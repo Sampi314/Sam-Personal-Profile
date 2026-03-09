@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D SUMIFS Demo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+        }
+
+        h3 {
+            font-size: 1rem;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+        }
+
+        .sheet {
+            background: #fff;
+            border-radius: 6px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .sheet-tab {
+            background: #0f3460;
+            color: #fff;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .formula-bar {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #d0d0d0;
+            background: #fafafa;
+            font-size: 0.8rem;
+        }
+
+        .formula-bar .cell-ref {
+            padding: 6px 10px;
+            border-right: 1px solid #d0d0d0;
+            font-weight: 600;
+            min-width: 50px;
+            text-align: center;
+            color: #333;
+            background: #eee;
+        }
+
+        .formula-bar .formula-text {
+            padding: 6px 10px;
+            flex: 1;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: #0f3460;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            table-layout: fixed;
+        }
+
+        th, td {
+            border: 1px solid #d0d7de;
+            padding: 6px 10px;
+            text-align: center;
+        }
+
+        /* Column headers (A, B, C...) */
+        thead th {
+            background: #e8ecf0;
+            color: #555;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        /* Row number cells */
+        td.row-num {
+            background: #e8ecf0;
+            color: #555;
+            font-weight: 600;
+            font-size: 0.75rem;
+            width: 32px;
+        }
+
+        td.header-cell {
+            background: #d4dce8;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        td.data-cell {
+            background: #fff;
+            color: #333;
+        }
+
+        td.data-cell.number {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        td.result-cell {
+            background: #fff9e6;
+            font-weight: 700;
+            color: #0f3460;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        td.result-cell:hover, td.result-cell.active {
+            background: #d6eaff;
+            outline: 2px solid #0f3460;
+            outline-offset: -2px;
+        }
+
+        td.row-label {
+            background: #f0f4f8;
+            font-weight: 600;
+            color: #1a1a2e;
+            text-align: left;
+        }
+
+        td.col-label {
+            background: #d4dce8;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .explanation {
+            background: #fff;
+            border-radius: 6px;
+            padding: 16px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .explanation strong {
+            color: #0f3460;
+        }
+
+        .explanation code {
+            background: #eef2f7;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.82rem;
+            color: #0f3460;
+        }
+
+        .highlight-source {
+            background: #e6f3ff !important;
+            transition: background 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Source Data Sheet -->
+    <div class="sheet">
+        <div class="sheet-tab">Source Data</div>
+        <table id="source-table">
+            <thead>
+                <tr>
+                    <th style="width:32px"></th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="row-num">1</td>
+                    <td class="header-cell">Region</td>
+                    <td class="header-cell">Product</td>
+                    <td class="header-cell">Amount</td>
+                </tr>
+                <tr><td class="row-num">2</td><td class="data-cell" data-region="North">North</td><td class="data-cell" data-product="Widget A">Widget A</td><td class="data-cell number" data-amount="1200">1,200</td></tr>
+                <tr><td class="row-num">3</td><td class="data-cell" data-region="South">South</td><td class="data-cell" data-product="Widget B">Widget B</td><td class="data-cell number" data-amount="800">800</td></tr>
+                <tr><td class="row-num">4</td><td class="data-cell" data-region="North">North</td><td class="data-cell" data-product="Widget B">Widget B</td><td class="data-cell number" data-amount="1500">1,500</td></tr>
+                <tr><td class="row-num">5</td><td class="data-cell" data-region="East">East</td><td class="data-cell" data-product="Widget A">Widget A</td><td class="data-cell number" data-amount="950">950</td></tr>
+                <tr><td class="row-num">6</td><td class="data-cell" data-region="South">South</td><td class="data-cell" data-product="Widget A">Widget A</td><td class="data-cell number" data-amount="1100">1,100</td></tr>
+                <tr><td class="row-num">7</td><td class="data-cell" data-region="East">East</td><td class="data-cell" data-product="Widget B">Widget B</td><td class="data-cell number" data-amount="700">700</td></tr>
+                <tr><td class="row-num">8</td><td class="data-cell" data-region="North">North</td><td class="data-cell" data-product="Widget A">Widget A</td><td class="data-cell number" data-amount="600">600</td></tr>
+                <tr><td class="row-num">9</td><td class="data-cell" data-region="South">South</td><td class="data-cell" data-product="Widget B">Widget B</td><td class="data-cell number" data-amount="400">400</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Summary Sheet -->
+    <div class="sheet">
+        <div class="sheet-tab">2D Summary (SUMIFS)</div>
+        <div class="formula-bar">
+            <div class="cell-ref" id="cell-ref">F2</div>
+            <div class="formula-text" id="formula-text">=SUMIFS($C:$C, $A:$A, $E2, $B:$B, F$1)</div>
+        </div>
+        <table id="summary-table">
+            <thead>
+                <tr>
+                    <th style="width:32px"></th>
+                    <th>E</th>
+                    <th>F</th>
+                    <th>G</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="row-num">1</td>
+                    <td class="header-cell"></td>
+                    <td class="col-label">Widget A</td>
+                    <td class="col-label">Widget B</td>
+                </tr>
+                <tr>
+                    <td class="row-num">2</td>
+                    <td class="row-label">North</td>
+                    <td class="result-cell active" data-region="North" data-product="Widget A" data-cell="F2">1,800</td>
+                    <td class="result-cell" data-region="North" data-product="Widget B" data-cell="G2">1,500</td>
+                </tr>
+                <tr>
+                    <td class="row-num">3</td>
+                    <td class="row-label">South</td>
+                    <td class="result-cell" data-region="South" data-product="Widget A" data-cell="F3">1,100</td>
+                    <td class="result-cell" data-region="South" data-product="Widget B" data-cell="G3">1,200</td>
+                </tr>
+                <tr>
+                    <td class="row-num">4</td>
+                    <td class="row-label">East</td>
+                    <td class="result-cell" data-region="East" data-product="Widget A" data-cell="F4">950</td>
+                    <td class="result-cell" data-region="East" data-product="Widget B" data-cell="G4">700</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Explanation -->
+    <div class="explanation">
+        <strong>Click any result cell</strong> to see its formula and which source rows contribute to the total. The formula <code>=SUMIFS($C:$C, $A:$A, $E2, $B:$B, F$1)</code> uses mixed references so it can be dragged across the entire summary grid from a single cell.
+    </div>
+
+    <script>
+        const resultCells = document.querySelectorAll('.result-cell');
+        const sourceRows = document.querySelectorAll('#source-table tbody tr:not(:first-child)');
+        const cellRefEl = document.getElementById('cell-ref');
+        const formulaTextEl = document.getElementById('formula-text');
+
+        function clearHighlights() {
+            resultCells.forEach(c => c.classList.remove('active'));
+            sourceRows.forEach(r => {
+                r.querySelectorAll('td:not(.row-num)').forEach(td => td.classList.remove('highlight-source'));
+            });
+        }
+
+        function highlightCell(cell) {
+            clearHighlights();
+            cell.classList.add('active');
+
+            const region = cell.dataset.region;
+            const product = cell.dataset.product;
+            const cellName = cell.dataset.cell;
+
+            // Update formula bar
+            cellRefEl.textContent = cellName;
+            const colLetter = cellName[0];
+            const rowNum = cellName[1];
+            formulaTextEl.textContent =
+                `=SUMIFS($C:$C, $A:$A, $E${rowNum}, $B:$B, ${colLetter}$1)    →  SUMIFS(Amount, Region, "${region}", Product, "${product}")`;
+
+            // Highlight matching source rows
+            sourceRows.forEach(row => {
+                const regionCell = row.querySelector('[data-region]');
+                const productCell = row.querySelector('[data-product]');
+                if (regionCell && productCell &&
+                    regionCell.dataset.region === region &&
+                    productCell.dataset.product === product) {
+                    row.querySelectorAll('td:not(.row-num)').forEach(td => td.classList.add('highlight-source'));
+                }
+            });
+        }
+
+        resultCells.forEach(cell => {
+            cell.addEventListener('click', () => highlightCell(cell));
+        });
+    </script>
+</body>
+</html>
