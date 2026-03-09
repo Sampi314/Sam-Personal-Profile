@@ -1,0 +1,57 @@
+{
+  "name": {
+    "first": "Sam",
+    "last": "Ngo",
+    "display": "Sam Ngo"
+  },
+  "headline": "Senior Analyst",
+  "summary": "Senior Analyst with expertise in data analysis, financial modelling, and business intelligence. Skilled in Excel, Power Query, Power BI, VBA, and VB.NET.",
+  "contact": {
+    "email": "nkhoihue@gmail.com",
+    "phone": "",
+    "location": {
+      "city": "Sydney",
+      "state": "NSW",
+      "country": "Australia"
+    },
+    "linkedin": "",
+    "github": "",
+    "website": ""
+  },
+  "experience": [
+    {
+      "title": "Senior Analyst",
+      "company": "SumProduct",
+      "location": "Sydney, Australia",
+      "start_date": "2022-08",
+      "end_date": "",
+      "current": true,
+      "description": "",
+      "highlights": []
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Adelaide",
+      "degree": "Master",
+      "field_of_study": "Finance",
+      "start_date": "",
+      "end_date": "",
+      "gpa": "",
+      "honors": []
+    }
+  ],
+  "skills": {
+    "technical": ["Excel", "Power Query", "Power BI", "VBA", "VB.NET"],
+    "languages": [],
+    "tools": ["Microsoft Office Suite", "Power BI Desktop"],
+    "soft_skills": []
+  },
+  "certifications": [],
+  "projects": [],
+  "publications": [],
+  "awards": [],
+  "volunteer": [],
+  "interests": [],
+  "references": "Available upon request"
+}
