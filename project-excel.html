@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D SUMIFS Formula Engine - Sam Ngo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>2D SUMIFS Formula Engine</h1>
+        <p>Interactive Excel formula demonstration</p>
+    </div>
+
+    <main class="wide">
+        <section class="fade-in">
+            <div class="project-detail-header">
+                <div>
+                    <h2>Overview</h2>
+                </div>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">Formulas</span>
+                    <span class="card-tag">SUMIFS</span>
+                </div>
+            </div>
+            <p class="summary-text">This demo shows how a single <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">SUMIFS</code> formula with mixed references can build an entire two-dimensional summary table. Instead of writing a unique formula for each cell, you write one formula in the top-left corner and drag it across the grid &mdash; the mixed references (<code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">$E2</code> locks the column, <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">F$1</code> locks the row) do the rest.</p>
+        </section>
+
+        <section class="fade-in">
+            <h2>Key Concepts</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 8px;"><strong>Mixed References:</strong> Combining absolute and relative references so one formula works for the entire grid.</li>
+                <li style="margin-bottom: 8px;"><strong>SUMIFS Function:</strong> Sums values in a range that meet multiple criteria &mdash; here, matching both Region and Product.</li>
+                <li style="margin-bottom: 8px;"><strong>Cross-Tabulation:</strong> Building a pivot-table-like summary using formulas instead of the PivotTable feature.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>Interactive Demo</h2>
+            <p class="summary-text" style="margin-bottom: 16px;">Click any result cell in the summary table to see its formula and which source rows contribute.</p>
+            <div class="demo-container">
+                <iframe src="excel-2d-sumifs.html" title="2D SUMIFS Demo"></iframe>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>When to Use This</h2>
+            <p class="summary-text">This technique is ideal when you need a quick summary matrix without the overhead of a PivotTable. It's especially useful in financial models where you need transparent, auditable formulas that stakeholders can trace cell-by-cell. I use this pattern regularly at SumProduct for budget summaries, variance analysis grids, and multi-dimensional reporting.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <script src="shared.js"></script>
+</body>
+</html>

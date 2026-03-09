@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Sam Ngo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Blog &amp; Articles</h1>
+        <p>Tips, tutorials, and insights on Excel, Power Query, Power BI, and financial modeling.</p>
+    </div>
+
+    <main>
+        <div class="card-grid">
+            <a href="project-excel.html" class="card fade-in">
+                <div class="blog-date">March 2026</div>
+                <h3>Mastering 2D SUMIFS: Dynamic Cross-Tabulation in Excel</h3>
+                <p>Learn how to build a two-dimensional summary table using SUMIFS with mixed references. One formula, dragged across an entire grid, replaces dozens of manual lookups.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">Formulas</span>
+                    <span class="card-tag">Tutorial</span>
+                </div>
+            </a>
+
+            <a href="project-powerquery.html" class="card fade-in">
+                <div class="blog-date">February 2026</div>
+                <h3>Building an ETL Pipeline in Power Query: A Step-by-Step Guide</h3>
+                <p>Walk through a real-world data cleaning pipeline: removing nulls, splitting columns, changing types, and adding calculated columns using M code.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Power Query</span>
+                    <span class="card-tag">M Code</span>
+                    <span class="card-tag">ETL</span>
+                </div>
+            </a>
+
+            <a href="project-powerbi.html" class="card fade-in">
+                <div class="blog-date">January 2026</div>
+                <h3>Designing Interactive Dashboards with Power BI</h3>
+                <p>Explore how KPI cards, slicers, bar charts, and donut charts work together in Power BI. Includes DAX measures for YoY comparisons and dynamic filtering.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Power BI</span>
+                    <span class="card-tag">DAX</span>
+                    <span class="card-tag">Dashboard</span>
+                </div>
+            </a>
+
+            <div class="card fade-in">
+                <div class="blog-date">December 2025</div>
+                <h3>VBA Best Practices for Financial Models</h3>
+                <p>Key patterns for writing maintainable VBA in financial workbooks: error handling, naming conventions, separating logic from UI, and performance tips for large datasets.</p>
+                <div class="card-tags">
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">Best Practices</span>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="blog-date">November 2025</div>
+                <h3>Power Automate: Automating Repetitive Reporting Tasks</h3>
+                <p>How I used Power Automate to schedule data refreshes, send automated email reports, and reduce manual work by hours each week.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Power Automate</span>
+                    <span class="card-tag">Automation</span>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="blog-date">October 2025</div>
+                <h3>Financial Modeling: Structuring Assumptions for Clarity</h3>
+                <p>A practical approach to organizing assumptions, inputs, and outputs in financial models so stakeholders can follow the logic without getting lost in formulas.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Financial Modeling</span>
+                    <span class="card-tag">Best Practices</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <script src="shared.js"></script>
+</body>
+</html>

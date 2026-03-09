@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools & Resources - Sam Ngo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tools.html" class="active">Tools</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Tools &amp; Resources</h1>
+        <p>Interactive demos and resources I've built to showcase common data analysis techniques.</p>
+    </div>
+
+    <main>
+        <!-- Interactive Demos -->
+        <section class="fade-in">
+            <h2>Interactive Demos</h2>
+            <div class="card-grid">
+                <a href="project-excel.html" class="card">
+                    <div class="card-icon">&#128202;</div>
+                    <h3>2D SUMIFS Formula Engine</h3>
+                    <p>Click any result cell to see the SUMIFS formula in action and watch source data rows highlight in real time. Demonstrates mixed references for scalable cross-tabulation.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Excel</span>
+                        <span class="card-tag">Interactive</span>
+                    </div>
+                </a>
+
+                <a href="project-powerbi.html" class="card">
+                    <div class="card-icon">&#128200;</div>
+                    <h3>Power BI Sales Dashboard</h3>
+                    <p>A fully interactive dashboard simulation with KPI cards, quarterly bar charts, category donut charts, and a region slicer that cross-filters all visuals.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Power BI</span>
+                        <span class="card-tag">Interactive</span>
+                    </div>
+                </a>
+
+                <a href="project-powerquery.html" class="card">
+                    <div class="card-icon">&#128256;</div>
+                    <h3>Power Query ETL Pipeline</h3>
+                    <p>Step through a 5-stage data transformation pipeline. See the data preview and M code evolve at each step: Source, Clean, Split, Type, and Add Column.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Power Query</span>
+                        <span class="card-tag">Interactive</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Recommended Resources -->
+        <section class="fade-in">
+            <h2>Recommended Resources</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">&#128218;</div>
+                    <h3>Excel Formula Reference</h3>
+                    <p>Curated list of essential Excel functions for financial modeling: SUMIFS, INDEX/MATCH, OFFSET, INDIRECT, and array formulas.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Excel</span>
+                        <span class="card-tag">Reference</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">&#128209;</div>
+                    <h3>DAX Patterns for BI</h3>
+                    <p>Common DAX patterns used in Power BI: time intelligence, YoY comparisons, running totals, and dynamic filtering with CALCULATE.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">DAX</span>
+                        <span class="card-tag">Patterns</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">&#128295;</div>
+                    <h3>Power Query M Code Snippets</h3>
+                    <p>Reusable M code snippets for common transformations: unpivoting, conditional columns, merging queries, and custom functions.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Power Query</span>
+                        <span class="card-tag">Snippets</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">&#9881;</div>
+                    <h3>VBA Utility Library</h3>
+                    <p>A collection of VBA utility functions for workbook management, data validation, formatting automation, and error handling patterns.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">VBA</span>
+                        <span class="card-tag">Utilities</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="fade-in">
+            <h2>My Tech Stack</h2>
+            <p class="summary-text" style="margin-bottom: 16px;">The tools and technologies I use daily for data analysis, reporting, and automation.</p>
+            <div class="skills-grid">
+                <span class="skill-tag">Microsoft Excel</span>
+                <span class="skill-tag">VBA / VB.NET</span>
+                <span class="skill-tag">Power Query (M)</span>
+                <span class="skill-tag">Power BI (DAX)</span>
+                <span class="skill-tag">Power Automate</span>
+                <span class="skill-tag">RStudio</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">Financial Modeling</span>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <script src="shared.js"></script>
+</body>
+</html>
