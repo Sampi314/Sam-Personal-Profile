@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sam Ngo - Senior Analyst</title>
+    <title>Sam Ngo - Senior Analyst at SumProduct</title>
     <style>
         * {
             margin: 0;
@@ -85,7 +85,7 @@
         }
 
         .experience-item, .education-item {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .experience-item:last-child, .education-item:last-child {
@@ -101,6 +101,17 @@
             font-size: 0.9rem;
             color: #666;
             margin-top: 2px;
+        }
+
+        .experience-item ul {
+            margin-top: 8px;
+            padding-left: 20px;
+        }
+
+        .experience-item ul li {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 4px;
         }
 
         .skills-grid {
@@ -121,6 +132,148 @@
         .summary-text {
             font-size: 1rem;
             color: #555;
+        }
+
+        .subsection-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-top: 16px;
+            margin-bottom: 8px;
+        }
+
+        .subsection-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .cert-list, .award-list, .lang-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cert-list li, .award-list li, .lang-list li {
+            font-size: 0.95rem;
+            color: #555;
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .cert-list li::before, .award-list li::before {
+            content: "\2022";
+            position: absolute;
+            left: 0;
+            color: #0f3460;
+        }
+
+        .lang-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem;
+        }
+
+        .lang-item:last-child {
+            border-bottom: none;
+        }
+
+        .lang-name {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .lang-level {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        /* Excel Example Styles */
+        .excel-demo {
+            margin-top: 16px;
+        }
+
+        .excel-demo h4 {
+            font-size: 1rem;
+            color: #1a1a2e;
+            margin-bottom: 12px;
+        }
+
+        .excel-table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 16px;
+        }
+
+        .excel-table {
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            font-family: 'Consolas', 'Courier New', monospace;
+            min-width: 100%;
+        }
+
+        .excel-table th,
+        .excel-table td {
+            border: 1px solid #c0c0c0;
+            padding: 6px 12px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .excel-table th {
+            background: #e8eef6;
+            color: #0f3460;
+            font-weight: 600;
+        }
+
+        .excel-table .row-header {
+            background: #e8eef6;
+            color: #0f3460;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .excel-table .col-label {
+            background: #d4dce8;
+            color: #666;
+            font-size: 0.75rem;
+            font-weight: 400;
+        }
+
+        .excel-table td.data {
+            background: #fff;
+        }
+
+        .excel-table td.result {
+            background: #fff9e6;
+            font-weight: 700;
+            color: #0f3460;
+        }
+
+        .formula-box {
+            background: #1a1a2e;
+            color: #e2e8f0;
+            border-radius: 6px;
+            padding: 16px 20px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            overflow-x: auto;
+            line-height: 1.8;
+        }
+
+        .formula-box .keyword {
+            color: #7ec8e3;
+        }
+
+        .formula-box .comment {
+            color: #888;
+            font-style: italic;
+        }
+
+        .formula-note {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
         }
 
         footer {
@@ -148,25 +301,70 @@
 <body>
     <header>
         <h1>Sam Ngo</h1>
-        <p class="headline">Senior Analyst</p>
-        <p class="location">Sydney, Australia</p>
+        <p class="headline">Senior Analyst at SumProduct</p>
+        <p class="location">Sydney, New South Wales, Australia</p>
         <div class="contact-bar">
             <a href="mailto:nkhoihue@gmail.com">nkhoihue@gmail.com</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
         </div>
     </header>
 
     <main>
         <section>
             <h2>About</h2>
-            <p class="summary-text">Senior Analyst with expertise in data analysis, financial modelling, and business intelligence. Skilled in Excel, Power Query, Power BI, VBA, and VB.NET.</p>
+            <p class="summary-text">I am a dedicated and results-driven finance professional with a strong foundation in financial modeling, data analysis, and strategic decision-making. With a Master of Finance from the University of Adelaide and a Bachelor's degree in International Finance, I bring a solid academic background combined with experience in financial analysis.</p>
+            <p class="summary-text" style="margin-top: 12px;">Currently serving as a Senior Analyst at SumProduct, I specialize in developing and reviewing complex financial models, leveraging advanced mathematical techniques and Excel to facilitate critical business decisions. My expertise in data transformation and visualization allows me to extract, clean, and present intricate data sets, providing clear and actionable insights.</p>
         </section>
 
         <section>
             <h2>Experience</h2>
+
             <div class="experience-item">
                 <h3>Senior Analyst</h3>
-                <p class="meta">SumProduct &middot; Sydney, Australia</p>
-                <p class="meta">Aug 2022 &ndash; Present</p>
+                <p class="meta">SumProduct &middot; Sydney, New South Wales, Australia</p>
+                <p class="meta">Oct 2023 &ndash; Present</p>
+            </div>
+
+            <div class="experience-item">
+                <h3>Analyst</h3>
+                <p class="meta">SumProduct &middot; Sydney, New South Wales, Australia</p>
+                <p class="meta">Aug 2022 &ndash; Oct 2023</p>
+                <ul>
+                    <li>Extensive experience in developing and reviewing complex financial models, employing advanced mathematical techniques and Excel to facilitate strategic decision-making.</li>
+                    <li>Proficient in data transformation and visualization, employing diverse tools and technologies to extract, clean, and present intricate data sets for insightful analysis.</li>
+                    <li>Skilled in providing support across various areas, including training materials, marketing material preparation, website content development, and office administration.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Team Leader &ndash; Consultant</h3>
+                <p class="meta">Practera &middot; Australia</p>
+                <p class="meta">Apr 2020</p>
+                <ul>
+                    <li>Conducted team meetings to update members on best practices, allocated suitable tasks and deadlines.</li>
+                    <li>Oversaw team member work for quality and guideline compliance.</li>
+                    <li>Negotiated with team members to develop optimal strategies to promote adherence to performance goals.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Commercial Banking Intern</h3>
+                <p class="meta">United Overseas Bank Limited (UOB) &middot; Ho Chi Minh City, Vietnam</p>
+                <p class="meta">Sep 2019 &ndash; Oct 2019</p>
+                <ul>
+                    <li>Generated over 100 customer contacts (existing, potential) daily, utilising excellent communication skills.</li>
+                    <li>Supported the sales team with the preparation of documents for loan applications.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Trainee Accountant</h3>
+                <p class="meta">Lien Sinh Packaging &middot; Ho Chi Minh City, Vietnam</p>
+                <p class="meta">Jun 2018 &ndash; Sep 2018</p>
+                <ul>
+                    <li>Undertook the preparation of asset, liability, and capital account entries (compiling, analysing).</li>
+                    <li>Created financial reports to support the accounting team.</li>
+                </ul>
             </div>
         </section>
 
@@ -174,18 +372,124 @@
             <h2>Education</h2>
             <div class="education-item">
                 <h3>Master of Finance</h3>
-                <p class="meta">University of Adelaide</p>
+                <p class="meta">University of Adelaide &middot; Feb 2020 &ndash; Dec 2021</p>
+            </div>
+            <div class="education-item">
+                <h3>Bachelor's Degree, International Finance</h3>
+                <p class="meta">I-Shou University &middot; 2016 &ndash; 2019</p>
             </div>
         </section>
 
         <section>
             <h2>Skills</h2>
+            <div class="subsection-title">Technical</div>
             <div class="skills-grid">
                 <span class="skill-tag">Excel</span>
-                <span class="skill-tag">Power Query</span>
-                <span class="skill-tag">Power BI</span>
                 <span class="skill-tag">VBA</span>
                 <span class="skill-tag">VB.NET</span>
+                <span class="skill-tag">Power Query</span>
+                <span class="skill-tag">Power BI</span>
+                <span class="skill-tag">RStudio</span>
+                <span class="skill-tag">Power Automate</span>
+                <span class="skill-tag">Financial Modeling</span>
+                <span class="skill-tag">Data Analysis</span>
+                <span class="skill-tag">Data Visualization</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>Excel Examples</h2>
+            <div class="excel-demo">
+                <h4>2D SUMIFS &ndash; Cross-Tabulated Lookup</h4>
+                <p class="formula-note" style="margin-bottom: 16px;">A common challenge: summarising data across two dimensions (e.g. sales by region and product). Here's how SUMIFS handles it with a 2D layout.</p>
+
+                <p class="subsection-title">Source Data</p>
+                <div class="excel-table-wrapper">
+                    <table class="excel-table">
+                        <thead>
+                            <tr>
+                                <th>Region</th>
+                                <th>Product</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="data">North</td><td class="data">Widget A</td><td class="data">1,200</td></tr>
+                            <tr><td class="data">South</td><td class="data">Widget B</td><td class="data">800</td></tr>
+                            <tr><td class="data">North</td><td class="data">Widget B</td><td class="data">1,500</td></tr>
+                            <tr><td class="data">East</td><td class="data">Widget A</td><td class="data">950</td></tr>
+                            <tr><td class="data">South</td><td class="data">Widget A</td><td class="data">1,100</td></tr>
+                            <tr><td class="data">East</td><td class="data">Widget B</td><td class="data">700</td></tr>
+                            <tr><td class="data">North</td><td class="data">Widget A</td><td class="data">600</td></tr>
+                            <tr><td class="data">South</td><td class="data">Widget B</td><td class="data">400</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="subsection-title">2D Summary (Result)</p>
+                <div class="excel-table-wrapper">
+                    <table class="excel-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Widget A</th>
+                                <th>Widget B</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="row-header">North</td><td class="result">1,800</td><td class="result">1,500</td></tr>
+                            <tr><td class="row-header">South</td><td class="result">1,100</td><td class="result">1,200</td></tr>
+                            <tr><td class="row-header">East</td><td class="result">950</td><td class="result">700</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="subsection-title">Formula</p>
+                <div class="formula-box">
+                    <span class="comment">/* Cell under "Widget A" &amp; "North" */</span><br>
+                    =<span class="keyword">SUMIFS</span>(Amount, Region, "North", Product, "Widget A")<br><br>
+                    <span class="comment">/* Dynamic version using row/column headers */</span><br>
+                    =<span class="keyword">SUMIFS</span>($C:$C, $A:$A, $G2, $B:$B, H$1)
+                </div>
+
+                <p class="formula-note">The dynamic version uses mixed references so the formula can be copied across rows and columns: <strong>$G2</strong> locks the column (region from row header) and <strong>H$1</strong> locks the row (product from column header), creating a full 2D summary from a single formula.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Certifications</h2>
+            <ul class="cert-list">
+                <li>Corporate Financial Statement Analysis</li>
+                <li>R Programming</li>
+                <li>UT.5.05x: Linear Algebra &ndash; Foundations to Frontiers</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Honours &amp; Awards</h2>
+            <ul class="award-list">
+                <li>Dean's List Award (x2)</li>
+                <li>Honorary Member of Golden Key Society</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Languages</h2>
+            <div class="lang-item">
+                <span class="lang-name">Vietnamese</span>
+                <span class="lang-level">Native or Bilingual</span>
+            </div>
+            <div class="lang-item">
+                <span class="lang-name">English</span>
+                <span class="lang-level">Full Professional</span>
+            </div>
+            <div class="lang-item">
+                <span class="lang-name">Chinese (Simplified)</span>
+                <span class="lang-level">Limited Working</span>
+            </div>
+            <div class="lang-item">
+                <span class="lang-name">Chinese (Traditional)</span>
+                <span class="lang-level">Limited Working</span>
             </div>
         </section>
     </main>

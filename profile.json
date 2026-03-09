@@ -4,8 +4,8 @@
     "last": "Ngo",
     "display": "Sam Ngo"
   },
-  "headline": "Senior Analyst",
-  "summary": "Senior Analyst with expertise in data analysis, financial modelling, and business intelligence. Skilled in Excel, Power Query, Power BI, VBA, and VB.NET.",
+  "headline": "Senior Analyst at SumProduct",
+  "summary": "I am a dedicated and results-driven finance professional with a strong foundation in financial modeling, data analysis, and strategic decision-making. With a Master of Finance from the University of Adelaide and a Bachelor's degree in International Finance, I bring a solid academic background combined with over two years of experience in financial analysis. Currently serving as a Senior Analyst at SumProduct, I specialize in developing and reviewing complex financial models, leveraging advanced mathematical techniques and Excel to facilitate critical business decisions. My expertise in data transformation and visualization allows me to extract, clean, and present intricate data sets, providing clear and actionable insights.",
   "contact": {
     "email": "nkhoihue@gmail.com",
     "phone": "",
@@ -14,7 +14,7 @@
       "state": "NSW",
       "country": "Australia"
     },
-    "linkedin": "",
+    "linkedin": "https://www.linkedin.com/in/nkhoihue/",
     "github": "",
     "website": ""
   },
@@ -22,12 +22,66 @@
     {
       "title": "Senior Analyst",
       "company": "SumProduct",
-      "location": "Sydney, Australia",
-      "start_date": "2022-08",
+      "location": "Sydney, New South Wales, Australia",
+      "start_date": "2023-10",
       "end_date": "",
       "current": true,
       "description": "",
       "highlights": []
+    },
+    {
+      "title": "Analyst",
+      "company": "SumProduct",
+      "location": "Sydney, New South Wales, Australia",
+      "start_date": "2022-08",
+      "end_date": "2023-10",
+      "current": false,
+      "description": "",
+      "highlights": [
+        "Extensive experience in developing and reviewing complex financial models, employing advanced mathematical techniques and Excel to facilitate strategic decision-making.",
+        "Proficient in data transformation and visualization, employing diverse tools and technologies to extract, clean, and present intricate data sets for insightful analysis.",
+        "Skilled in providing support across various areas, including training materials, marketing material preparation, website content development, and office administration."
+      ]
+    },
+    {
+      "title": "Team Leader - Consultant",
+      "company": "Practera",
+      "location": "Australia",
+      "start_date": "2020-04",
+      "end_date": "2020-04",
+      "current": false,
+      "description": "",
+      "highlights": [
+        "Conducted team meetings to update members on best practices, allocated suitable tasks and deadlines.",
+        "Oversaw team member work for quality and guideline compliance.",
+        "Negotiated with team members to develop optimal strategies to promote adherence to performance goals."
+      ]
+    },
+    {
+      "title": "Commercial Banking Intern",
+      "company": "United Overseas Bank Limited (UOB)",
+      "location": "Ho Chi Minh City, Vietnam",
+      "start_date": "2019-09",
+      "end_date": "2019-10",
+      "current": false,
+      "description": "",
+      "highlights": [
+        "Generated over 100 customer contacts (existing, potential) daily, utilising excellent communication skills.",
+        "Supported the sales team with the preparation of documents for loan applications."
+      ]
+    },
+    {
+      "title": "Trainee Accountant",
+      "company": "Lien Sinh Packaging",
+      "location": "Ho Chi Minh City, Vietnam",
+      "start_date": "2018-06",
+      "end_date": "2018-09",
+      "current": false,
+      "description": "",
+      "highlights": [
+        "Undertook the preparation of asset, liability, and capital account entries (compiling, analysing).",
+        "Created financial reports to support the accounting team."
+      ]
     }
   ],
   "education": [
@@ -35,22 +89,38 @@
       "institution": "University of Adelaide",
       "degree": "Master",
       "field_of_study": "Finance",
-      "start_date": "",
-      "end_date": "",
+      "start_date": "2020-02",
+      "end_date": "2021-12",
+      "gpa": "",
+      "honors": []
+    },
+    {
+      "institution": "I-Shou University",
+      "degree": "Bachelor",
+      "field_of_study": "International Finance",
+      "start_date": "2016",
+      "end_date": "2019",
       "gpa": "",
       "honors": []
     }
   ],
   "skills": {
-    "technical": ["Excel", "Power Query", "Power BI", "VBA", "VB.NET"],
-    "languages": [],
+    "technical": ["Excel", "Power Query", "Power BI", "VBA", "VB.NET", "RStudio", "Microsoft Power Automate"],
+    "languages": ["Vietnamese (Native)", "English (Full Professional)", "Chinese Simplified (Limited Working)", "Chinese Traditional (Limited Working)"],
     "tools": ["Microsoft Office Suite", "Power BI Desktop"],
-    "soft_skills": []
+    "soft_skills": ["Financial Modeling", "Data Analysis", "Data Visualization", "Strategic Decision-Making", "Team Leadership"]
   },
-  "certifications": [],
+  "certifications": [
+    "Corporate Financial Statement Analysis",
+    "R Programming",
+    "UT.5.05x: Linear Algebra - Foundations to Frontiers"
+  ],
   "projects": [],
   "publications": [],
-  "awards": [],
+  "awards": [
+    "Dean's List Award (x2)",
+    "Honorary Member of Golden Key Society"
+  ],
   "volunteer": [],
   "interests": [],
   "references": "Available upon request"
