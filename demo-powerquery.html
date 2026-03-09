@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Query Demo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+        }
+
+        h3 {
+            font-size: 1rem;
+            color: #1a1a2e;
+            margin-bottom: 12px;
+        }
+
+        .pipeline {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .step-btn {
+            padding: 8px 16px;
+            border: 2px solid #d0d7de;
+            border-radius: 6px;
+            background: #fff;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #555;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .step-btn::after {
+            content: "\2192";
+            position: absolute;
+            right: -14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .step-btn:last-child::after { content: none; }
+
+        .step-btn:hover {
+            border-color: #0f3460;
+            color: #0f3460;
+        }
+
+        .step-btn.active {
+            background: #0f3460;
+            color: #fff;
+            border-color: #0f3460;
+        }
+
+        .step-btn.completed {
+            background: #e8f5e9;
+            color: #27ae60;
+            border-color: #27ae60;
+        }
+
+        .step-btn.completed.active {
+            background: #0f3460;
+            color: #fff;
+            border-color: #0f3460;
+        }
+
+        .content-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .panel {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            background: #0f3460;
+            color: #fff;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .panel-header.code-header {
+            background: #1a1a2e;
+        }
+
+        /* Table styles */
+        .table-wrapper {
+            overflow-x: auto;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+
+        th {
+            background: #e8ecf0;
+            color: #333;
+            font-weight: 600;
+            padding: 8px 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            border-bottom: 2px solid #c0c0c0;
+        }
+
+        td {
+            padding: 6px 12px;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+
+        tr:hover td {
+            background: #f5f8fc;
+        }
+
+        td.null-val {
+            color: #ccc;
+            font-style: italic;
+        }
+
+        td.changed {
+            background: #fff9e6;
+            font-weight: 600;
+            color: #0f3460;
+        }
+
+        td.removed {
+            background: #fde8e8;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        /* Code panel */
+        .code-block {
+            padding: 16px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.8rem;
+            line-height: 1.8;
+            color: #d4d4d4;
+            background: #1e1e2e;
+            min-height: 200px;
+            overflow-x: auto;
+        }
+
+        .code-block .kw { color: #7ec8e3; }
+        .code-block .fn { color: #dcdcaa; }
+        .code-block .str { color: #ce9178; }
+        .code-block .comment { color: #6a9955; font-style: italic; }
+        .code-block .highlight-line {
+            background: rgba(126, 200, 227, 0.12);
+            display: inline-block;
+            width: 100%;
+            padding: 0 4px;
+            margin: 0 -4px;
+            border-left: 3px solid #7ec8e3;
+        }
+
+        .step-description {
+            background: #fff;
+            border-radius: 8px;
+            padding: 14px 18px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .step-description strong { color: #0f3460; }
+
+        @media (max-width: 600px) {
+            .content-area { grid-template-columns: 1fr; }
+            .pipeline { gap: 6px; }
+            .step-btn { font-size: 0.72rem; padding: 6px 10px; }
+            .step-btn::after { right: -10px; font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Step Pipeline -->
+    <div class="pipeline" id="pipeline">
+        <button class="step-btn active" data-step="0">Source</button>
+        <button class="step-btn" data-step="1">Remove Nulls</button>
+        <button class="step-btn" data-step="2">Split Column</button>
+        <button class="step-btn" data-step="3">Change Type</button>
+        <button class="step-btn" data-step="4">Add Column</button>
+    </div>
+
+    <!-- Main content -->
+    <div class="content-area">
+        <div class="panel">
+            <div class="panel-header">Preview</div>
+            <div class="table-wrapper" id="table-preview"></div>
+        </div>
+        <div class="panel">
+            <div class="panel-header code-header">M Code (Power Query Formula Language)</div>
+            <div class="code-block" id="code-block"></div>
+        </div>
+    </div>
+
+    <div class="step-description" id="step-desc"></div>
+
+    <script>
+        const steps = [
+            {
+                name: 'Source',
+                desc: '<strong>Source:</strong> Raw data loaded from a CSV. Notice the null values and the combined "Name" column that needs splitting. Power Query reads the source and infers column types.',
+                columns: ['ID', 'Name', 'Region', 'Amount', 'Date'],
+                rows: [
+                    ['1001', 'John Smith', 'North', '1200', '2024-01-15'],
+                    ['1002', 'Jane Doe', 'South', '', '2024-02-10'],
+                    ['1003', 'Bob Lee', 'East', '950', '2024-01-22'],
+                    ['1004', '', 'West', '800', ''],
+                    ['1005', 'Alice Tran', 'North', '1500', '2024-03-05'],
+                    ['1006', 'Sam Ngo', 'South', '1100', '2024-02-28'],
+                    ['1007', '', '', '700', '2024-03-12'],
+                    ['1008', 'Eva Chen', 'East', '650', '2024-01-30']
+                ],
+                nullCells: [[1,3],[3,1],[3,4],[6,1],[6,2]],
+                changedCells: [],
+                code: `<span class="kw">let</span>\n  <span class="highlight-line">Source = <span class="fn">Csv.Document</span>(\n    <span class="fn">File.Contents</span>(<span class="str">"SalesData.csv"</span>)\n  )</span>\n<span class="kw">in</span>\n  Source`
+            },
+            {
+                name: 'Remove Nulls',
+                desc: '<strong>Remove Nulls:</strong> Filtered out rows where critical fields (Name, Region) are blank. This step uses <code>Table.SelectRows</code> to keep only complete records — a common first cleanup step.',
+                columns: ['ID', 'Name', 'Region', 'Amount', 'Date'],
+                rows: [
+                    ['1001', 'John Smith', 'North', '1200', '2024-01-15'],
+                    ['1002', 'Jane Doe', 'South', '', '2024-02-10'],
+                    ['1003', 'Bob Lee', 'East', '950', '2024-01-22'],
+                    ['1005', 'Alice Tran', 'North', '1500', '2024-03-05'],
+                    ['1006', 'Sam Ngo', 'South', '1100', '2024-02-28'],
+                    ['1008', 'Eva Chen', 'East', '650', '2024-01-30']
+                ],
+                nullCells: [[1,3]],
+                changedCells: [],
+                code: `<span class="kw">let</span>\n  Source = <span class="fn">Csv.Document</span>(...),\n  <span class="highlight-line">FilteredRows = <span class="fn">Table.SelectRows</span>(\n    Source,\n    <span class="kw">each</span> [Name] <> <span class="kw">null</span>\n      <span class="kw">and</span> [Name] <> <span class="str">""</span>\n      <span class="kw">and</span> [Region] <> <span class="kw">null</span>\n  )</span>\n<span class="kw">in</span>\n  FilteredRows`
+            },
+            {
+                name: 'Split Column',
+                desc: '<strong>Split Column:</strong> The "Name" column is split into "First Name" and "Last Name" by the space delimiter. <code>Table.SplitColumn</code> with <code>Splitter.SplitTextByDelimiter</code> handles this — a very common transformation.',
+                columns: ['ID', 'First Name', 'Last Name', 'Region', 'Amount', 'Date'],
+                rows: [
+                    ['1001', 'John', 'Smith', 'North', '1200', '2024-01-15'],
+                    ['1002', 'Jane', 'Doe', 'South', '', '2024-02-10'],
+                    ['1003', 'Bob', 'Lee', 'East', '950', '2024-01-22'],
+                    ['1005', 'Alice', 'Tran', 'North', '1500', '2024-03-05'],
+                    ['1006', 'Sam', 'Ngo', 'South', '1100', '2024-02-28'],
+                    ['1008', 'Eva', 'Chen', 'East', '650', '2024-01-30']
+                ],
+                nullCells: [[1,4]],
+                changedCells: [[0,1],[0,2],[1,1],[1,2],[2,1],[2,2],[3,1],[3,2],[4,1],[4,2],[5,1],[5,2]],
+                code: `<span class="kw">let</span>\n  Source = ...,\n  FilteredRows = ...,\n  <span class="highlight-line">SplitName = <span class="fn">Table.SplitColumn</span>(\n    FilteredRows, <span class="str">"Name"</span>,\n    <span class="fn">Splitter.SplitTextByDelimiter</span>(<span class="str">" "</span>),\n    {<span class="str">"First Name"</span>, <span class="str">"Last Name"</span>}\n  )</span>\n<span class="kw">in</span>\n  SplitName`
+            },
+            {
+                name: 'Change Type',
+                desc: '<strong>Change Type:</strong> Converted Amount from text to number and Date from text to date type. Null amounts are replaced with 0. Proper typing is essential for aggregation in downstream reports.',
+                columns: ['ID', 'First Name', 'Last Name', 'Region', 'Amount', 'Date'],
+                rows: [
+                    ['1001', 'John', 'Smith', 'North', '1,200', '15 Jan 2024'],
+                    ['1002', 'Jane', 'Doe', 'South', '0', '10 Feb 2024'],
+                    ['1003', 'Bob', 'Lee', 'East', '950', '22 Jan 2024'],
+                    ['1005', 'Alice', 'Tran', 'North', '1,500', '05 Mar 2024'],
+                    ['1006', 'Sam', 'Ngo', 'South', '1,100', '28 Feb 2024'],
+                    ['1008', 'Eva', 'Chen', 'East', '650', '30 Jan 2024']
+                ],
+                nullCells: [],
+                changedCells: [[0,4],[0,5],[1,4],[1,5],[2,4],[2,5],[3,4],[3,5],[4,4],[4,5],[5,4],[5,5]],
+                code: `<span class="kw">let</span>\n  Source = ...,\n  FilteredRows = ...,\n  SplitName = ...,\n  <span class="highlight-line">TypedCols = <span class="fn">Table.TransformColumnTypes</span>(\n    SplitName, {\n      {<span class="str">"Amount"</span>, <span class="kw">Int64.Type</span>},\n      {<span class="str">"Date"</span>, <span class="kw">type date</span>}\n    }\n  ),</span>\n  <span class="highlight-line">ReplaceNull = <span class="fn">Table.ReplaceValue</span>(\n    TypedCols, <span class="kw">null</span>, 0,\n    <span class="fn">Replacer.ReplaceValue</span>, {<span class="str">"Amount"</span>}\n  )</span>\n<span class="kw">in</span>\n  ReplaceNull`
+            },
+            {
+                name: 'Add Column',
+                desc: '<strong>Add Column:</strong> Created a "Revenue Band" column using conditional logic: High (>1000), Medium (500-1000), or Low (<500). This is equivalent to an IF/nested-IF in Excel but expressed as an <code>if...then...else</code> in M code.',
+                columns: ['ID', 'First Name', 'Last Name', 'Region', 'Amount', 'Date', 'Revenue Band'],
+                rows: [
+                    ['1001', 'John', 'Smith', 'North', '1,200', '15 Jan 2024', 'High'],
+                    ['1002', 'Jane', 'Doe', 'South', '0', '10 Feb 2024', 'Low'],
+                    ['1003', 'Bob', 'Lee', 'East', '950', '22 Jan 2024', 'Medium'],
+                    ['1005', 'Alice', 'Tran', 'North', '1,500', '05 Mar 2024', 'High'],
+                    ['1006', 'Sam', 'Ngo', 'South', '1,100', '28 Feb 2024', 'High'],
+                    ['1008', 'Eva', 'Chen', 'East', '650', '30 Jan 2024', 'Medium']
+                ],
+                nullCells: [],
+                changedCells: [[0,6],[1,6],[2,6],[3,6],[4,6],[5,6]],
+                code: `<span class="kw">let</span>\n  Source = ...,\n  FilteredRows = ...,\n  SplitName = ...,\n  TypedCols = ...,\n  ReplaceNull = ...,\n  <span class="highlight-line">AddBand = <span class="fn">Table.AddColumn</span>(\n    ReplaceNull, <span class="str">"Revenue Band"</span>,\n    <span class="kw">each if</span> [Amount] > 1000 <span class="kw">then</span> <span class="str">"High"</span>\n      <span class="kw">else if</span> [Amount] >= 500 <span class="kw">then</span> <span class="str">"Medium"</span>\n      <span class="kw">else</span> <span class="str">"Low"</span>\n  )</span>\n<span class="kw">in</span>\n  AddBand`
+            }
+        ];
+
+        function isNull(row, col, step) {
+            return step.nullCells.some(([r, c]) => r === row && c === col);
+        }
+
+        function isChanged(row, col, step) {
+            return step.changedCells.some(([r, c]) => r === row && c === col);
+        }
+
+        function renderStep(idx) {
+            const step = steps[idx];
+
+            // Update buttons
+            document.querySelectorAll('.step-btn').forEach((btn, i) => {
+                btn.classList.remove('active', 'completed');
+                if (i < idx) btn.classList.add('completed');
+                if (i === idx) btn.classList.add('active');
+            });
+
+            // Table
+            let html = '<table><thead><tr>';
+            step.columns.forEach(c => html += `<th>${c}</th>`);
+            html += '</tr></thead><tbody>';
+            step.rows.forEach((row, ri) => {
+                html += '<tr>';
+                row.forEach((val, ci) => {
+                    if (isNull(ri, ci, step)) {
+                        html += `<td class="null-val">null</td>`;
+                    } else if (isChanged(ri, ci, step)) {
+                        html += `<td class="changed">${val}</td>`;
+                    } else {
+                        html += `<td>${val}</td>`;
+                    }
+                });
+                html += '</tr>';
+            });
+            html += '</tbody></table>';
+            document.getElementById('table-preview').innerHTML = html;
+
+            // Code
+            document.getElementById('code-block').innerHTML = step.code;
+
+            // Description
+            document.getElementById('step-desc').innerHTML = step.desc;
+        }
+
+        document.querySelectorAll('.step-btn').forEach(btn => {
+            btn.addEventListener('click', () => renderStep(parseInt(btn.dataset.step)));
+        });
+
+        renderStep(0);
+    </script>
+</body>
+</html>
