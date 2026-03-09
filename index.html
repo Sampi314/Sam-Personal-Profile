@@ -198,92 +198,42 @@
             font-size: 0.85rem;
         }
 
-        /* Excel Example Styles */
-        .excel-demo {
-            margin-top: 16px;
+        /* Tabbed Showcase */
+        .showcase-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 0;
         }
 
-        .excel-demo h4 {
-            font-size: 1rem;
-            color: #1a1a2e;
-            margin-bottom: 12px;
-        }
-
-        .excel-table-wrapper {
-            overflow-x: auto;
-            margin-bottom: 16px;
-        }
-
-        .excel-table {
-            border-collapse: collapse;
-            font-size: 0.85rem;
-            font-family: 'Consolas', 'Courier New', monospace;
-            min-width: 100%;
-        }
-
-        .excel-table th,
-        .excel-table td {
-            border: 1px solid #c0c0c0;
-            padding: 6px 12px;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .excel-table th {
+        .showcase-tab {
+            padding: 10px 24px;
+            border: none;
             background: #e8eef6;
-            color: #0f3460;
-            font-weight: 600;
+            color: #555;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.2s;
+            font-family: inherit;
         }
 
-        .excel-table .row-header {
-            background: #e8eef6;
-            color: #0f3460;
-            font-weight: 600;
-            text-align: left;
-        }
-
-        .excel-table .col-label {
+        .showcase-tab:hover {
             background: #d4dce8;
-            color: #666;
-            font-size: 0.75rem;
-            font-weight: 400;
-        }
-
-        .excel-table td.data {
-            background: #fff;
-        }
-
-        .excel-table td.result {
-            background: #fff9e6;
-            font-weight: 700;
             color: #0f3460;
         }
 
-        .formula-box {
-            background: #1a1a2e;
-            color: #e2e8f0;
-            border-radius: 6px;
-            padding: 16px 20px;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-            overflow-x: auto;
-            line-height: 1.8;
+        .showcase-tab.active {
+            background: #0f3460;
+            color: #fff;
         }
 
-        .formula-box .keyword {
-            color: #7ec8e3;
-        }
-
-        .formula-box .comment {
-            color: #888;
-            font-style: italic;
-        }
-
-        .formula-note {
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.6;
+        .showcase-iframe {
+            width: 100%;
+            height: 540px;
+            border: none;
+            border-radius: 0 0 6px 6px;
+            background: #f0f2f5;
         }
 
         footer {
@@ -409,62 +359,14 @@
         </section>
 
         <section>
-            <h2>Excel Examples</h2>
-            <div class="excel-demo">
-                <h4>2D SUMIFS &ndash; Cross-Tabulated Lookup</h4>
-                <p class="formula-note" style="margin-bottom: 16px;">A common challenge: summarising data across two dimensions (e.g. sales by region and product). Here's how SUMIFS handles it with a 2D layout.</p>
-
-                <p class="subsection-title">Source Data</p>
-                <div class="excel-table-wrapper">
-                    <table class="excel-table">
-                        <thead>
-                            <tr>
-                                <th>Region</th>
-                                <th>Product</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td class="data">North</td><td class="data">Widget A</td><td class="data">1,200</td></tr>
-                            <tr><td class="data">South</td><td class="data">Widget B</td><td class="data">800</td></tr>
-                            <tr><td class="data">North</td><td class="data">Widget B</td><td class="data">1,500</td></tr>
-                            <tr><td class="data">East</td><td class="data">Widget A</td><td class="data">950</td></tr>
-                            <tr><td class="data">South</td><td class="data">Widget A</td><td class="data">1,100</td></tr>
-                            <tr><td class="data">East</td><td class="data">Widget B</td><td class="data">700</td></tr>
-                            <tr><td class="data">North</td><td class="data">Widget A</td><td class="data">600</td></tr>
-                            <tr><td class="data">South</td><td class="data">Widget B</td><td class="data">400</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <p class="subsection-title">2D Summary (Result)</p>
-                <div class="excel-table-wrapper">
-                    <table class="excel-table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Widget A</th>
-                                <th>Widget B</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td class="row-header">North</td><td class="result">1,800</td><td class="result">1,500</td></tr>
-                            <tr><td class="row-header">South</td><td class="result">1,100</td><td class="result">1,200</td></tr>
-                            <tr><td class="row-header">East</td><td class="result">950</td><td class="result">700</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <p class="subsection-title">Formula</p>
-                <div class="formula-box">
-                    <span class="comment">/* Cell under "Widget A" &amp; "North" */</span><br>
-                    =<span class="keyword">SUMIFS</span>(Amount, Region, "North", Product, "Widget A")<br><br>
-                    <span class="comment">/* Dynamic version using row/column headers */</span><br>
-                    =<span class="keyword">SUMIFS</span>($C:$C, $A:$A, $G2, $B:$B, H$1)
-                </div>
-
-                <p class="formula-note">The dynamic version uses mixed references so the formula can be copied across rows and columns: <strong>$G2</strong> locks the column (region from row header) and <strong>H$1</strong> locks the row (product from column header), creating a full 2D summary from a single formula.</p>
+            <h2>Technical Showcase</h2>
+            <p class="summary-text" style="margin-bottom: 16px;">Interactive demos of tools I work with daily. Click the tabs to explore.</p>
+            <div class="showcase-tabs">
+                <button class="showcase-tab active" data-src="excel-2d-sumifs.html">Excel</button>
+                <button class="showcase-tab" data-src="demo-powerbi.html">Power BI</button>
+                <button class="showcase-tab" data-src="demo-powerquery.html">Power Query</button>
             </div>
+            <iframe id="showcase-frame" src="excel-2d-sumifs.html" class="showcase-iframe" title="Technical Showcase Demo"></iframe>
         </section>
 
         <section>
@@ -508,5 +410,15 @@
     <footer>
         &copy; 2026 Sam Ngo
     </footer>
+
+    <script>
+        document.querySelectorAll('.showcase-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.showcase-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('showcase-frame').src = tab.dataset.src;
+            });
+        });
+    </script>
 </body>
 </html>
