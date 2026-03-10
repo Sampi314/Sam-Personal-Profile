@@ -57,13 +57,13 @@
 
         <section class="fade-in">
             <h2>Usage</h2>
-            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">=fn_Is_Hyperlink(A1:A100)</pre>
+            <pre data-lang="plaintext">=fn_Is_Hyperlink(A1:A100)</pre>
             <p class="summary-text" style="margin-top: 14px;">Use with SUMPRODUCT to count hyperlinks: <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">=SUMPRODUCT(--fn_Is_Hyperlink(A1:A100))</code></p>
         </section>
 
         <section class="fade-in">
             <h2>The VBA Code</h2>
-            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">Function fn_Is_Hyperlink(Hyperlink_Range As Range) As Variant
+            <pre>Function fn_Is_Hyperlink(Hyperlink_Range As Range) As Variant
     Dim Arr() As Variant
     ReDim Arr(1 To Hyperlink_Range.Rows.Count, 1 To Hyperlink_Range.Columns.Count)
     Dim r As Long, c As Long

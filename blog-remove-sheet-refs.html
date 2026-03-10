@@ -52,7 +52,7 @@
         <section class="fade-in">
             <h2>Why Remove Same-Sheet References?</h2>
             <p class="summary-text" style="margin-bottom: 14px;">When Excel creates formulas across different sheets, it uses the sheet name followed by an exclamation mark to indicate where the referenced cells are located. However, when the formula refers to the same sheet it's on, these references are unnecessary. For example, these two formulas are identical:</p>
-            <pre style="background: var(--code-bg); padding: 16px 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">=Sheet1!A1 + Sheet1!B1
+            <pre data-lang="plaintext">=Sheet1!A1 + Sheet1!B1
 =A1 + B1</pre>
             <p class="summary-text" style="margin-top: 14px;">Removing the <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">Sheet1!</code> reference simplifies the formula without changing its functionality.</p>
         </section>
@@ -70,7 +70,7 @@
         <section class="fade-in">
             <h2>The VBA Solution</h2>
             <p class="summary-text" style="margin-bottom: 16px;">The following VBA macro scans through all the formulas in the active worksheet and removes references to the current sheet, regardless of whether the sheet name has spaces or not:</p>
-            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">Sub RemoveSameSheetReferences()
+            <pre>Sub RemoveSameSheetReferences()
     Dim sht     As Worksheet
     Dim ShtName As String
 

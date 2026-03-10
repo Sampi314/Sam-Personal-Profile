@@ -57,14 +57,14 @@
 
         <section class="fade-in">
             <h2>Usage</h2>
-            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">=fn_ROTATE(A1:D3)       ' Rotate 90° clockwise
+            <pre data-lang="plaintext">=fn_ROTATE(A1:D3)       ' Rotate 90° clockwise
 =fn_ROTATE(A1:D3, 2)    ' Rotate 180°
 =fn_ROTATE(A1:D3, 3)    ' Rotate 270° (90° counter-clockwise)</pre>
         </section>
 
         <section class="fade-in">
             <h2>The VBA Code</h2>
-            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">Function fn_ROTATE(Arr As Range, Optional times As Integer = 1) As Variant
+            <pre>Function fn_ROTATE(Arr As Range, Optional times As Integer = 1) As Variant
     ' Rotates a 2D range 90 degrees clockwise, repeated 'times' times
     Dim Rtt As Variant, Tmp As Variant
     Dim Row_Cnt As Long, Col_Cnt As Long, Row As Long, Col As Long, Idx As Long
