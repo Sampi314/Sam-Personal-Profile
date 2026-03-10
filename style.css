@@ -146,9 +146,16 @@ a:hover {
     font-family: 'Space Mono', monospace;
     font-weight: 700;
     font-size: 1.15rem;
-    color: var(--nav-text);
+    color: var(--accent);
     text-decoration: none;
     letter-spacing: -0.02em;
+    display: inline-flex;
+    align-items: center;
+}
+
+.nav-brand svg {
+    color: var(--accent);
+    flex-shrink: 0;
 }
 
 .nav-links {
