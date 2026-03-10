@@ -8,7 +8,7 @@
   "summary": "I am a dedicated and results-driven finance professional with a strong foundation in financial modeling, data analysis, and strategic decision-making. With a Master of Finance from the University of Adelaide and a Bachelor's degree in International Finance, I bring a solid academic background combined with over two years of experience in financial analysis. Currently serving as a Senior Analyst at SumProduct, I specialize in developing and reviewing complex financial models, leveraging advanced mathematical techniques and Excel to facilitate critical business decisions. My expertise in data transformation and visualization allows me to extract, clean, and present intricate data sets, providing clear and actionable insights.",
   "contact": {
     "email": "nkhoihue@gmail.com",
-    "phone": "",
+    "phone": "+61 45196 1276",
     "location": {
       "city": "Sydney",
       "state": "NSW",
@@ -27,7 +27,14 @@
       "end_date": "",
       "current": true,
       "description": "",
-      "highlights": []
+      "highlights": [
+        "Provide consulting solutions to financial and accounting challenges, including developing financial models and data analysis tools in Excel.",
+        "Create dynamic Power BI dashboards and reports.",
+        "Build automation models using Excel VBA, VB.NET, Power Query and Power BI.",
+        "Assist in model audits.",
+        "Manage projects and train staff in data analysis and automation tools.",
+        "Write blogs for SumProduct on Power BI, Power Pivot, and Excel Challenge series."
+      ]
     },
     {
       "title": "Analyst",
@@ -44,7 +51,7 @@
       ]
     },
     {
-      "title": "Team Leader - Consultant",
+      "title": "Global Trade Accelerator Consultant",
       "company": "Practera",
       "location": "Australia",
       "start_date": "2020-04",
@@ -52,9 +59,9 @@
       "current": false,
       "description": "",
       "highlights": [
-        "Conducted team meetings to update members on best practices, allocated suitable tasks and deadlines.",
-        "Oversaw team member work for quality and guideline compliance.",
-        "Negotiated with team members to develop optimal strategies to promote adherence to performance goals."
+        "Identified and defined objectives of assigned marketing research projects, determining best methods to meet those objectives.",
+        "Conducted research and compiled data related to product market, customer demographics, and factors influencing demand.",
+        "Analysed results to identify ways of maximising sales and market penetration of current products."
       ]
     },
     {
@@ -90,18 +97,18 @@
       "degree": "Master",
       "field_of_study": "Finance",
       "start_date": "2020-02",
-      "end_date": "2021-12",
-      "gpa": "",
-      "honors": []
+      "end_date": "2021-11",
+      "gpa": "6.375/7",
+      "honors": ["Golden Key Member"]
     },
     {
       "institution": "I-Shou University",
       "degree": "Bachelor",
       "field_of_study": "International Finance",
-      "start_date": "2016",
-      "end_date": "2019",
-      "gpa": "",
-      "honors": []
+      "start_date": "2016-02",
+      "end_date": "2019-06",
+      "gpa": "4.00/4",
+      "honors": ["Top 5% of International Finance Department", "Merit Scholarship", "Dean's List Awards for Academic Excellence"]
     }
   ],
   "skills": {
@@ -122,6 +129,6 @@
     "Honorary Member of Golden Key Society"
   ],
   "volunteer": [],
-  "interests": [],
+  "interests": ["Stargazing", "Reading", "Hiking"],
   "references": "Available upon request"
 }
