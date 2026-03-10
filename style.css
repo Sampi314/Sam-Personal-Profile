@@ -2140,6 +2140,17 @@ section.overview-prominent .project-detail-header h2 {
         display: none !important;
     }
 
+    /* Hide Featured Work section entirely */
+    section.section-alt {
+        display: none !important;
+    }
+
+    /* Ensure fade-in elements are fully visible when printing */
+    .fade-in {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
     /* Reset backgrounds and colors for printing */
     body {
         background: #fff !important;
@@ -2196,6 +2207,11 @@ section.overview-prominent .project-detail-header h2 {
         border-bottom: 1px solid #ddd !important;
         padding: 16px 0 !important;
         margin-bottom: 8px !important;
+    }
+
+    /* Allow page breaks inside sections but avoid breaking individual items */
+    .experience-item,
+    .education-item {
         break-inside: avoid;
         page-break-inside: avoid;
     }
@@ -2264,13 +2280,9 @@ section.overview-prominent .project-detail-header h2 {
         display: none;
     }
 
-    /* Featured Work section - hide entirely for CV */
+    /* Featured Work section background fallback */
     .section-alt {
         background: #fff !important;
-    }
-
-    .section-alt:has(.featured-work-grid) {
-        display: none !important;
     }
 
     /* Page header */
