@@ -16,7 +16,7 @@
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="tools.html">Tools</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="contact.html">Contact</a></li>
                 <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
             </ul>
         </div>
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="hero-photo">
-                <img src="profile.jpg" alt="Sam Ngo" class="profile-pic">
+                <div class="profile-pic profile-initials">SN</div>
             </div>
         </div>
     </header>
@@ -136,41 +136,6 @@
             </div>
         </section>
 
-        <!-- Technical Showcase -->
-        <section class="fade-in">
-            <h2>Technical Showcase</h2>
-            <p class="summary-text" style="margin-bottom: 16px;">Interactive demos of tools I work with daily. Click a project to explore the full demo and details.</p>
-            <div class="card-grid">
-                <a href="project-excel.html" class="card">
-                    <div class="card-icon">&#128202;</div>
-                    <h3>2D SUMIFS Formula Engine</h3>
-                    <p>Interactive demo showing how SUMIFS with mixed references creates dynamic cross-tabulation summaries in Excel.</p>
-                    <div class="card-tags">
-                        <span class="card-tag">Excel</span>
-                        <span class="card-tag">Formulas</span>
-                    </div>
-                </a>
-                <a href="project-powerbi.html" class="card">
-                    <div class="card-icon">&#128200;</div>
-                    <h3>Power BI Sales Dashboard</h3>
-                    <p>Simulated Power BI dashboard with KPI cards, bar charts, donut charts, and interactive region slicers.</p>
-                    <div class="card-tags">
-                        <span class="card-tag">Power BI</span>
-                        <span class="card-tag">DAX</span>
-                    </div>
-                </a>
-                <a href="project-powerquery.html" class="card">
-                    <div class="card-icon">&#128256;</div>
-                    <h3>Power Query ETL Pipeline</h3>
-                    <p>Step-by-step data transformation pipeline showing Source, Clean, Split, Type, and Custom Column stages.</p>
-                    <div class="card-tags">
-                        <span class="card-tag">Power Query</span>
-                        <span class="card-tag">M Code</span>
-                    </div>
-                </a>
-            </div>
-        </section>
-
         <!-- Certifications -->
         <section class="fade-in">
             <h2>Certifications</h2>
@@ -211,32 +176,6 @@
             </div>
         </section>
 
-        <!-- Contact Form -->
-        <section class="fade-in" id="contact">
-            <h2>Get In Touch</h2>
-            <p class="summary-text" style="margin-bottom: 20px;">Have a question or want to work together? Send me a message.</p>
-            <form id="contact-form" class="contact-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required placeholder="Your name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required placeholder="your@email.com">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="subject" placeholder="What's this about?">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required placeholder="Your message..."></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Send Message</button>
-            </form>
-        </section>
     </main>
 
     <footer>
