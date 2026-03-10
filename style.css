@@ -511,7 +511,9 @@ section h2 {
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 24px;
-    padding-bottom: 12px;
+    margin-left: -40px;
+    margin-right: -40px;
+    padding: 0 40px 12px;
     border-bottom: 1px solid var(--border);
     letter-spacing: -0.02em;
 }
@@ -1603,6 +1605,12 @@ section.overview-prominent .project-detail-header h2 {
     section.overview-prominent {
         padding: 28px 24px;
         border-left-width: 3px;
+    }
+
+    section h2 {
+        margin-left: -24px;
+        margin-right: -24px;
+        padding: 0 24px 12px;
     }
 
     section h2::after {

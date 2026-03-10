@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Worksheet Functions (UDFs) for Excel VBA - Sam Ngo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="page-header-inner">
+            <h1>Custom Worksheet Functions (UDFs) for Excel VBA</h1>
+            <p>March 2026</p>
+        </div>
+    </div>
+
+    <main>
+        <section class="fade-in overview-prominent">
+            <div class="project-detail-header">
+                <div>
+                    <h2>Overview</h2>
+                </div>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">Functions</span>
+                </div>
+            </div>
+            <p class="summary-text">Excel's built-in functions are powerful, but some operations remain impossible without VBA. This collection of custom User Defined Functions extends Excel with capabilities like summing by cell color, extracting threaded comments, finding the Nth match, rotating arrays, and checking file paths.</p>
+            <p class="summary-text" style="margin-top: 14px;">Each function is designed as a proper UDF that can be called directly from worksheet formulas. Most return arrays, making them compatible with Excel 365 dynamic array spilling.</p>
+        </section>
+
+        <section class="fade-in">
+            <h2>The Functions</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 12px;"><strong>fn_Sum_by_Color:</strong> Sums cells in a range whose fill color matches a reference cell, useful for color-coded financial models</li>
+                <li style="margin-bottom: 12px;"><strong>fn_Range_Has_Notes:</strong> Returns a TRUE/FALSE array indicating which cells have legacy comments (Notes) attached</li>
+                <li style="margin-bottom: 12px;"><strong>fn_Extract_Comments_Thread:</strong> Extracts all threaded comments and replies into a structured table with Cell, Author, Date, and Text columns</li>
+                <li style="margin-bottom: 12px;"><strong>fn_NMATCH:</strong> Like MATCH but finds the Nth occurrence of a value, supporting array inputs for both the lookup value and instance number</li>
+                <li style="margin-bottom: 12px;"><strong>fn_ROTATE:</strong> Rotates a 2D range 90 degrees clockwise, with an optional count parameter for 180 or 270 degree rotations</li>
+                <li style="margin-bottom: 12px;"><strong>fn_Does_File_Path_Exist:</strong> Returns TRUE/FALSE for each cell, checking whether the file path in that cell actually exists on disk</li>
+                <li style="margin-bottom: 12px;"><strong>fn_Is_Hyperlink:</strong> Returns TRUE/FALSE indicating whether each cell contains a hyperlink</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>The VBA Code</h2>
+            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">Function fn_Sum_by_Color(Cell_Color As Range, Sum_Range As Range)
+    Application.Volatile
+    Dim Clr_Sum As Double
+    Dim Clr_Idx As Integer: Clr_Idx = Cell_Color.Interior.ColorIndex
+    Dim Clr As Range
+    For Each Clr In Sum_Range
+        If Clr.Interior.ColorIndex = Clr_Idx Then
+            Clr_Sum = WorksheetFunction.Sum(Clr, Clr_Sum)
+        End If
+    Next Clr
+    fn_Sum_by_Color = Clr_Sum
+End Function
+
+Function fn_Range_Has_Notes(Comment_Range As Range) As Variant
+    Application.Volatile
+    Dim Arr() As Variant
+    ReDim Arr(1 To Comment_Range.Rows.Count, 1 To Comment_Range.Columns.Count)
+    Dim r As Long, c As Long
+    For r = 1 To Comment_Range.Rows.Count
+        For c = 1 To Comment_Range.Columns.Count
+            Arr(r, c) = Not Comment_Range(r, c).Comment Is Nothing
+        Next c
+    Next r
+    fn_Range_Has_Notes = Arr
+End Function
+
+Function fn_Extract_Comments_Thread(Comment_Thread_Range As Range) As Variant
+    Application.Volatile
+    ' Returns a 2D array: [Cell, Index, Type, Author, Date, Text]
+    Dim Rng As Range, Lin_Arr As Long
+    For Each Rng In Comment_Thread_Range
+        If Not (Rng.CommentThreaded Is Nothing) Then
+            Lin_Arr = Lin_Arr + 1 + Rng.CommentThreaded.Replies.Count
+        End If
+    Next Rng
+    
+    Dim Arr() As Variant: ReDim Arr(0 To Lin_Arr, 1 To 6)
+    Arr(0, 1) = &quot;Cell&quot;: Arr(0, 2) = &quot;Index&quot;: Arr(0, 3) = &quot;Type&quot;
+    Arr(0, 4) = &quot;User&quot;: Arr(0, 5) = &quot;Date&quot;: Arr(0, 6) = &quot;Text&quot;
+    
+    Dim Cmt_Idx As Long, Rlp_Idx As Long
+    For Each Rng In Comment_Thread_Range
+        If Not (Rng.CommentThreaded Is Nothing) Then
+            Cmt_Idx = Cmt_Idx + 1: Rlp_Idx = Rlp_Idx + 1
+            Arr(Rlp_Idx, 1) = Rng.Address(False, False)
+            Arr(Rlp_Idx, 3) = &quot;Comment&quot;
+            Arr(Rlp_Idx, 4) = Rng.CommentThreaded.Author.Name
+            Arr(Rlp_Idx, 5) = Rng.CommentThreaded.Date
+            Arr(Rlp_Idx, 6) = Rng.CommentThreaded.Text
+            Dim Rlp As Object
+            For Each Rlp In Rng.CommentThreaded.Replies
+                Rlp_Idx = Rlp_Idx + 1
+                Arr(Rlp_Idx, 1) = Rng.Address(False, False)
+                Arr(Rlp_Idx, 3) = &quot;Reply&quot;
+                Arr(Rlp_Idx, 4) = Rlp.Author.Name
+                Arr(Rlp_Idx, 5) = Rlp.Date
+                Arr(Rlp_Idx, 6) = Rlp.Text
+            Next Rlp
+        End If
+    Next Rng
+    fn_Extract_Comments_Thread = Arr
+End Function
+
+Function fn_NMATCH(ByVal lookup_value As Variant, _
+        ByVal lookup_vector As Range, ByVal instance_num As Variant) As Variant
+    ' Returns the Nth occurrence position of lookup_value in lookup_vector
+    ' Supports arrays for both lookup_value and instance_num (outer product)
+    Dim Arr_Src As Variant: Arr_Src = lookup_vector.Value2
+    Dim R_Src As Long: R_Src = UBound(Arr_Src, 1)
+    Dim C_Src As Long: C_Src = UBound(Arr_Src, 2)
+    
+    Dim Cnt As Long, r As Long, c As Long
+    Dim Num_Nth As Long: Num_Nth = CLng(instance_num)
+    
+    For r = 1 To R_Src
+        For c = 1 To C_Src
+            If CStr(Arr_Src(r, c)) = CStr(lookup_value) Then
+                Cnt = Cnt + 1
+                If Cnt = Num_Nth Then
+                    fn_NMATCH = (r - 1) * C_Src + c
+                    Exit Function
+                End If
+            End If
+        Next c
+    Next r
+    fn_NMATCH = CVErr(xlErrNA)
+End Function
+
+Function fn_ROTATE(Arr As Range, Optional times As Integer = 1) As Variant
+    ' Rotates a 2D range 90 degrees clockwise, repeated 'times' times
+    Dim Rtt As Variant, Tmp As Variant
+    Dim Row_Cnt As Long, Col_Cnt As Long, Row As Long, Col As Long, Idx As Long
+    Rtt = Arr.Value
+    times = times Mod 4
+    For Idx = 1 To times
+        Row_Cnt = UBound(Rtt, 1): Col_Cnt = UBound(Rtt, 2)
+        ReDim Tmp(1 To Col_Cnt, 1 To Row_Cnt)
+        For Row = 1 To Row_Cnt
+            For Col = 1 To Col_Cnt
+                Tmp(Col, Row_Cnt - Row + 1) = Rtt(Row, Col)
+            Next Col
+        Next Row
+        Rtt = Tmp
+    Next Idx
+    fn_ROTATE = Rtt
+End Function
+
+Function fn_Does_File_Path_Exist(File_Path As Range) As Variant
+    Dim Arr() As Variant
+    ReDim Arr(1 To File_Path.Rows.Count, 1 To File_Path.Columns.Count)
+    Dim r As Long, c As Long
+    For r = 1 To File_Path.Rows.Count
+        For c = 1 To File_Path.Columns.Count
+            Dim p As String: p = CStr(File_Path(r, c).Value2)
+            On Error Resume Next
+            Arr(r, c) = (Len(Dir(p, vbNormal)) &gt; 0)
+            If Err.Number &lt;&gt; 0 Then Arr(r, c) = False
+            On Error GoTo 0
+        Next c
+    Next r
+    fn_Does_File_Path_Exist = Arr
+End Function
+
+Function fn_Is_Hyperlink(Hyperlink_Range As Range) As Variant
+    Dim Arr() As Variant
+    ReDim Arr(1 To Hyperlink_Range.Rows.Count, 1 To Hyperlink_Range.Columns.Count)
+    Dim r As Long, c As Long
+    For r = 1 To Hyperlink_Range.Rows.Count
+        For c = 1 To Hyperlink_Range.Columns.Count
+            Arr(r, c) = (Hyperlink_Range(r, c).Hyperlinks.Count &gt; 0)
+        Next c
+    Next r
+    fn_Is_Hyperlink = Arr
+End Function</pre>
+        </section>
+
+        <section class="fade-in">
+            <h2>Final Thoughts</h2>
+            <p class="summary-text">These UDFs fill gaps in Excel's native function library. They are especially valuable in XLAM add-ins where they become available across all workbooks, extending Excel's capabilities without requiring users to write any VBA themselves.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-logo"></div>
+        <div class="footer-tagline">Finance &middot; Data &middot; Visualization</div>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+    <script src="shared.js"></script>
+</body>
+</html>

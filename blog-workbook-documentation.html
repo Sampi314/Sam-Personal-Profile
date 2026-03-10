@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workbook Documentation Suite in VBA - Sam Ngo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="page-header-inner">
+            <h1>Workbook Documentation Suite in VBA</h1>
+            <p>March 2026</p>
+        </div>
+    </div>
+
+    <main>
+        <section class="fade-in overview-prominent">
+            <div class="project-detail-header">
+                <div>
+                    <h2>Overview</h2>
+                </div>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">Documentation</span>
+                </div>
+            </div>
+            <p class="summary-text">Understanding a workbook's structure is crucial when inheriting files or conducting reviews. This suite of four macros generates comprehensive documentation: named ranges, embedded objects, unique formulas in R1C1 notation, and chart series details.</p>
+            <p class="summary-text" style="margin-top: 14px;">Each tool creates a new worksheet (or workbook) with a structured report and hyperlinks for quick navigation back to the source cells.</p>
+        </section>
+
+        <section class="fade-in">
+            <h2>The Four Tools</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 12px;"><strong>List Names Range:</strong> Documents every visible named range in the workbook with its scope (worksheet vs workbook level), the name, and the RefersTo formula</li>
+                <li style="margin-bottom: 12px;"><strong>List Objects:</strong> Catalogs all shapes, images, charts, and other embedded objects across every sheet with their positions</li>
+                <li style="margin-bottom: 12px;"><strong>List Unique Formulas R1C1:</strong> Groups identical formulas by their R1C1 representation, revealing the true number of distinct calculations in your workbook</li>
+                <li style="margin-bottom: 12px;"><strong>Chart Identifier:</strong> Extracts the SERIES formula for every chart series in the workbook, making it easy to see what data each chart is referencing</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>The VBA Code</h2>
+            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">Public Sub List_Names_Range()
+    Dim Nam_Rng As Variant
+    Dim Idx_Spn As Long: Idx_Spn = 1
+    Dim New_Wks As Worksheet: Set New_Wks = Worksheets.Add
+    
+    New_Wks.Cells.ClearContents
+    For Each Nam_Rng In ActiveWorkbook.Names
+        If Nam_Rng.Visible Then
+            Idx_Spn = Idx_Spn + 1
+            New_Wks.Cells(Idx_Spn, 1).Value = IIf(TypeName(Nam_Rng.Parent) = &quot;Worksheet&quot;, _
+                Nam_Rng.Parent.Name, &quot;[Workbook]&quot;)
+            New_Wks.Cells(Idx_Spn, 2).Value = Nam_Rng.Name
+            New_Wks.Hyperlinks.Add New_Wks.Cells(Idx_Spn, 3), &quot;&quot;, Nam_Rng.RefersTo
+            New_Wks.Cells(Idx_Spn, 4).Value = &quot;'&quot; &amp; Nam_Rng.RefersTo
+        End If
+    Next Nam_Rng
+    
+    New_Wks.Range(&quot;A1&quot;).Value = &quot;Scope&quot;
+    New_Wks.Range(&quot;B1&quot;).Value = &quot;Name&quot;
+    New_Wks.Range(&quot;C1&quot;).Value = &quot;Hyperlink&quot;
+    New_Wks.Range(&quot;D1&quot;).Value = &quot;Refers To&quot;
+    New_Wks.Range(&quot;A:D&quot;).EntireColumn.AutoFit
+End Sub
+
+Public Sub List_Objects()
+    Dim Obj As Shape, Wks As Worksheet
+    Dim Idx_Lst As Long: Idx_Lst = 1
+    Dim New_Wks As Worksheet: Set New_Wks = Worksheets.Add
+    
+    On Error Resume Next
+    For Each Wks In ActiveWorkbook.Sheets
+        For Each Obj In Wks.Shapes
+            Idx_Lst = Idx_Lst + 1
+            New_Wks.Cells(Idx_Lst, 1).Value = Obj.Parent.Name
+            New_Wks.Cells(Idx_Lst, 2).Value = Obj.TopLeftCell.Address
+            New_Wks.Hyperlinks.Add New_Wks.Cells(Idx_Lst, 3), &quot;&quot;, _
+                &quot;'&quot; &amp; Wks.Name &amp; &quot;'!&quot; &amp; Obj.TopLeftCell.Address
+        Next Obj
+    Next Wks
+    On Error GoTo 0
+    
+    New_Wks.Range(&quot;A1&quot;).Value = &quot;Worksheet&quot;
+    New_Wks.Range(&quot;B1&quot;).Value = &quot;Cell Address&quot;
+    New_Wks.Range(&quot;C1&quot;).Value = &quot;Hyperlinks&quot;
+    New_Wks.Range(&quot;A:C&quot;).EntireColumn.AutoFit
+End Sub
+
+Public Sub List_Unique_Formulas_R1C1()
+    Dim Frm_Dic As Object: Set Frm_Dic = CreateObject(&quot;Scripting.Dictionary&quot;)
+    Dim Wks As Worksheet, Cel As Range
+    Dim Idx_Lst As Long: Idx_Lst = 1
+    Dim New_Wks As Worksheet: Set New_Wks = Worksheets.Add
+    
+    On Error Resume Next
+    For Each Wks In ActiveWorkbook.Sheets
+        For Each Cel In Wks.UsedRange.SpecialCells(xlCellTypeFormulas)
+            If Not Frm_Dic.Exists(Cel.FormulaR1C1) Then
+                Frm_Dic.Add Cel.FormulaR1C1, Cel
+            Else
+                Set Frm_Dic(Cel.FormulaR1C1) = Union(Frm_Dic(Cel.FormulaR1C1), Cel)
+            End If
+        Next Cel
+        
+        Dim Frm As Variant
+        For Each Frm In Frm_Dic.Keys
+            Dim Rng_Are As Range
+            For Each Rng_Are In Frm_Dic(Frm).Areas
+                Idx_Lst = Idx_Lst + 1
+                New_Wks.Cells(Idx_Lst, 1).Value = Wks.Name
+                New_Wks.Cells(Idx_Lst, 2).Value = Rng_Are.Address
+                New_Wks.Cells(Idx_Lst, 4).Value = &quot;'&quot; &amp; Frm
+                New_Wks.Cells(Idx_Lst, 5).Value = &quot;'&quot; &amp; Rng_Are.Cells(1, 1).Formula
+            Next Rng_Are
+        Next Frm
+        Frm_Dic.RemoveAll
+    Next Wks
+    
+    New_Wks.Range(&quot;A1&quot;).Value = &quot;Worksheet&quot;
+    New_Wks.Range(&quot;B1&quot;).Value = &quot;Cell Address&quot;
+    New_Wks.Range(&quot;C1&quot;).Value = &quot;Hyperlinks&quot;
+    New_Wks.Range(&quot;D1&quot;).Value = &quot;Formula R1C1&quot;
+    New_Wks.Range(&quot;E1&quot;).Value = &quot;Formula A1&quot;
+    New_Wks.Range(&quot;A:C&quot;).EntireColumn.AutoFit
+    New_Wks.Range(&quot;D:E&quot;).ColumnWidth = 60
+End Sub
+
+Public Sub Chart_Identifier()
+    Dim Wks As Worksheet, Cht As Object, Srs As Series
+    Dim Cur_Wkb As Workbook: Set Cur_Wkb = ActiveWorkbook
+    Dim New_Wkb As Workbook: Set New_Wkb = Workbooks.Add
+    
+    New_Wkb.Range(&quot;A1&quot;).Value = &quot;File:&quot;
+    New_Wkb.Range(&quot;B1&quot;).Value = Cur_Wkb.Name
+    New_Wkb.Range(&quot;A6:I6&quot;).Value = Array(&quot;Sheet&quot;, &quot;Chart&quot;, &quot;Series&quot;, _
+        &quot;Formula&quot;, &quot;Name&quot;, &quot;Y-axis&quot;, &quot;X-axis&quot;, &quot;Bubble Size&quot;, &quot;Label Range&quot;)
+    
+    Dim i As Long: i = 0
+    For Each Wks In Cur_Wkb.Sheets
+        For Each Cht In Wks.ChartObjects
+            Cht.Activate
+            For Each Srs In ActiveChart.SeriesCollection
+                i = i + 1
+                New_Wkb.Range(&quot;A6&quot;).Offset(i, 0).Value = Wks.Name
+                New_Wkb.Range(&quot;A6&quot;).Offset(i, 1).Value = Cht.Name
+                New_Wkb.Range(&quot;A6&quot;).Offset(i, 2).Value = Srs.Name
+                On Error Resume Next
+                New_Wkb.Range(&quot;A6&quot;).Offset(i, 3).Value = &quot;'&quot; &amp; Srs.Formula
+                On Error GoTo 0
+            Next Srs
+        Next Cht
+    Next Wks
+End Sub</pre>
+        </section>
+
+        <section class="fade-in">
+            <h2>Final Thoughts</h2>
+            <p class="summary-text">Together, these four tools give you a complete picture of what is inside a workbook. They are especially valuable during model reviews, handovers, and compliance audits where understanding every component matters.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-logo"></div>
+        <div class="footer-tagline">Finance &middot; Data &middot; Visualization</div>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+    <script src="shared.js"></script>
+</body>
+</html>

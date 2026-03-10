@@ -220,7 +220,7 @@ function initHeroParticles() {
    Card Thumbnail SVG Generator
    ======================================== */
 function generateCardThumbnails() {
-    const cards = document.querySelectorAll('[data-card-theme]');
+    const cards = document.querySelectorAll('[data-card-theme]:not(.featured-card)');
     cards.forEach(card => {
         const theme = card.getAttribute('data-card-theme');
         const svg = createThemeSVG(theme);
