@@ -363,6 +363,18 @@ header p.location {
     transform: scale(1.02);
 }
 
+.profile-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: linear-gradient(135deg, #141419, #1e1e28);
+    letter-spacing: 0.04em;
+}
+
 .header-actions {
     display: flex;
     gap: 12px;
@@ -484,13 +496,7 @@ section h2 {
 }
 
 section h2::after {
-    content: '';
-    position: absolute;
-    left: 40px;
-    width: 32px;
-    height: 2px;
-    background: var(--accent);
-    margin-top: 13px;
+    display: none;
 }
 
 /* ========================================
