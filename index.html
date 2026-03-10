@@ -132,20 +132,7 @@
         <!-- Technical Showcase -->
         <section class="fade-in">
             <h2>Technical Showcase</h2>
-            <p class="summary-text" style="margin-bottom: 16px;">Interactive demos of tools I work with daily. Select a tab to explore, or visit the <a href="tools.html">dedicated project pages</a> for details.</p>
-            <div class="showcase-layout">
-                <div class="showcase-sidebar">
-                    <button class="showcase-tab active" data-src="excel-2d-sumifs.html">Excel</button>
-                    <button class="showcase-tab" data-src="demo-powerbi.html">Power BI</button>
-                    <button class="showcase-tab" data-src="demo-powerquery.html">Power Query</button>
-                </div>
-                <iframe id="showcase-frame" src="excel-2d-sumifs.html" class="showcase-iframe" title="Technical Showcase Demo"></iframe>
-            </div>
-        </section>
-
-        <!-- Projects -->
-        <section class="fade-in">
-            <h2>Projects</h2>
+            <p class="summary-text" style="margin-bottom: 16px;">Interactive demos of tools I work with daily. Click a project to explore the full demo and details.</p>
             <div class="card-grid">
                 <a href="project-excel.html" class="card">
                     <div class="card-icon">&#128202;</div>
@@ -255,15 +242,5 @@
     </footer>
 
     <script src="shared.js"></script>
-    <script>
-        // Showcase tab switching
-        document.querySelectorAll('.showcase-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.showcase-tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                document.getElementById('showcase-frame').src = tab.dataset.src;
-            });
-        });
-    </script>
 </body>
 </html>
