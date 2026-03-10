@@ -53,6 +53,51 @@
             <p class="summary-text" style="margin-top: 14px;">Currently serving as a Senior Analyst at SumProduct, I specialize in developing and reviewing complex financial models, leveraging advanced mathematical techniques and Excel to facilitate critical business decisions. My expertise in data transformation and visualization allows me to extract, clean, and present intricate data sets, providing clear and actionable insights.</p>
         </section>
 
+        <!-- Featured Work -->
+        <section class="fade-in section-alt">
+            <h2>Featured Work</h2>
+            <div class="featured-work-grid">
+                <a href="project-excel.html" class="featured-card" data-card-theme="excel">
+                    <div class="featured-card-thumb" data-featured-theme="excel"></div>
+                    <div class="featured-card-body">
+                        <h3>Matrix Manipulation: 8 Formula Approaches</h3>
+                        <p>Compare MMULT, SUMIFS, GROUPBY, and LAMBDA variants for aggregating categorised data into a summary matrix. Interactive demo lets you switch between all 8 methods.</p>
+                        <div class="card-tags">
+                            <span class="card-tag">Excel</span>
+                            <span class="card-tag">Formulas</span>
+                            <span class="card-tag">Interactive</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="project-powerbi.html" class="featured-card" data-card-theme="powerbi">
+                    <div class="featured-card-thumb" data-featured-theme="powerbi"></div>
+                    <div class="featured-card-body">
+                        <h3>Power BI Sales Dashboard</h3>
+                        <p>Interactive dashboard simulation with KPI cards, quarterly bar charts, category donut charts, and region slicer that cross-filters all visuals.</p>
+                        <div class="card-tags">
+                            <span class="card-tag">Power BI</span>
+                            <span class="card-tag">DAX</span>
+                            <span class="card-tag">Dashboard</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="project-sum-to-target.html" class="featured-card" data-card-theme="algorithms">
+                    <div class="featured-card-thumb" data-featured-theme="algorithms"></div>
+                    <div class="featured-card-body">
+                        <h3>Solving the Subset Sum Problem with Excel</h3>
+                        <p>Find all combinations of numbers that sum to a target using SEQUENCE, BASE, MMULT, and FILTER. Three approaches from step-by-step to a single formula.</p>
+                        <div class="card-tags">
+                            <span class="card-tag">Excel</span>
+                            <span class="card-tag">Algorithms</span>
+                            <span class="card-tag">Dynamic Arrays</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <div class="section-accent-divider"></div>
+
         <!-- Experience -->
         <section class="fade-in">
             <h2>Experience</h2>
@@ -107,7 +152,7 @@
         </section>
 
         <!-- Education -->
-        <section class="fade-in">
+        <section class="fade-in section-alt">
             <h2>Education</h2>
             <div class="education-item">
                 <h3>Master of Finance</h3>
@@ -137,8 +182,10 @@
             </div>
         </section>
 
+        <div class="section-accent-divider"></div>
+
         <!-- Certifications -->
-        <section class="fade-in">
+        <section class="fade-in section-alt">
             <h2>Certifications</h2>
             <ul class="cert-list">
                 <li>Corporate Financial Statement Analysis</li>
@@ -157,7 +204,7 @@
         </section>
 
         <!-- Languages -->
-        <section class="fade-in">
+        <section class="fade-in section-alt">
             <h2>Languages</h2>
             <div class="lang-item">
                 <span class="lang-name">Vietnamese</span>
@@ -189,5 +236,14 @@
     </footer>
 
     <script src="shared.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('[data-featured-theme]').forEach(el => {
+                const theme = el.getAttribute('data-featured-theme');
+                const svg = createThemeSVG(theme);
+                if (svg) el.innerHTML = svg;
+            });
+        });
+    </script>
 </body>
 </html>

@@ -29,41 +29,60 @@
     </div>
 
     <main>
+        <!-- Featured Posts -->
+        <div class="blog-featured fade-in">
+            <!-- Hero card: Matrix Manipulation -->
+            <a href="project-excel.html" class="blog-hero-card">
+                <div class="blog-hero-thumb" data-featured-theme="excel"></div>
+                <div class="blog-hero-body">
+                    <div class="blog-date">March 2026</div>
+                    <h3>Matrix Manipulation: 8 Formula Approaches to 2D Aggregation</h3>
+                    <p>Compare MMULT, SUMIFS, GROUPBY, and LAMBDA variants for aggregating categorised data into a summary matrix. Interactive demo lets you switch between all 8 methods.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Excel</span>
+                        <span class="card-tag">Formulas</span>
+                        <span class="card-tag">Interactive</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Sub row: Sum to Target + Bubble Pies -->
+            <div class="blog-sub-row">
+                <a href="project-sum-to-target.html" class="blog-sub-card fade-in">
+                    <div class="blog-sub-thumb" data-featured-theme="algorithms"></div>
+                    <div class="blog-sub-body">
+                        <div class="blog-date">March 2026</div>
+                        <h3>Solving the Subset Sum Problem with Excel Formulas</h3>
+                        <p>Find all combinations of numbers that sum to a target using SEQUENCE, BASE, MMULT, and FILTER.</p>
+                        <div class="card-tags">
+                            <span class="card-tag">Excel</span>
+                            <span class="card-tag">Algorithms</span>
+                            <span class="card-tag">Dynamic Arrays</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="project-bubble-pies.html" class="blog-sub-card fade-in">
+                    <div class="blog-sub-thumb" data-featured-theme="charting"></div>
+                    <div class="blog-sub-body">
+                        <div class="blog-date">March 2026</div>
+                        <h3>Bubble Pies: Multi-Dimensional Data in One Chart</h3>
+                        <p>Overlay mini pie charts on a bubble chart to show market positioning, scale, and sector composition.</p>
+                        <div class="card-tags">
+                            <span class="card-tag">Excel</span>
+                            <span class="card-tag">Charting</span>
+                            <span class="card-tag">VBA</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="blog-divider"><span>More Articles</span></div>
+
+        <!-- Remaining posts in card grid -->
         <div class="card-grid">
-            <a href="project-excel.html" class="card fade-in">
-                <div class="blog-date">March 2026</div>
-                <h3>Matrix Manipulation: 8 Formula Approaches to 2D Aggregation</h3>
-                <p>Compare MMULT, SUMIFS, GROUPBY, and LAMBDA variants for aggregating categorised data into a summary matrix. Interactive demo lets you switch between all 8 methods.</p>
-                <div class="card-tags">
-                    <span class="card-tag">Excel</span>
-                    <span class="card-tag">Formulas</span>
-                    <span class="card-tag">Interactive</span>
-                </div>
-            </a>
-
-            <a href="project-sum-to-target.html" class="card fade-in">
-                <div class="blog-date">March 2026</div>
-                <h3>Solving the Subset Sum Problem with Excel Formulas</h3>
-                <p>Find all combinations of numbers that sum to a target using SEQUENCE, BASE, MMULT, and FILTER. Three approaches from step-by-step to a single 275-character formula.</p>
-                <div class="card-tags">
-                    <span class="card-tag">Excel</span>
-                    <span class="card-tag">Algorithms</span>
-                    <span class="card-tag">Dynamic Arrays</span>
-                </div>
-            </a>
-
-            <a href="project-bubble-pies.html" class="card fade-in">
-                <div class="blog-date">March 2026</div>
-                <h3>Bubble Pies: Multi-Dimensional Data in One Chart</h3>
-                <p>Overlay mini pie charts on a bubble chart to show market positioning, scale, and sector composition simultaneously. Built with VBA and Python integration.</p>
-                <div class="card-tags">
-                    <span class="card-tag">Excel</span>
-                    <span class="card-tag">Charting</span>
-                    <span class="card-tag">VBA</span>
-                </div>
-            </a>
-
-            <a href="project-marimekko.html" class="card fade-in">
+            <a href="project-marimekko.html" class="card fade-in" data-card-theme="charting">
                 <div class="blog-date">March 2026</div>
                 <h3>Building a Marimekko Chart in Excel</h3>
                 <p>Variable-width stacked bar chart for market share and product mix analysis. 7 combined chart objects create a consulting-grade Mekko visualisation.</p>
@@ -74,7 +93,7 @@
                 </div>
             </a>
 
-            <a href="project-percentage-change.html" class="card fade-in">
+            <a href="project-percentage-change.html" class="card fade-in" data-card-theme="charting">
                 <div class="blog-date">March 2026</div>
                 <h3>Column Chart with Percentage Change Arrows</h3>
                 <p>Year-over-year variance indicators with colour-coded arrows and percentage labels. Uses invisible series and error bars for the bridge connectors.</p>
@@ -85,7 +104,7 @@
                 </div>
             </a>
 
-            <a href="project-waffle-chart.html" class="card fade-in">
+            <a href="project-waffle-chart.html" class="card fade-in" data-card-theme="charting">
                 <div class="blog-date">March 2026</div>
                 <h3>Simple and Stacked Waffle Charts in Excel</h3>
                 <p>10&times;10 grid percentage visualisation using SEQUENCE and conditional formatting. Includes single-value and multi-category stacked variants.</p>
@@ -96,7 +115,7 @@
                 </div>
             </a>
 
-            <a href="project-raincloud-horizontal.html" class="card fade-in">
+            <a href="project-raincloud-horizontal.html" class="card fade-in" data-card-theme="statistics">
                 <div class="blog-date">March 2026</div>
                 <h3>Horizontal RainCloud Charts in Excel</h3>
                 <p>Distribution visualisation combining density curves, box plots, and scatter plots. 34 chart objects create 1-cloud and 3-cloud comparison layouts.</p>
@@ -107,7 +126,7 @@
                 </div>
             </a>
 
-            <a href="project-raincloud-vertical.html" class="card fade-in">
+            <a href="project-raincloud-vertical.html" class="card fade-in" data-card-theme="statistics">
                 <div class="blog-date">March 2026</div>
                 <h3>Vertical RainCloud Charts in Excel</h3>
                 <p>Vertical orientation with 27 chart objects. 1-cloud and 3-cloud layouts with density, box plot, and jittered scatter layers.</p>
@@ -118,7 +137,7 @@
                 </div>
             </a>
 
-            <a href="project-point-figure.html" class="card fade-in">
+            <a href="project-point-figure.html" class="card fade-in" data-card-theme="finance">
                 <div class="blog-date">March 2026</div>
                 <h3>Point &amp; Figure Chart with Bollinger Bands</h3>
                 <p>Classic technical analysis chart built from MSFT stock data with Bollinger Band overlays. X/O columns with formula-driven bin width and switch detection.</p>
@@ -129,7 +148,7 @@
                 </div>
             </a>
 
-            <a href="project-dynamic-hyperlink.html" class="card fade-in">
+            <a href="project-dynamic-hyperlink.html" class="card fade-in" data-card-theme="navigation">
                 <div class="blog-date">March 2026</div>
                 <h3>Dynamic Hyperlinks That Never Break</h3>
                 <p>Formula-driven hyperlinks using HYPERLINK(), INDIRECT(), and CELL() that auto-update when sheets are renamed. The SumProduct Navigator pattern.</p>
@@ -140,7 +159,7 @@
                 </div>
             </a>
 
-            <a href="project-christmas-tree.html" class="card fade-in">
+            <a href="project-christmas-tree.html" class="card fade-in" data-card-theme="fun">
                 <div class="blog-date">December 2025</div>
                 <h3>Christmas Tree Light Generator in Excel</h3>
                 <p>A festive creation with randomised Unicode ornaments, conditional formatting lights, and seasonal greetings. Press F9 to regenerate the decorations!</p>
@@ -151,7 +170,7 @@
                 </div>
             </a>
 
-            <a href="project-powerquery.html" class="card fade-in">
+            <a href="project-powerquery.html" class="card fade-in" data-card-theme="powerquery">
                 <div class="blog-date">February 2026</div>
                 <h3>Building an ETL Pipeline in Power Query: A Step-by-Step Guide</h3>
                 <p>Walk through a real-world data cleaning pipeline: removing nulls, splitting columns, changing types, and adding calculated columns using M code.</p>
@@ -162,7 +181,7 @@
                 </div>
             </a>
 
-            <a href="project-powerbi.html" class="card fade-in">
+            <a href="project-powerbi.html" class="card fade-in" data-card-theme="powerbi">
                 <div class="blog-date">January 2026</div>
                 <h3>Designing Interactive Dashboards with Power BI</h3>
                 <p>Explore how KPI cards, slicers, bar charts, and donut charts work together in Power BI. Includes DAX measures for YoY comparisons and dynamic filtering.</p>
@@ -173,7 +192,7 @@
                 </div>
             </a>
 
-            <div class="card fade-in">
+            <div class="card fade-in" data-card-theme="vba">
                 <div class="blog-date">December 2025</div>
                 <h3>VBA Best Practices for Financial Models</h3>
                 <p>Key patterns for writing maintainable VBA in financial workbooks: error handling, naming conventions, separating logic from UI, and performance tips for large datasets.</p>
@@ -183,7 +202,7 @@
                 </div>
             </div>
 
-            <div class="card fade-in">
+            <div class="card fade-in" data-card-theme="automation">
                 <div class="blog-date">November 2025</div>
                 <h3>Power Automate: Automating Repetitive Reporting Tasks</h3>
                 <p>How I used Power Automate to schedule data refreshes, send automated email reports, and reduce manual work by hours each week.</p>
@@ -193,7 +212,7 @@
                 </div>
             </div>
 
-            <div class="card fade-in">
+            <div class="card fade-in" data-card-theme="finance">
                 <div class="blog-date">October 2025</div>
                 <h3>Financial Modeling: Structuring Assumptions for Clarity</h3>
                 <p>A practical approach to organizing assumptions, inputs, and outputs in financial models so stakeholders can follow the logic without getting lost in formulas.</p>
@@ -203,7 +222,7 @@
                 </div>
             </div>
 
-            <a href="blog-fill-left.html" class="card fade-in">
+            <a href="blog-fill-left.html" class="card fade-in" data-card-theme="vba">
                 <div class="blog-date">November 2024</div>
                 <h3>Excel Automation: Fill Blank Cells to the Left with VBA</h3>
                 <p>A simple VBA macro to fill all blank cells in selected rows with the value from the nearest non-blank cell to the right. Automate data cleanup and save time.</p>
@@ -214,7 +233,7 @@
                 </div>
             </a>
 
-            <a href="blog-auto-set-sheet.html" class="card fade-in">
+            <a href="blog-auto-set-sheet.html" class="card fade-in" data-card-theme="vba">
                 <div class="blog-date">September 2024</div>
                 <h3>Automating Sheet Setup in Excel with VBA</h3>
                 <p>A VBA macro to automatically reset all visible, hidden, and very hidden sheets to cell A1 with 100% zoom for a clean, professional workbook presentation.</p>
@@ -225,7 +244,7 @@
                 </div>
             </a>
 
-            <a href="blog-remove-sheet-refs.html" class="card fade-in">
+            <a href="blog-remove-sheet-refs.html" class="card fade-in" data-card-theme="formulas">
                 <div class="blog-date">September 2024</div>
                 <h3>Streamlining Excel Formulas: Removing Same-Sheet References with VBA</h3>
                 <p>Clean up redundant same-sheet references in your formulas automatically. A VBA macro that handles both quoted and unquoted sheet names.</p>
@@ -248,5 +267,15 @@
     </footer>
 
     <script src="shared.js"></script>
+    <script>
+        // Generate featured thumbnails from theme SVGs
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('[data-featured-theme]').forEach(el => {
+                const theme = el.getAttribute('data-featured-theme');
+                const svg = createThemeSVG(theme);
+                if (svg) el.innerHTML = svg;
+            });
+        });
+    </script>
 </body>
 </html>
