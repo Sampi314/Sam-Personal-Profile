@@ -1,7 +1,7 @@
 /* ========================================
    Google Fonts Import
    ======================================== */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* ========================================
    CSS Variables & Theme System
@@ -72,7 +72,7 @@ html {
 }
 
 body {
-    font-family: 'DM Sans', -apple-system, sans-serif;
+    font-family: 'Outfit', -apple-system, sans-serif;
     color: var(--text-primary);
     line-height: 1.65;
     background: var(--bg-primary);
@@ -142,7 +142,7 @@ a:hover {
 }
 
 .nav-brand {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Space Mono', monospace;
     font-weight: 700;
     font-size: 1.15rem;
     color: var(--nav-text);
@@ -327,7 +327,7 @@ header::after {
 }
 
 header h1 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Space Mono', monospace;
     font-size: clamp(2.8rem, 6vw, 4.2rem);
     font-weight: 900;
     letter-spacing: -0.03em;
@@ -379,7 +379,7 @@ header p.location {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Space Mono', monospace;
     font-size: 3.2rem;
     font-weight: 700;
     color: var(--accent);
@@ -400,7 +400,7 @@ header p.location {
     gap: 8px;
     padding: 11px 24px;
     border-radius: 4px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 0.85rem;
     font-weight: 600;
     text-decoration: none;
@@ -497,7 +497,7 @@ section {
 }
 
 section h2 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Space Mono', monospace;
     font-size: 1.4rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -578,7 +578,7 @@ section h2::after {
 
 .experience-item h3,
 .education-item h3 {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 1.05rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -788,7 +788,7 @@ section h2::after {
 }
 
 .card h3 {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 1rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -865,7 +865,7 @@ section h2::after {
     border: 1px solid var(--border);
     border-radius: 2px;
     font-size: 0.9rem;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     background: var(--bg-card-alt);
     color: var(--text-primary);
     transition: border-color 0.2s, box-shadow 0.2s;
@@ -891,7 +891,7 @@ section h2::after {
 
 .btn-submit {
     align-self: flex-start;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     background: var(--accent);
     color: #0a0a0f;
     padding: 12px 32px;
@@ -943,7 +943,7 @@ section h2::after {
 }
 
 .page-header h1 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Space Mono', monospace;
     font-size: clamp(1.8rem, 4vw, 2.4rem);
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -1133,7 +1133,7 @@ footer a:hover {
 }
 
 .featured-card-body h3 {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -1233,7 +1233,7 @@ footer a:hover {
 }
 
 .blog-hero-body h3 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Space Mono', monospace;
     font-size: 1.35rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -1314,7 +1314,7 @@ footer a:hover {
 }
 
 .blog-sub-body h3 {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 1.02rem;
     font-weight: 700;
     color: var(--text-primary);
