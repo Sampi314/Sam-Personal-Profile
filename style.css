@@ -254,7 +254,7 @@ header {
     overflow: hidden;
 }
 
-/* Subtle geometric accent */
+/* Animated geometric accents */
 header::before {
     content: '';
     position: absolute;
@@ -265,6 +265,7 @@ header::before {
     border: 1px solid rgba(184, 134, 11, 0.12);
     border-radius: 50%;
     pointer-events: none;
+    animation: orbit-slow 25s linear infinite;
 }
 
 header::after {
@@ -277,6 +278,17 @@ header::after {
     border: 1px solid rgba(184, 134, 11, 0.06);
     border-radius: 50%;
     pointer-events: none;
+    animation: orbit-slow 35s linear infinite reverse;
+}
+
+.hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .hero-inner {
