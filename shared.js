@@ -571,7 +571,13 @@ function initFooterLogo() {
    Blog Post Registry (for Related Posts)
    ======================================== */
 var BLOG_POSTS = [
-    { url: 'blog-custom-udfs.html', title: 'Custom Worksheet Functions (UDFs)', tags: ['Excel','VBA','Functions'], theme: 'vba' },
+    { url: 'blog-udf-sum-by-color.html', title: 'fn_Sum_by_Color: Sum Cells by Fill Color', tags: ['Excel','VBA','UDF'], theme: 'formulas' },
+    { url: 'blog-udf-range-has-notes.html', title: 'fn_Range_Has_Notes: Detect Cell Comments', tags: ['Excel','VBA','UDF'], theme: 'formulas' },
+    { url: 'blog-udf-extract-comments.html', title: 'fn_Extract_Comments_Thread: Export Threaded Comments', tags: ['Excel','VBA','UDF'], theme: 'formulas' },
+    { url: 'blog-udf-nmatch.html', title: 'fn_NMATCH: Find the Nth Occurrence', tags: ['Excel','VBA','UDF'], theme: 'formulas' },
+    { url: 'blog-udf-rotate.html', title: 'fn_ROTATE: Rotate a 2D Range', tags: ['Excel','VBA','UDF'], theme: 'formulas' },
+    { url: 'blog-udf-file-path-exist.html', title: 'fn_Does_File_Path_Exist: Check File Paths', tags: ['Excel','VBA','UDF'], theme: 'formulas' },
+    { url: 'blog-udf-is-hyperlink.html', title: 'fn_Is_Hyperlink: Detect Hyperlinks', tags: ['Excel','VBA','UDF'], theme: 'formulas' },
     { url: 'blog-calculation-timer.html', title: 'Formula Calculation Timer', tags: ['VBA','Performance'], theme: 'vba' },
     { url: 'blog-naming-hyperlinks.html', title: 'Mass Naming & Hyperlink Tools', tags: ['VBA','Named Ranges'], theme: 'vba' },
     { url: 'blog-smart-fill.html', title: 'Smart Fill in All Four Directions', tags: ['VBA','Data Cleaning'], theme: 'vba' },

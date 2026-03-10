@@ -42,36 +42,22 @@
 
         <!-- Featured Posts -->
         <div class="blog-featured fade-in">
-            <!-- Hero card: Custom UDFs -->
-            <a href="blog-custom-udfs.html" class="blog-hero-card">
+            <!-- Hero card: Workbook Stats -->
+            <a href="blog-workbook-stats.html" class="blog-hero-card">
                 <div class="blog-hero-thumb" data-featured-theme="vba"></div>
                 <div class="blog-hero-body">
                     <div class="blog-date">March 2026</div>
-                    <h3>Custom Worksheet Functions (UDFs) for Excel VBA</h3>
-                    <p>Extend Excel with fn_Sum_by_Color, fn_NMATCH, fn_ROTATE, fn_Extract_Comments_Thread, and more. Array-compatible UDFs that work with dynamic arrays.</p>
+                    <h3>Workbook Statistics Report Generator</h3>
+                    <p>Generate comprehensive stats: formula density, dynamic arrays, unique formulae, and cross-sheet dependencies across your entire workbook.</p>
                     <div class="card-tags">
-                        <span class="card-tag">Excel</span>
                         <span class="card-tag">VBA</span>
-                        <span class="card-tag">Functions</span>
+                        <span class="card-tag">Analytics</span>
                     </div>
                 </div>
             </a>
 
             <!-- Sub row -->
             <div class="blog-sub-row">
-                <a href="blog-workbook-stats.html" class="blog-sub-card fade-in">
-                    <div class="blog-sub-thumb" data-featured-theme="vba"></div>
-                    <div class="blog-sub-body">
-                        <div class="blog-date">March 2026</div>
-                        <h3>Workbook Statistics Report Generator</h3>
-                        <p>Generate comprehensive stats: formula density, dynamic arrays, unique formulae, and cross-sheet dependencies.</p>
-                        <div class="card-tags">
-                            <span class="card-tag">VBA</span>
-                            <span class="card-tag">Analytics</span>
-                        </div>
-                    </div>
-                </a>
-
                 <a href="blog-spill-resolver.html" class="blog-sub-card fade-in">
                     <div class="blog-sub-thumb" data-featured-theme="vba"></div>
                     <div class="blog-sub-body">
@@ -81,6 +67,19 @@
                         <div class="card-tags">
                             <span class="card-tag">VBA</span>
                             <span class="card-tag">Dynamic Arrays</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="blog-error-scanner.html" class="blog-sub-card fade-in">
+                    <div class="blog-sub-thumb" data-featured-theme="vba"></div>
+                    <div class="blog-sub-body">
+                        <div class="blog-date">March 2026</div>
+                        <h3>Workbook Error Scanner</h3>
+                        <p>Scan every sheet for #REF!, #VALUE!, #N/A and all other errors. Produces a clickable hyperlinked report.</p>
+                        <div class="card-tags">
+                            <span class="card-tag">VBA</span>
+                            <span class="card-tag">Error Handling</span>
                         </div>
                     </div>
                 </a>
@@ -218,6 +217,88 @@
             </a>
         </div>
 
+        <!-- Custom UDFs -->
+        <div class="blog-divider"><span>Custom UDFs</span></div>
+
+        <div class="card-grid">
+            <a href="blog-udf-sum-by-color.html" class="card fade-in" data-card-theme="formulas">
+                <div class="blog-date">March 2026</div>
+                <h3>fn_Sum_by_Color: Sum Cells by Fill Color</h3>
+                <p>Sum cells whose background color matches a reference cell. Ideal for color-coded financial models.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">UDF</span>
+                </div>
+            </a>
+
+            <a href="blog-udf-range-has-notes.html" class="card fade-in" data-card-theme="formulas">
+                <div class="blog-date">March 2026</div>
+                <h3>fn_Range_Has_Notes: Detect Cell Comments</h3>
+                <p>Returns a TRUE/FALSE array indicating which cells have legacy comments (Notes) attached.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">UDF</span>
+                </div>
+            </a>
+
+            <a href="blog-udf-extract-comments.html" class="card fade-in" data-card-theme="formulas">
+                <div class="blog-date">March 2026</div>
+                <h3>fn_Extract_Comments_Thread: Export Threaded Comments</h3>
+                <p>Extract all threaded comments and replies into a structured table with Cell, Author, Date, and Text columns.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">UDF</span>
+                </div>
+            </a>
+
+            <a href="blog-udf-nmatch.html" class="card fade-in" data-card-theme="formulas">
+                <div class="blog-date">March 2026</div>
+                <h3>fn_NMATCH: Find the Nth Occurrence</h3>
+                <p>Like MATCH but finds the Nth occurrence of a value. Supports array inputs for lookup value and instance number.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">UDF</span>
+                </div>
+            </a>
+
+            <a href="blog-udf-rotate.html" class="card fade-in" data-card-theme="formulas">
+                <div class="blog-date">March 2026</div>
+                <h3>fn_ROTATE: Rotate a 2D Range 90 Degrees</h3>
+                <p>Rotate any 2D range clockwise with an optional count for 180 or 270 degree rotations.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">UDF</span>
+                </div>
+            </a>
+
+            <a href="blog-udf-file-path-exist.html" class="card fade-in" data-card-theme="formulas">
+                <div class="blog-date">March 2026</div>
+                <h3>fn_Does_File_Path_Exist: Check File Paths</h3>
+                <p>Returns TRUE/FALSE for each cell, checking whether the file path actually exists on disk.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">UDF</span>
+                </div>
+            </a>
+
+            <a href="blog-udf-is-hyperlink.html" class="card fade-in" data-card-theme="formulas">
+                <div class="blog-date">March 2026</div>
+                <h3>fn_Is_Hyperlink: Detect Hyperlinks in Cells</h3>
+                <p>Returns TRUE/FALSE indicating whether each cell contains a hyperlink.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">UDF</span>
+                </div>
+            </a>
+        </div>
+
         <!-- VBA Tools -->
         <div class="blog-divider"><span>VBA Tools</span></div>
 
@@ -342,15 +423,6 @@
                 </div>
             </a>
 
-            <a href="blog-custom-udfs.html" class="card fade-in" data-card-theme="vba">
-                <div class="blog-date">March 2026</div>
-                <h3>Custom Worksheet Functions (UDFs)</h3>
-                <p>Sum by color, extract threaded comments, find Nth match, rotate arrays, check file paths, and more custom functions.</p>
-                <div class="card-tags">
-                    <span class="card-tag">VBA</span>
-                    <span class="card-tag">Functions</span>
-                </div>
-            </a>
 
             <a href="blog-naming-hyperlinks.html" class="card fade-in" data-card-theme="vba">
                 <div class="blog-date">March 2026</div>

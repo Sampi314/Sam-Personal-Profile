@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fn_Extract_Comments_Thread: Export Threaded Comments - Sam Ngo</title>
+    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="alternate" type="application/rss+xml" title="Sam Ngo RSS Feed" href="feed.xml">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="page-header-inner">
+            <h1>fn_Extract_Comments_Thread: Export Threaded Comments</h1>
+            <p>March 2026</p>
+        </div>
+    </div>
+
+    <main>
+        <section class="fade-in overview-prominent">
+            <div class="project-detail-header">
+                <div><h2>Overview</h2></div>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">UDF</span>
+                </div>
+            </div>
+            <p class="summary-text">A custom worksheet function that extracts all threaded comments and their replies into a structured table with Cell, Index, Type, Author, Date, and Text columns. Perfect for audit trails and review documentation.</p>
+        </section>
+
+        <section class="fade-in">
+            <h2>How It Works</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 8px;"><strong>Comment_Thread_Range:</strong> The range of cells to scan for threaded comments.</li>
+                <li style="margin-bottom: 8px;">First pass counts all comments and replies to size the output array.</li>
+                <li style="margin-bottom: 8px;">Second pass fills a 6-column array: Cell address, Index, Type (Comment/Reply), Author name, Date, and Text.</li>
+                <li style="margin-bottom: 8px;">Spills as a dynamic array with a header row.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>Usage</h2>
+            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">=fn_Extract_Comments_Thread(A1:Z100)</pre>
+            <p class="summary-text" style="margin-top: 14px;">Returns a table with columns: Cell, Index, Type, User, Date, Text. Each comment and its replies appear as separate rows.</p>
+        </section>
+
+        <section class="fade-in">
+            <h2>The VBA Code</h2>
+            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">Function fn_Extract_Comments_Thread(Comment_Thread_Range As Range) As Variant
+    Application.Volatile
+    ' Returns a 2D array: [Cell, Index, Type, Author, Date, Text]
+    Dim Rng As Range, Lin_Arr As Long
+    For Each Rng In Comment_Thread_Range
+        If Not (Rng.CommentThreaded Is Nothing) Then
+            Lin_Arr = Lin_Arr + 1 + Rng.CommentThreaded.Replies.Count
+        End If
+    Next Rng
+
+    Dim Arr() As Variant: ReDim Arr(0 To Lin_Arr, 1 To 6)
+    Arr(0, 1) = "Cell": Arr(0, 2) = "Index": Arr(0, 3) = "Type"
+    Arr(0, 4) = "User": Arr(0, 5) = "Date": Arr(0, 6) = "Text"
+
+    Dim Cmt_Idx As Long, Rlp_Idx As Long
+    For Each Rng In Comment_Thread_Range
+        If Not (Rng.CommentThreaded Is Nothing) Then
+            Cmt_Idx = Cmt_Idx + 1: Rlp_Idx = Rlp_Idx + 1
+            Arr(Rlp_Idx, 1) = Rng.Address(False, False)
+            Arr(Rlp_Idx, 3) = "Comment"
+            Arr(Rlp_Idx, 4) = Rng.CommentThreaded.Author.Name
+            Arr(Rlp_Idx, 5) = Rng.CommentThreaded.Date
+            Arr(Rlp_Idx, 6) = Rng.CommentThreaded.Text
+            Dim Rlp As Object
+            For Each Rlp In Rng.CommentThreaded.Replies
+                Rlp_Idx = Rlp_Idx + 1
+                Arr(Rlp_Idx, 1) = Rng.Address(False, False)
+                Arr(Rlp_Idx, 3) = "Reply"
+                Arr(Rlp_Idx, 4) = Rlp.Author.Name
+                Arr(Rlp_Idx, 5) = Rlp.Date
+                Arr(Rlp_Idx, 6) = Rlp.Text
+            Next Rlp
+        End If
+    Next Rng
+    fn_Extract_Comments_Thread = Arr
+End Function</pre>
+        </section>
+        <section class="related-posts fade-in"></section>
+    </main>
+
+    <footer>
+        <div class="footer-logo"></div>
+        <div class="footer-tagline">Finance &middot; Data &middot; Visualization</div>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">&uarr;</button>
+    <script src="shared.js"></script>
+</body>
+</html>

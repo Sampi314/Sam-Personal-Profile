@@ -9,11 +9,53 @@
     <atom:link href="https://sampi314.github.io/Sam-Personal-Profile/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
-        <title>Custom Worksheet Functions (UDFs) for Excel VBA</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-custom-udfs.html</link>
-        <description>Extend Excel with fn_Sum_by_Color, fn_NMATCH, fn_ROTATE, fn_Extract_Comments_Thread, and more custom UDFs.</description>
+        <title>fn_Sum_by_Color: Sum Cells by Fill Color</title>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-sum-by-color.html</link>
+        <description>Sum cells whose background color matches a reference cell. Ideal for color-coded financial models.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-custom-udfs.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-sum-by-color.html</guid>
+    </item>
+    <item>
+        <title>fn_Range_Has_Notes: Detect Cell Comments</title>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-range-has-notes.html</link>
+        <description>Returns a TRUE/FALSE array indicating which cells have legacy comments attached.</description>
+        <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-range-has-notes.html</guid>
+    </item>
+    <item>
+        <title>fn_Extract_Comments_Thread: Export Threaded Comments</title>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-extract-comments.html</link>
+        <description>Extract all threaded comments and replies into a structured table with Cell, Author, Date, and Text columns.</description>
+        <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-extract-comments.html</guid>
+    </item>
+    <item>
+        <title>fn_NMATCH: Find the Nth Occurrence</title>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-nmatch.html</link>
+        <description>Like MATCH but finds the Nth occurrence of a value in a range.</description>
+        <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-nmatch.html</guid>
+    </item>
+    <item>
+        <title>fn_ROTATE: Rotate a 2D Range 90 Degrees</title>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-rotate.html</link>
+        <description>Rotate any 2D range clockwise with an optional count for 180 or 270 degree rotations.</description>
+        <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-rotate.html</guid>
+    </item>
+    <item>
+        <title>fn_Does_File_Path_Exist: Check File Paths from Cells</title>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-file-path-exist.html</link>
+        <description>Returns TRUE/FALSE for each cell, checking whether the file path actually exists on disk.</description>
+        <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-file-path-exist.html</guid>
+    </item>
+    <item>
+        <title>fn_Is_Hyperlink: Detect Hyperlinks in Cells</title>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-is-hyperlink.html</link>
+        <description>Returns TRUE/FALSE indicating whether each cell contains a hyperlink.</description>
+        <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-is-hyperlink.html</guid>
     </item>
     <item>
         <title>Workbook Statistics Report Generator</title>
