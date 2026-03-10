@@ -2,21 +2,26 @@
    Theme Toggle
    ======================================== */
 function initTheme() {
+    // One-time migration: old site used 'dark' value, new site defaults to dark
     const saved = localStorage.getItem('theme');
     if (saved === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.removeItem('theme');
+    }
+    // Dark is default (no data-theme attribute). Only set light explicitly.
+    if (localStorage.getItem('theme') === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
     }
     updateThemeIcon();
 }
 
 function toggleTheme() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (isDark) {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    if (isLight) {
         document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
-    } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
     }
     updateThemeIcon();
 }
@@ -24,9 +29,9 @@ function toggleTheme() {
 function updateThemeIcon() {
     const btn = document.querySelector('.theme-toggle');
     if (!btn) return;
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    btn.textContent = isDark ? '\u2600' : '\u263E';
-    btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.textContent = isLight ? '\u263E' : '\u2600';
+    btn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
 }
 
 /* ========================================
@@ -151,7 +156,7 @@ function initHeroParticles() {
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < lineDistance) {
                     const opacity = (1 - dist / lineDistance) * 0.08;
-                    ctx.strokeStyle = `rgba(184, 134, 11, ${opacity})`;
+                    ctx.strokeStyle = `rgba(245, 158, 11, ${opacity})`;
                     ctx.lineWidth = 0.5;
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
@@ -174,7 +179,7 @@ function initHeroParticles() {
 
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(184, 134, 11, ${p.alpha})`;
+            ctx.fillStyle = `rgba(245, 158, 11, ${p.alpha})`;
             ctx.fill();
         }
 
