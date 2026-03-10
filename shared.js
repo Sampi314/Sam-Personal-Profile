@@ -568,6 +568,410 @@ function initFooterLogo() {
 }
 
 /* ========================================
+   Blog Post Registry (for Related Posts)
+   ======================================== */
+var BLOG_POSTS = [
+    { url: 'blog-custom-udfs.html', title: 'Custom Worksheet Functions (UDFs)', tags: ['Excel','VBA','Functions'], theme: 'vba' },
+    { url: 'blog-calculation-timer.html', title: 'Formula Calculation Timer', tags: ['VBA','Performance'], theme: 'vba' },
+    { url: 'blog-naming-hyperlinks.html', title: 'Mass Naming & Hyperlink Tools', tags: ['VBA','Named Ranges'], theme: 'vba' },
+    { url: 'blog-smart-fill.html', title: 'Smart Fill in All Four Directions', tags: ['VBA','Data Cleaning'], theme: 'vba' },
+    { url: 'blog-vba-inspector.html', title: 'VBA Code Inspector', tags: ['VBA','Development'], theme: 'vba' },
+    { url: 'blog-auto-save-versioning.html', title: 'Auto Save & Version Control', tags: ['VBA','Automation'], theme: 'vba' },
+    { url: 'blog-group-by-title.html', title: 'Auto-Grouping Rows by Title Hierarchy', tags: ['VBA','Outlining'], theme: 'vba' },
+    { url: 'blog-spill-resolver.html', title: 'Dynamic Array Spill Resolver', tags: ['VBA','Dynamic Arrays'], theme: 'vba' },
+    { url: 'blog-text-case.html', title: 'Text Case Transformations', tags: ['VBA','Text'], theme: 'vba' },
+    { url: 'blog-workbook-stats.html', title: 'Workbook Statistics Report', tags: ['VBA','Analytics'], theme: 'vba' },
+    { url: 'blog-error-scanner.html', title: 'Workbook Error Scanner', tags: ['VBA','Error Handling'], theme: 'vba' },
+    { url: 'blog-power-query-manager.html', title: 'Power Query Manager', tags: ['VBA','Power Query'], theme: 'vba' },
+    { url: 'blog-validation-inspector.html', title: 'Data Validation Inspector', tags: ['VBA','Data Validation'], theme: 'vba' },
+    { url: 'blog-workbook-documentation.html', title: 'Workbook Documentation Suite', tags: ['VBA','Documentation'], theme: 'vba' },
+    { url: 'blog-audit-tracing.html', title: 'Audit & Formula Tracing Tools', tags: ['VBA','Auditing'], theme: 'vba' },
+    { url: 'blog-clipboard-tools.html', title: 'Clipboard Power Tools', tags: ['VBA','Clipboard'], theme: 'vba' },
+    { url: 'blog-remove-sheet-refs.html', title: 'Removing Same-Sheet References', tags: ['VBA','Automation'], theme: 'vba' },
+    { url: 'blog-fill-left.html', title: 'Fill Blank Cells to the Left', tags: ['VBA','Automation'], theme: 'vba' },
+    { url: 'blog-auto-set-sheet.html', title: 'Automating Sheet Setup', tags: ['VBA','Automation'], theme: 'vba' },
+    { url: 'project-bubble-pies.html', title: 'Bubble Pies Chart', tags: ['Excel','Charting','VBA'], theme: 'charting' },
+    { url: 'project-marimekko.html', title: 'Marimekko Chart', tags: ['Excel','Charting','Market Analysis'], theme: 'charting' },
+    { url: 'project-percentage-change.html', title: 'Percentage Change Column Chart', tags: ['Excel','Charting','VBA'], theme: 'charting' },
+    { url: 'project-waffle-chart.html', title: 'Waffle Charts in Excel', tags: ['Excel','Charting','VBA'], theme: 'charting' },
+    { url: 'project-raincloud-horizontal.html', title: 'Horizontal RainCloud Charts', tags: ['Excel','Statistics','VBA'], theme: 'statistics' },
+    { url: 'project-raincloud-vertical.html', title: 'Vertical RainCloud Charts', tags: ['Excel','Statistics','VBA'], theme: 'statistics' },
+    { url: 'project-point-figure.html', title: 'Point & Figure Chart', tags: ['Excel','Finance','VBA'], theme: 'finance' },
+    { url: 'project-christmas-tree.html', title: 'Christmas Tree Light Generator', tags: ['Excel','Fun','VBA'], theme: 'fun' },
+    { url: 'project-excel.html', title: 'Matrix Manipulation Formula Engine', tags: ['Excel','Formulas','Interactive'], theme: 'excel' },
+    { url: 'project-sum-to-target.html', title: 'Subset Sum Problem with Formulas', tags: ['Excel','Algorithms','Dynamic Arrays'], theme: 'algorithms' },
+    { url: 'project-dynamic-hyperlink.html', title: 'Dynamic Hyperlinks That Never Break', tags: ['Excel','Formulas','Navigation'], theme: 'navigation' }
+];
+
+/* ========================================
+   Related Posts
+   ======================================== */
+function initRelatedPosts() {
+    const path = window.location.pathname;
+    const page = path.split('/').pop() || '';
+    if (!page.startsWith('blog-') && !page.startsWith('project-')) return;
+
+    const container = document.querySelector('.related-posts');
+    if (!container) return;
+
+    // Get current page tags
+    const currentTags = new Set();
+    document.querySelectorAll('.overview-prominent .card-tag').forEach(t => {
+        currentTags.add(t.textContent.trim());
+    });
+    if (currentTags.size === 0) return;
+
+    // Score each post by tag overlap
+    const scored = BLOG_POSTS
+        .filter(p => p.url !== page)
+        .map(p => {
+            const overlap = p.tags.filter(t => currentTags.has(t)).length;
+            return { ...p, score: overlap };
+        })
+        .filter(p => p.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3);
+
+    if (scored.length === 0) {
+        container.remove();
+        return;
+    }
+
+    let html = '<h2>Related Posts</h2><div class="related-grid">';
+    scored.forEach(p => {
+        const tagsHtml = p.tags.map(t => `<span class="card-tag">${t}</span>`).join('');
+        html += `<a href="${p.url}" class="card" data-card-theme="${p.theme || 'excel'}">
+            <h3>${p.title}</h3>
+            <div class="card-tags">${tagsHtml}</div>
+        </a>`;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+
+    // Generate thumbnails for the new cards
+    container.querySelectorAll('[data-card-theme]').forEach(card => {
+        const theme = card.getAttribute('data-card-theme');
+        const svg = createThemeSVG(theme);
+        if (svg) {
+            const thumb = document.createElement('div');
+            thumb.className = 'card-thumbnail';
+            thumb.innerHTML = svg;
+            card.insertBefore(thumb, card.firstChild);
+        }
+    });
+}
+
+/* ========================================
+   Table of Contents (Blog/Project Posts)
+   ======================================== */
+function initTOC() {
+    const path = window.location.pathname;
+    const page = path.split('/').pop() || '';
+    if (!page.startsWith('blog-') && !page.startsWith('project-')) return;
+
+    const headings = document.querySelectorAll('main section h2');
+    if (headings.length < 3) return;
+
+    const sidebar = document.createElement('nav');
+    sidebar.className = 'toc-sidebar';
+    sidebar.setAttribute('aria-label', 'Table of contents');
+
+    const title = document.createElement('div');
+    title.className = 'toc-title';
+    title.textContent = 'Contents';
+    sidebar.appendChild(title);
+
+    headings.forEach((h, i) => {
+        const id = 'section-' + i;
+        h.closest('section').id = id;
+
+        const link = document.createElement('a');
+        link.className = 'toc-link';
+        link.href = '#' + id;
+        link.textContent = h.textContent;
+        sidebar.appendChild(link);
+    });
+
+    document.body.appendChild(sidebar);
+
+    // Highlight current section
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                sidebar.querySelectorAll('.toc-link').forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                });
+            }
+        });
+    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+    headings.forEach(h => {
+        const section = h.closest('section');
+        if (section) observer.observe(section);
+    });
+}
+
+/* ========================================
+   Blog Tag Filtering
+   ======================================== */
+function initTagFilter() {
+    const bar = document.querySelector('.tag-filter-bar');
+    if (!bar) return;
+
+    // Collect all filterable items: cards, featured cards, sub-cards, hero card
+    const allItems = document.querySelectorAll('.card-grid .card, .blog-featured .blog-hero-card, .blog-featured .blog-sub-card');
+    const dividers = document.querySelectorAll('.blog-divider');
+    const grids = document.querySelectorAll('.card-grid');
+
+    // Extract unique tags
+    const tagSet = new Set();
+    allItems.forEach(item => {
+        item.querySelectorAll('.card-tag').forEach(tag => {
+            tagSet.add(tag.textContent.trim());
+        });
+    });
+
+    const tags = Array.from(tagSet).sort();
+
+    // Create "All" pill
+    const allPill = document.createElement('button');
+    allPill.className = 'tag-pill active';
+    allPill.textContent = 'All';
+    bar.appendChild(allPill);
+
+    // Create tag pills
+    tags.forEach(tag => {
+        const pill = document.createElement('button');
+        pill.className = 'tag-pill';
+        pill.textContent = tag;
+        pill.setAttribute('data-tag', tag);
+        bar.appendChild(pill);
+    });
+
+    let activeTag = null;
+
+    bar.addEventListener('click', (e) => {
+        const pill = e.target.closest('.tag-pill');
+        if (!pill) return;
+
+        bar.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        activeTag = pill.getAttribute('data-tag') || null;
+        applyBlogFilters();
+    });
+
+    // Expose for search integration
+    window._blogActiveTag = () => activeTag;
+    window._applyBlogFilters = applyBlogFilters;
+    window._blogAllItems = allItems;
+    window._blogDividers = dividers;
+    window._blogGrids = grids;
+
+    function applyBlogFilters() {
+        const searchTerm = (document.querySelector('.blog-search-input')?.value || '').toLowerCase().trim();
+        const tag = window._blogActiveTag ? window._blogActiveTag() : activeTag;
+
+        let anyVisible = false;
+
+        allItems.forEach(item => {
+            const itemTags = Array.from(item.querySelectorAll('.card-tag')).map(t => t.textContent.trim());
+            const title = (item.querySelector('h3')?.textContent || '').toLowerCase();
+            const desc = (item.querySelector('p')?.textContent || '').toLowerCase();
+            const tagText = itemTags.join(' ').toLowerCase();
+
+            const matchesTag = !tag || itemTags.includes(tag);
+            const matchesSearch = !searchTerm || title.includes(searchTerm) || desc.includes(searchTerm) || tagText.includes(searchTerm);
+
+            if (matchesTag && matchesSearch) {
+                item.classList.remove('blog-item-hidden');
+                anyVisible = true;
+            } else {
+                item.classList.add('blog-item-hidden');
+            }
+        });
+
+        // Hide sections with no visible cards
+        grids.forEach(grid => {
+            const visibleCards = grid.querySelectorAll('.card:not(.blog-item-hidden)');
+            grid.style.display = visibleCards.length ? '' : 'none';
+        });
+
+        // Hide featured section if all featured items hidden
+        const featured = document.querySelector('.blog-featured');
+        if (featured) {
+            const visFeatured = featured.querySelectorAll('.blog-hero-card:not(.blog-item-hidden), .blog-sub-card:not(.blog-item-hidden)');
+            featured.style.display = visFeatured.length ? '' : 'none';
+        }
+
+        // Hide dividers when their next grid is hidden
+        dividers.forEach(div => {
+            const nextGrid = div.nextElementSibling;
+            div.style.display = (nextGrid && nextGrid.style.display === 'none') ? 'none' : '';
+        });
+
+        // No results message
+        let noResults = document.querySelector('.blog-no-results');
+        if (!anyVisible) {
+            if (!noResults) {
+                noResults = document.createElement('div');
+                noResults.className = 'blog-no-results';
+                noResults.textContent = 'No posts found.';
+                document.querySelector('main').appendChild(noResults);
+            }
+            noResults.style.display = 'block';
+        } else if (noResults) {
+            noResults.style.display = 'none';
+        }
+    }
+}
+
+/* ========================================
+   Blog Search
+   ======================================== */
+function initBlogSearch() {
+    const input = document.querySelector('.blog-search-input');
+    if (!input) return;
+
+    let debounceTimer;
+    input.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            if (window._applyBlogFilters) window._applyBlogFilters();
+        }, 200);
+    });
+}
+
+/* ========================================
+   Scroll Progress Bar
+   ======================================== */
+function initScrollProgress() {
+    const container = document.createElement('div');
+    container.className = 'scroll-progress';
+    const bar = document.createElement('div');
+    bar.className = 'scroll-progress-bar';
+    container.appendChild(bar);
+    document.body.appendChild(container);
+
+    function update() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0;
+        bar.style.transform = `scaleX(${progress})`;
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+}
+
+/* ========================================
+   Code Copy Button
+   ======================================== */
+function initCodeCopy() {
+    const blocks = document.querySelectorAll('pre');
+    blocks.forEach(pre => {
+        const btn = document.createElement('button');
+        btn.className = 'code-copy-btn';
+        btn.textContent = 'Copy';
+        btn.addEventListener('click', () => {
+            const code = pre.querySelector('code') || pre;
+            navigator.clipboard.writeText(code.textContent).then(() => {
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        });
+        pre.appendChild(btn);
+    });
+}
+
+/* ========================================
+   Reading Time Estimate
+   ======================================== */
+function initReadingTime() {
+    const path = window.location.pathname;
+    const page = path.split('/').pop() || '';
+    if (!page.startsWith('blog-') && !page.startsWith('project-')) return;
+
+    const main = document.querySelector('main');
+    if (!main) return;
+
+    const text = main.textContent || '';
+    const words = text.trim().split(/\s+/).length;
+    const minutes = Math.max(1, Math.round(words / 200));
+
+    const header = document.querySelector('.page-header-inner');
+    if (!header) return;
+
+    const badge = document.createElement('span');
+    badge.className = 'reading-time';
+    badge.textContent = `${minutes} min read`;
+    header.appendChild(badge);
+}
+
+/* ========================================
+   Screenshot Gallery & Lightbox
+   ======================================== */
+function initGallery() {
+    const galleries = document.querySelectorAll('.gallery');
+    if (!galleries.length) return;
+
+    // Create lightbox
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    lightbox.innerHTML = '<button class="lightbox-close" aria-label="Close">&times;</button>' +
+        '<button class="lightbox-nav lightbox-prev" aria-label="Previous">&lsaquo;</button>' +
+        '<img src="" alt="">' +
+        '<button class="lightbox-nav lightbox-next" aria-label="Next">&rsaquo;</button>';
+    document.body.appendChild(lightbox);
+
+    const lbImg = lightbox.querySelector('img');
+    let currentGallery = [];
+    let currentIndex = 0;
+
+    function openLightbox(gallery, index) {
+        currentGallery = Array.from(gallery.querySelectorAll('.gallery-item img'));
+        currentIndex = index;
+        lbImg.src = currentGallery[currentIndex].src;
+        lbImg.alt = currentGallery[currentIndex].alt;
+        lightbox.classList.add('open');
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('open');
+    }
+
+    function navigate(dir) {
+        currentIndex = (currentIndex + dir + currentGallery.length) % currentGallery.length;
+        lbImg.src = currentGallery[currentIndex].src;
+        lbImg.alt = currentGallery[currentIndex].alt;
+    }
+
+    galleries.forEach(gallery => {
+        gallery.querySelectorAll('.gallery-item').forEach((item, i) => {
+            item.addEventListener('click', () => openLightbox(gallery, i));
+        });
+    });
+
+    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', () => navigate(-1));
+    lightbox.querySelector('.lightbox-next').addEventListener('click', () => navigate(1));
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navigate(-1);
+        if (e.key === 'ArrowRight') navigate(1);
+    });
+}
+
+/* ========================================
    Init All
    ======================================== */
 document.addEventListener('DOMContentLoaded', () => {
@@ -582,4 +986,12 @@ document.addEventListener('DOMContentLoaded', () => {
     generateCardThumbnails();
     generateProjectPlaceholders();
     initIframeLoading();
+    initScrollProgress();
+    initCodeCopy();
+    initReadingTime();
+    initTagFilter();
+    initBlogSearch();
+    initTOC();
+    initRelatedPosts();
+    initGallery();
 });
