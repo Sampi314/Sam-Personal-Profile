@@ -3,294 +3,530 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2D SUMIFS Demo</title>
+    <title>Matrix Manipulation Demo</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f2f5;
+            background: #0c0c14;
+            color: #e0e0e8;
             padding: 20px;
         }
 
+        .method-switcher {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 18px;
+        }
+
+        .method-btn {
+            padding: 7px 14px;
+            border: 1px solid #2a2a3a;
+            border-radius: 3px;
+            background: #14141e;
+            color: #8a8a9a;
+            font-size: 0.72rem;
+            font-family: 'Consolas', 'Courier New', monospace;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.02em;
+        }
+
+        .method-btn:hover {
+            border-color: #d4a020;
+            color: #d4a020;
+        }
+
+        .method-btn.active {
+            background: #d4a020;
+            color: #0c0c14;
+            border-color: #d4a020;
+            font-weight: 700;
+        }
+
         h3 {
-            font-size: 1rem;
-            color: #1a1a2e;
-            margin-bottom: 10px;
+            font-size: 0.85rem;
+            color: #a0a0b0;
+            margin-bottom: 8px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
         }
 
         .sheet {
-            background: #fff;
-            border-radius: 6px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            background: #12121c;
+            border: 1px solid #2a2a3a;
+            border-radius: 4px;
+            margin-bottom: 16px;
             overflow: hidden;
         }
 
         .sheet-tab {
-            background: #0f3460;
-            color: #fff;
-            padding: 8px 16px;
-            font-size: 0.8rem;
+            background: #1a1a28;
+            color: #d4a020;
+            padding: 8px 14px;
+            font-size: 0.75rem;
             font-weight: 600;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border-bottom: 1px solid #2a2a3a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sheet-tab .note {
+            color: #5c5c6a;
+            font-weight: 400;
+            text-transform: none;
+            font-size: 0.7rem;
         }
 
         .formula-bar {
             display: flex;
             align-items: center;
-            border-bottom: 1px solid #d0d0d0;
-            background: #fafafa;
-            font-size: 0.8rem;
+            border-bottom: 1px solid #2a2a3a;
+            background: #0e0e18;
+            font-size: 0.78rem;
+            min-height: 32px;
         }
 
         .formula-bar .cell-ref {
             padding: 6px 10px;
-            border-right: 1px solid #d0d0d0;
-            font-weight: 600;
-            min-width: 50px;
+            border-right: 1px solid #2a2a3a;
+            font-weight: 700;
+            min-width: 46px;
             text-align: center;
-            color: #333;
-            background: #eee;
+            color: #d4a020;
+            background: #1a1a28;
+            font-family: 'Consolas', monospace;
+            font-size: 0.72rem;
         }
 
         .formula-bar .formula-text {
             padding: 6px 10px;
             flex: 1;
             font-family: 'Consolas', 'Courier New', monospace;
-            color: #0f3460;
+            color: #8ac4ff;
+            font-size: 0.72rem;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.82rem;
+            font-size: 0.78rem;
             table-layout: fixed;
+            min-width: 700px;
         }
 
         th, td {
-            border: 1px solid #d0d7de;
-            padding: 6px 10px;
+            border: 1px solid #2a2a3a;
+            padding: 5px 8px;
             text-align: center;
         }
 
-        /* Column headers (A, B, C...) */
         thead th {
-            background: #e8ecf0;
-            color: #555;
+            background: #1a1a28;
+            color: #5c5c6a;
             font-weight: 600;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.04em;
         }
 
-        /* Row number cells */
         td.row-num {
-            background: #e8ecf0;
-            color: #555;
+            background: #1a1a28;
+            color: #5c5c6a;
             font-weight: 600;
-            font-size: 0.75rem;
-            width: 32px;
+            font-size: 0.7rem;
+            width: 28px;
+            min-width: 28px;
         }
 
         td.header-cell {
-            background: #d4dce8;
+            background: #1e1e2c;
             font-weight: 700;
-            color: #1a1a2e;
+            color: #c0c0cc;
+            font-size: 0.72rem;
+            letter-spacing: 0.02em;
+        }
+
+        td.cat-cell {
+            background: #161620;
+            font-weight: 600;
+            color: #d4a020;
+            text-align: center;
         }
 
         td.data-cell {
-            background: #fff;
-            color: #333;
+            background: #0e0e18;
+            color: #b0b0be;
         }
 
         td.data-cell.number {
             text-align: right;
             font-variant-numeric: tabular-nums;
+            font-family: 'Consolas', monospace;
         }
 
         td.result-cell {
-            background: #fff9e6;
+            background: #1a1a10;
             font-weight: 700;
-            color: #0f3460;
+            color: #e8b73a;
             text-align: right;
             font-variant-numeric: tabular-nums;
+            font-family: 'Consolas', monospace;
             cursor: pointer;
-            transition: background 0.15s;
+            transition: background 0.15s, outline 0.15s;
         }
 
         td.result-cell:hover, td.result-cell.active {
-            background: #d6eaff;
-            outline: 2px solid #0f3460;
+            background: #2a2a18;
+            outline: 2px solid #d4a020;
             outline-offset: -2px;
         }
 
-        td.row-label {
-            background: #f0f4f8;
-            font-weight: 600;
-            color: #1a1a2e;
-            text-align: left;
+        td.result-label {
+            background: #16162a;
+            font-weight: 700;
+            color: #d4a020;
+            text-align: center;
         }
 
-        td.col-label {
-            background: #d4dce8;
+        td.total-cell {
+            background: #1a1a10;
             font-weight: 700;
-            color: #1a1a2e;
+            color: #a0a0b0;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+            font-family: 'Consolas', monospace;
         }
 
         .explanation {
-            background: #fff;
-            border-radius: 6px;
-            padding: 16px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-            font-size: 0.85rem;
-            color: #555;
+            background: #12121c;
+            border: 1px solid #2a2a3a;
+            border-radius: 4px;
+            padding: 14px;
+            font-size: 0.8rem;
+            color: #8a8a9a;
             line-height: 1.7;
         }
 
         .explanation strong {
-            color: #0f3460;
+            color: #d4a020;
         }
 
         .explanation code {
-            background: #eef2f7;
+            background: #1a1a28;
             padding: 2px 6px;
             border-radius: 3px;
             font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.82rem;
-            color: #0f3460;
+            font-size: 0.75rem;
+            color: #8ac4ff;
         }
 
-        .highlight-source {
-            background: #e6f3ff !important;
-            transition: background 0.3s;
+        .highlight-source td:not(.row-num) {
+            background: #1a2a1a !important;
+            color: #a0d0a0 !important;
+            transition: background 0.2s;
+        }
+
+        .method-description {
+            font-size: 0.78rem;
+            color: #6a6a7a;
+            margin-bottom: 14px;
+            line-height: 1.6;
+            padding: 10px 12px;
+            background: #12121c;
+            border: 1px solid #2a2a3a;
+            border-radius: 4px;
+        }
+
+        .method-description code {
+            background: #1a1a28;
+            padding: 1px 5px;
+            border-radius: 2px;
+            font-family: 'Consolas', monospace;
+            color: #8ac4ff;
+            font-size: 0.72rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- Source Data Sheet -->
+    <h3>Formula Method</h3>
+    <div class="method-switcher">
+        <button class="method-btn active" data-method="mmult">MMULT</button>
+        <button class="method-btn" data-method="sumifs">SUMIFS</button>
+        <button class="method-btn" data-method="reduce">DROP REDUCE</button>
+        <button class="method-btn" data-method="map">MAP LAMBDA</button>
+        <button class="method-btn" data-method="bycol">REDUCE BYCOL</button>
+        <button class="method-btn" data-method="makearray">MAKEARRAY</button>
+        <button class="method-btn" data-method="groupby">GROUPBY</button>
+        <button class="method-btn" data-method="subtotal">SUBTOTAL</button>
+    </div>
+
+    <div class="method-description" id="method-desc"></div>
+
+    <!-- Source Data -->
     <div class="sheet">
-        <div class="sheet-tab">Source Data</div>
+        <div class="sheet-tab">
+            Source Data
+            <span class="note">9 rows &times; 10 periods &middot; Categories A, B, C</span>
+        </div>
+        <div class="table-wrapper">
         <table id="source-table">
             <thead>
                 <tr>
-                    <th style="width:32px"></th>
-                    <th>A</th>
-                    <th>B</th>
-                    <th>C</th>
+                    <th style="width:28px"></th>
+                    <th style="width:36px">E</th>
+                    <th>P1</th><th>P2</th><th>P3</th><th>P4</th><th>P5</th>
+                    <th>P6</th><th>P7</th><th>P8</th><th>P9</th><th>P10</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td class="row-num">1</td>
-                    <td class="header-cell">Region</td>
-                    <td class="header-cell">Product</td>
-                    <td class="header-cell">Amount</td>
-                </tr>
-                <tr><td class="row-num">2</td><td class="data-cell" data-region="North">North</td><td class="data-cell" data-product="Widget A">Widget A</td><td class="data-cell number" data-amount="1200">1,200</td></tr>
-                <tr><td class="row-num">3</td><td class="data-cell" data-region="South">South</td><td class="data-cell" data-product="Widget B">Widget B</td><td class="data-cell number" data-amount="800">800</td></tr>
-                <tr><td class="row-num">4</td><td class="data-cell" data-region="North">North</td><td class="data-cell" data-product="Widget B">Widget B</td><td class="data-cell number" data-amount="1500">1,500</td></tr>
-                <tr><td class="row-num">5</td><td class="data-cell" data-region="East">East</td><td class="data-cell" data-product="Widget A">Widget A</td><td class="data-cell number" data-amount="950">950</td></tr>
-                <tr><td class="row-num">6</td><td class="data-cell" data-region="South">South</td><td class="data-cell" data-product="Widget A">Widget A</td><td class="data-cell number" data-amount="1100">1,100</td></tr>
-                <tr><td class="row-num">7</td><td class="data-cell" data-region="East">East</td><td class="data-cell" data-product="Widget B">Widget B</td><td class="data-cell number" data-amount="700">700</td></tr>
-                <tr><td class="row-num">8</td><td class="data-cell" data-region="North">North</td><td class="data-cell" data-product="Widget A">Widget A</td><td class="data-cell number" data-amount="600">600</td></tr>
-                <tr><td class="row-num">9</td><td class="data-cell" data-region="South">South</td><td class="data-cell" data-product="Widget B">Widget B</td><td class="data-cell number" data-amount="400">400</td></tr>
+            <tbody id="source-body">
             </tbody>
         </table>
+        </div>
     </div>
 
-    <!-- Summary Sheet -->
+    <!-- Result -->
     <div class="sheet">
-        <div class="sheet-tab">2D Summary (SUMIFS)</div>
-        <div class="formula-bar">
-            <div class="cell-ref" id="cell-ref">F2</div>
-            <div class="formula-text" id="formula-text">=SUMIFS($C:$C, $A:$A, $E2, $B:$B, F$1)</div>
+        <div class="sheet-tab" id="result-tab">
+            2D Summary &mdash; MMULT
         </div>
-        <table id="summary-table">
+        <div class="formula-bar">
+            <div class="cell-ref" id="cell-ref">G35</div>
+            <div class="formula-text" id="formula-text">Select a result cell</div>
+        </div>
+        <div class="table-wrapper">
+        <table id="result-table">
             <thead>
                 <tr>
-                    <th style="width:32px"></th>
-                    <th>E</th>
-                    <th>F</th>
-                    <th>G</th>
+                    <th style="width:28px"></th>
+                    <th style="width:36px">Cat</th>
+                    <th>P1</th><th>P2</th><th>P3</th><th>P4</th><th>P5</th>
+                    <th>P6</th><th>P7</th><th>P8</th><th>P9</th><th>P10</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td class="row-num">1</td>
-                    <td class="header-cell"></td>
-                    <td class="col-label">Widget A</td>
-                    <td class="col-label">Widget B</td>
-                </tr>
-                <tr>
-                    <td class="row-num">2</td>
-                    <td class="row-label">North</td>
-                    <td class="result-cell active" data-region="North" data-product="Widget A" data-cell="F2">1,800</td>
-                    <td class="result-cell" data-region="North" data-product="Widget B" data-cell="G2">1,500</td>
-                </tr>
-                <tr>
-                    <td class="row-num">3</td>
-                    <td class="row-label">South</td>
-                    <td class="result-cell" data-region="South" data-product="Widget A" data-cell="F3">1,100</td>
-                    <td class="result-cell" data-region="South" data-product="Widget B" data-cell="G3">1,200</td>
-                </tr>
-                <tr>
-                    <td class="row-num">4</td>
-                    <td class="row-label">East</td>
-                    <td class="result-cell" data-region="East" data-product="Widget A" data-cell="F4">950</td>
-                    <td class="result-cell" data-region="East" data-product="Widget B" data-cell="G4">700</td>
-                </tr>
+            <tbody id="result-body">
             </tbody>
         </table>
+        </div>
     </div>
 
-    <!-- Explanation -->
-    <div class="explanation">
-        <strong>Click any result cell</strong> to see its formula and which source rows contribute to the total. The formula <code>=SUMIFS($C:$C, $A:$A, $E2, $B:$B, F$1)</code> uses mixed references so it can be dragged across the entire summary grid from a single cell.
+    <div class="explanation" id="explanation">
+        <strong>Click any gold result cell</strong> to see the exact formula and which source rows contribute. Use the buttons above to switch between 8 different formula approaches &mdash; all produce the same result from the same data.
     </div>
 
-    <script>
-        const resultCells = document.querySelectorAll('.result-cell');
-        const sourceRows = document.querySelectorAll('#source-table tbody tr:not(:first-child)');
-        const cellRefEl = document.getElementById('cell-ref');
-        const formulaTextEl = document.getElementById('formula-text');
+<script>
+// ============================================================
+// DATA from the Matrix Manipulation workbook (2D Array sheet)
+// ============================================================
+const categories = ['B','B','A','A','C','A','B','B','B'];
+const sourceData = [
+    [1,9,3,5,3,9,3,3,3,9],
+    [9,6,8,3,10,5,10,9,8,3],
+    [4,2,2,2,0,1,0,8,4,8],
+    [4,2,6,4,4,7,8,3,4,8],
+    [10,1,1,7,3,3,9,8,9,7],
+    [10,9,3,3,3,8,0,9,1,7],
+    [4,9,3,2,7,0,0,7,9,0],
+    [9,9,6,9,8,9,10,7,5,2],
+    [4,9,7,2,8,0,7,7,3,0]
+];
 
-        function clearHighlights() {
-            resultCells.forEach(c => c.classList.remove('active'));
-            sourceRows.forEach(r => {
-                r.querySelectorAll('td:not(.row-num)').forEach(td => td.classList.remove('highlight-source'));
-            });
-        }
+const uniqueCats = ['A','B','C'];
+// Pre-computed results (same for all methods)
+const results = {
+    'A': [18,13,11,9,7,16,8,20,9,23],
+    'B': [27,42,27,21,36,23,30,33,28,14],
+    'C': [10,1,1,7,3,3,9,8,9,7]
+};
+const totals = [55,56,39,37,46,42,47,61,46,44];
 
-        function highlightCell(cell) {
-            clearHighlights();
-            cell.classList.add('active');
+// Row numbers as shown in the workbook
+const sourceStartRow = 15;
+const resultRows = { mmult: 35, sumifs: 132, reduce: 44, map: 53, bycol: 62, makearray: 71, groupby: 80, subtotal: 99 };
 
-            const region = cell.dataset.region;
-            const product = cell.dataset.product;
-            const cellName = cell.dataset.cell;
+// Formula templates per method
+const methodInfo = {
+    mmult: {
+        name: 'MMULT',
+        tab: '2D Summary &mdash; MMULT',
+        desc: 'Builds a boolean helper matrix where <code>1</code> means the source row matches the category. Then uses <code>MMULT(helper, data)</code> to multiply and sum in one step &mdash; classic linear algebra approach.',
+        formula: (cat, period) => `MMULT(N(ANCHORARRAY(E35)=TRANSPOSE(ANCHORARRAY(E15))), ANCHORARRAY(G15))`,
+        cellFormula: (cat, p) => `=MMULT(helper_matrix, source_data)  →  SUM where category="${cat}", period=${p+1}`
+    },
+    sumifs: {
+        name: 'SUMIFS + OFFSET',
+        tab: '2D Summary &mdash; SUMIFS + OFFSET',
+        desc: 'Uses <code>SUMIFS</code> with <code>OFFSET</code> to shift the sum_range column-by-column. The criteria range stays fixed on the category column. Contributed by Oscar.',
+        formula: (cat, period) => `SUMIFS(OFFSET(ANCHORARRAY(E15),,1+ANCHORARRAY(G12)), ANCHORARRAY(E15), ANCHORARRAY(E132))`,
+        cellFormula: (cat, p) => `=SUMIFS(OFFSET(data,,${p+1}), categories, "${cat}")  →  SUM where category="${cat}", period=${p+1}`
+    },
+    reduce: {
+        name: 'DROP REDUCE SUMIFS LAMBDA',
+        tab: '2D Summary &mdash; DROP REDUCE SUMIFS',
+        desc: 'Iterates across periods using <code>REDUCE</code>, applying <code>SUMIFS</code> for each column and stacking results with <code>HSTACK</code>. The leading zero from REDUCE is removed with <code>DROP</code>.',
+        formula: (cat, period) => `DROP(REDUCE(0, ANCHORARRAY(G12), LAMBDA(x,y, HSTACK(x, SUMIFS(INDEX(data,0,y), categories, unique_cats)))),,1)`,
+        cellFormula: (cat, p) => `=SUMIFS(INDEX(data, 0, ${p+1}), categories, "${cat}")  →  period ${p+1}, cat "${cat}"`
+    },
+    map: {
+        name: 'MAP LAMBDA',
+        tab: '2D Summary &mdash; MAP LAMBDA',
+        desc: 'Creates unique <code>"cat-period"</code> key combinations, then <code>MAP</code>s a LAMBDA that filters and sums matching rows. Contributed by Kris.',
+        formula: (cat, period) => `MAP(SORT(UNIQUE(categories&"-"&periods)), LAMBDA(x, SUM((periods=--TEXTAFTER(x,"-"))*(categories=TEXTBEFORE(x,"-"))*data)))`,
+        cellFormula: (cat, p) => `=SUM((period=${p+1}) * (category="${cat}") * data)  →  MAP over key "${cat}-${p+1}"`
+    },
+    bycol: {
+        name: 'REDUCE BYCOL LAMBDA',
+        tab: '2D Summary &mdash; REDUCE BYCOL',
+        desc: 'Stacks category rows via <code>REDUCE</code> + <code>VSTACK</code>, then aggregates each column using <code>BYCOL</code> with a SUM LAMBDA. Contributed by Kris.',
+        formula: (cat, period) => `DROP(REDUCE(0, unique_cats, LAMBDA(x,y, VSTACK(x, BYCOL(data, LAMBDA(col, SUM(col*(categories=y))))))),1)`,
+        cellFormula: (cat, p) => `=SUM(column_${p+1} * (categories="${cat}"))  →  BYCOL aggregation`
+    },
+    makearray: {
+        name: 'MAKEARRAY LAMBDA',
+        tab: '2D Summary &mdash; MAKEARRAY',
+        desc: 'Constructs the entire result matrix cell-by-cell using <code>MAKEARRAY(rows, cols, LAMBDA(rw, cl, ...))</code>. Each cell independently computes its SUM. Limited to 1,048,576 &times; 16,384.',
+        formula: (cat, period) => `MAKEARRAY(ROWS(unique_cats), num_periods, LAMBDA(rw, cl, SUM((categories=INDEX(unique_cats,rw)) * INDEX(data, SEQUENCE(9), cl))))`,
+        cellFormula: (cat, p) => `=SUM((categories="${cat}") * INDEX(data, SEQUENCE(9), ${p+1}))  →  row ${uniqueCats.indexOf(cat)+1}, col ${p+1}`
+    },
+    groupby: {
+        name: 'GROUPBY',
+        tab: '2D Summary &mdash; GROUPBY',
+        desc: 'The simplest approach &mdash; a single <code>GROUPBY(categories, data, SUM)</code> call. Requires Microsoft 365 (2024+). Contributed by Kris.',
+        formula: (cat, period) => `GROUPBY(ANCHORARRAY(E15), ANCHORARRAY(G15), SUM, 0, 0)`,
+        cellFormula: (cat, p) => `=GROUPBY(categories, data, SUM)  →  category="${cat}", period=${p+1}`
+    },
+    subtotal: {
+        name: 'SUBTOTAL + OFFSET',
+        tab: '2D Summary &mdash; SUBTOTAL + OFFSET',
+        desc: 'Requires data sorted by category first. Uses <code>MATCH</code> to find each category\'s start position and <code>COUNTIF</code> for height, then <code>SUBTOTAL(9, OFFSET(...))</code> sums the slice.',
+        formula: (cat, period) => `SUBTOTAL(9, OFFSET(sorted_data, MATCH(cat, sorted_cats, 0)-1, SEQUENCE(,10,0), COUNTIF(sorted_cats, cat), 1))`,
+        cellFormula: (cat, p) => `=SUBTOTAL(9, OFFSET(sorted, start_${cat}, ${p}, count_${cat}, 1))  →  category="${cat}"`
+    }
+};
 
-            // Update formula bar
-            cellRefEl.textContent = cellName;
-            const colLetter = cellName[0];
-            const rowNum = cellName[1];
-            formulaTextEl.textContent =
-                `=SUMIFS($C:$C, $A:$A, $E${rowNum}, $B:$B, ${colLetter}$1)    →  SUMIFS(Amount, Region, "${region}", Product, "${product}")`;
+// ============================================================
+// RENDER
+// ============================================================
+let currentMethod = 'mmult';
+let activeResultCell = null;
 
-            // Highlight matching source rows
-            sourceRows.forEach(row => {
-                const regionCell = row.querySelector('[data-region]');
-                const productCell = row.querySelector('[data-product]');
-                if (regionCell && productCell &&
-                    regionCell.dataset.region === region &&
-                    productCell.dataset.product === product) {
-                    row.querySelectorAll('td:not(.row-num)').forEach(td => td.classList.add('highlight-source'));
-                }
-            });
-        }
+function buildSourceTable() {
+    const tbody = document.getElementById('source-body');
+    let html = '<tr><td class="row-num">14</td><td class="header-cell">Cat</td>';
+    for (let i = 1; i <= 10; i++) html += `<td class="header-cell">P${i}</td>`;
+    html += '</tr>';
 
-        resultCells.forEach(cell => {
-            cell.addEventListener('click', () => highlightCell(cell));
+    categories.forEach((cat, i) => {
+        html += `<tr data-cat="${cat}" data-row="${i}">`;
+        html += `<td class="row-num">${sourceStartRow + i}</td>`;
+        html += `<td class="cat-cell">${cat}</td>`;
+        sourceData[i].forEach(v => {
+            html += `<td class="data-cell number">${v}</td>`;
         });
-    </script>
+        html += '</tr>';
+    });
+    tbody.innerHTML = html;
+}
+
+function buildResultTable() {
+    const tbody = document.getElementById('result-body');
+    const startRow = resultRows[currentMethod];
+    let html = '';
+
+    uniqueCats.forEach((cat, ri) => {
+        html += `<tr>`;
+        html += `<td class="row-num">${startRow + ri}</td>`;
+        html += `<td class="result-label">${cat}</td>`;
+        results[cat].forEach((v, ci) => {
+            html += `<td class="result-cell" data-cat="${cat}" data-period="${ci}" data-cell-name="G${startRow + ri}">${v}</td>`;
+        });
+        html += '</tr>';
+    });
+
+    // Total row
+    html += '<tr>';
+    html += `<td class="row-num">${startRow + uniqueCats.length + 1}</td>`;
+    html += `<td class="header-cell">Total</td>`;
+    totals.forEach(v => {
+        html += `<td class="total-cell">${v}</td>`;
+    });
+    html += '</tr>';
+
+    tbody.innerHTML = html;
+    bindResultCells();
+}
+
+function bindResultCells() {
+    document.querySelectorAll('.result-cell').forEach(cell => {
+        cell.addEventListener('click', () => selectResultCell(cell));
+    });
+}
+
+function clearHighlights() {
+    document.querySelectorAll('.result-cell').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('#source-body tr').forEach(r => r.classList.remove('highlight-source'));
+}
+
+function selectResultCell(cell) {
+    clearHighlights();
+    cell.classList.add('active');
+    activeResultCell = cell;
+
+    const cat = cell.dataset.cat;
+    const period = parseInt(cell.dataset.period);
+    const info = methodInfo[currentMethod];
+
+    // Update formula bar
+    document.getElementById('cell-ref').textContent = cell.dataset.cellName;
+    document.getElementById('formula-text').textContent = info.cellFormula(cat, period);
+
+    // Highlight matching source rows
+    document.querySelectorAll('#source-body tr[data-cat]').forEach(row => {
+        if (row.dataset.cat === cat) {
+            row.classList.add('highlight-source');
+        }
+    });
+}
+
+function switchMethod(method) {
+    currentMethod = method;
+    const info = methodInfo[method];
+
+    // Update buttons
+    document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`[data-method="${method}"]`).classList.add('active');
+
+    // Update description
+    document.getElementById('method-desc').innerHTML = info.desc;
+    document.getElementById('result-tab').innerHTML = info.tab;
+
+    // Rebuild result table
+    buildResultTable();
+    clearHighlights();
+    document.getElementById('cell-ref').textContent = '—';
+    document.getElementById('formula-text').textContent = 'Select a result cell';
+}
+
+// Init
+buildSourceTable();
+switchMethod('mmult');
+
+// Bind method buttons
+document.querySelectorAll('.method-btn').forEach(btn => {
+    btn.addEventListener('click', () => switchMethod(btn.dataset.method));
+});
+</script>
 </body>
 </html>
