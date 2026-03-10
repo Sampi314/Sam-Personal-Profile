@@ -644,12 +644,14 @@ section h2::after {
     letter-spacing: 0.02em;
     border: 1px solid var(--border);
     transition: all 0.2s ease;
+    box-shadow: 0 0 8px transparent;
 }
 
 .skill-tag:hover {
     border-color: var(--accent);
     color: var(--accent);
     background: var(--accent-glow);
+    box-shadow: 0 0 12px var(--accent-glow);
 }
 
 .summary-text {
@@ -778,9 +780,9 @@ section h2::after {
 }
 
 .card:hover {
-    border-color: var(--border-strong);
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow), var(--shadow-hover);
+    transform: translateY(-4px);
     color: inherit;
 }
 
@@ -1107,9 +1109,9 @@ footer a:hover {
 }
 
 .featured-card:hover {
-    border-color: var(--border-strong);
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow), var(--shadow-hover);
+    transform: translateY(-4px);
     color: inherit;
 }
 
@@ -1207,9 +1209,9 @@ footer a:hover {
 }
 
 .blog-hero-card:hover {
-    border-color: var(--border-strong);
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow), var(--shadow-hover);
+    transform: translateY(-4px);
     color: inherit;
 }
 
@@ -1294,9 +1296,9 @@ footer a:hover {
 }
 
 .blog-sub-card:hover {
-    border-color: var(--border-strong);
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow), var(--shadow-hover);
+    transform: translateY(-4px);
     color: inherit;
 }
 
