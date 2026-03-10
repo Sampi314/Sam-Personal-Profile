@@ -57,7 +57,7 @@
         <section class="fade-in">
             <h2>The VBA Solution: Fill Left for Blanks</h2>
             <p class="summary-text" style="margin-bottom: 16px;">Here's a simple VBA macro designed to fill all blank cells in selected rows with the value from the nearest non-blank cell to the right:</p>
-            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">Sub Fill_Left()
+            <pre>Sub Fill_Left()
     Dim c_rng As Range, c_a_rng As Range, r_rng As Range
 
     For Each r_rng In Selection.Rows

@@ -61,7 +61,7 @@
 
         <section class="fade-in">
             <h2>The VBA Code</h2>
-            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">'Handle 64-bit and 32-bit Office
+            <pre>'Handle 64-bit and 32-bit Office
 #If VBA7 Then
     Declare PtrSafe Function GlobalUnlock Lib &quot;kernel32&quot; (ByVal hMem As LongPtr) As Long
     Declare PtrSafe Function GlobalLock Lib &quot;kernel32&quot; (ByVal hMem As LongPtr) As LongPtr

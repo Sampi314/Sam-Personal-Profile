@@ -58,13 +58,13 @@
 
         <section class="fade-in">
             <h2>Usage</h2>
-            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">=fn_Extract_Comments_Thread(A1:Z100)</pre>
+            <pre data-lang="plaintext">=fn_Extract_Comments_Thread(A1:Z100)</pre>
             <p class="summary-text" style="margin-top: 14px;">Returns a table with columns: Cell, Index, Type, User, Date, Text. Each comment and its replies appear as separate rows.</p>
         </section>
 
         <section class="fade-in">
             <h2>The VBA Code</h2>
-            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">Function fn_Extract_Comments_Thread(Comment_Thread_Range As Range) As Variant
+            <pre>Function fn_Extract_Comments_Thread(Comment_Thread_Range As Range) As Variant
     Application.Volatile
     ' Returns a 2D array: [Cell, Index, Type, Author, Date, Text]
     Dim Rng As Range, Lin_Arr As Long

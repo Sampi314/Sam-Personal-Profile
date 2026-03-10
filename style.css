@@ -1194,11 +1194,122 @@ footer a:hover {
 }
 
 /* ========================================
-   Code Copy Button
+   Code Blocks & Syntax Highlighting
    ======================================== */
 pre {
     position: relative;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    background: var(--code-bg);
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    line-height: 1.7;
+    border: 1px solid var(--border);
 }
+
+pre code {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* --- Dark theme (default) syntax colors --- */
+pre code.hljs {
+    background: var(--code-bg);
+    color: var(--text-primary);
+}
+
+pre code .hljs-keyword,
+pre code .hljs-built_in,
+pre code .hljs-type {
+    color: #c586c0;
+}
+
+pre code .hljs-title,
+pre code .hljs-function .hljs-title {
+    color: #dcdcaa;
+}
+
+pre code .hljs-string,
+pre code .hljs-literal {
+    color: #ce9178;
+}
+
+pre code .hljs-number {
+    color: #b5cea8;
+}
+
+pre code .hljs-comment {
+    color: #6a9955;
+    font-style: italic;
+}
+
+pre code .hljs-variable,
+pre code .hljs-params {
+    color: #9cdcfe;
+}
+
+pre code .hljs-symbol {
+    color: #4ec9b0;
+}
+
+pre code .hljs-operator,
+pre code .hljs-punctuation {
+    color: #d4d4d4;
+}
+
+/* --- Light theme syntax colors --- */
+[data-theme="light"] pre code.hljs {
+    background: var(--code-bg);
+    color: var(--text-primary);
+}
+
+[data-theme="light"] pre code .hljs-keyword,
+[data-theme="light"] pre code .hljs-built_in,
+[data-theme="light"] pre code .hljs-type {
+    color: #af00db;
+}
+
+[data-theme="light"] pre code .hljs-title,
+[data-theme="light"] pre code .hljs-function .hljs-title {
+    color: #795e26;
+}
+
+[data-theme="light"] pre code .hljs-string,
+[data-theme="light"] pre code .hljs-literal {
+    color: #a31515;
+}
+
+[data-theme="light"] pre code .hljs-number {
+    color: #098658;
+}
+
+[data-theme="light"] pre code .hljs-comment {
+    color: #008000;
+    font-style: italic;
+}
+
+[data-theme="light"] pre code .hljs-variable,
+[data-theme="light"] pre code .hljs-params {
+    color: #001080;
+}
+
+[data-theme="light"] pre code .hljs-symbol {
+    color: #267f99;
+}
+
+[data-theme="light"] pre code .hljs-operator,
+[data-theme="light"] pre code .hljs-punctuation {
+    color: #1a1a1f;
+}
+
+/* ========================================
+   Code Copy Button
+   ======================================== */
 
 .code-copy-btn {
     position: absolute;

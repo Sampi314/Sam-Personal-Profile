@@ -57,13 +57,13 @@
 
         <section class="fade-in">
             <h2>Usage</h2>
-            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">=fn_Does_File_Path_Exist(A1:A50)</pre>
+            <pre data-lang="plaintext">=fn_Does_File_Path_Exist(A1:A50)</pre>
             <p class="summary-text" style="margin-top: 14px;">Returns a spilled column of TRUE/FALSE. Use conditional formatting to highlight broken paths in red.</p>
         </section>
 
         <section class="fade-in">
             <h2>The VBA Code</h2>
-            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">Function fn_Does_File_Path_Exist(File_Path As Range) As Variant
+            <pre>Function fn_Does_File_Path_Exist(File_Path As Range) As Variant
     Dim Arr() As Variant
     ReDim Arr(1 To File_Path.Rows.Count, 1 To File_Path.Columns.Count)
     Dim r As Long, c As Long

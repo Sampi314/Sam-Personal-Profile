@@ -59,13 +59,13 @@
         <section class="fade-in">
             <h2>Usage</h2>
             <p class="summary-text">Enter in any cell:</p>
-            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">=fn_Sum_by_Color(A1, B1:B100)</pre>
+            <pre data-lang="plaintext">=fn_Sum_by_Color(A1, B1:B100)</pre>
             <p class="summary-text" style="margin-top: 14px;">Where A1 contains the reference fill color and B1:B100 is the range to sum.</p>
         </section>
 
         <section class="fade-in">
             <h2>The VBA Code</h2>
-            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">Function fn_Sum_by_Color(Cell_Color As Range, Sum_Range As Range)
+            <pre>Function fn_Sum_by_Color(Cell_Color As Range, Sum_Range As Range)
     Application.Volatile
     Dim Clr_Sum As Double
     Dim Clr_Idx As Integer: Clr_Idx = Cell_Color.Interior.ColorIndex

@@ -872,6 +872,46 @@ function initScrollProgress() {
 }
 
 /* ========================================
+   Syntax Highlighting (Highlight.js)
+   ======================================== */
+function initSyntaxHighlight() {
+    const pres = document.querySelectorAll('pre');
+    if (pres.length === 0) return;
+
+    // Wrap bare pre content in <code> tags with language class if not already wrapped
+    pres.forEach(pre => {
+        if (!pre.querySelector('code')) {
+            const code = document.createElement('code');
+            const lang = pre.getAttribute('data-lang') || 'vba';
+            code.className = 'language-' + lang;
+            code.textContent = pre.textContent;
+            pre.textContent = '';
+            pre.appendChild(code);
+        }
+    });
+
+    // Load Highlight.js from CDN
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js';
+    script.onload = function() {
+        // Load VBA language support
+        const vbaScript = document.createElement('script');
+        vbaScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/vbnet.min.js';
+        vbaScript.onload = function() {
+            if (window.hljs) {
+                hljs.registerAliases('vba', { languageName: 'vbnet' });
+                hljs.configure({ ignoreUnescapedHTML: true });
+                document.querySelectorAll('pre code').forEach(block => {
+                    hljs.highlightElement(block);
+                });
+            }
+        };
+        document.head.appendChild(vbaScript);
+    };
+    document.head.appendChild(script);
+}
+
+/* ========================================
    Code Copy Button
    ======================================== */
 function initCodeCopy() {
@@ -993,6 +1033,7 @@ document.addEventListener('DOMContentLoaded', () => {
     generateProjectPlaceholders();
     initIframeLoading();
     initScrollProgress();
+    initSyntaxHighlight();
     initCodeCopy();
     initReadingTime();
     initTagFilter();

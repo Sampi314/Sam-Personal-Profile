@@ -58,12 +58,12 @@
 
         <section class="fade-in">
             <h2>Usage</h2>
-            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">=fn_NMATCH("Apple", A1:A100, 3)    ' Find the 3rd "Apple"</pre>
+            <pre data-lang="plaintext">=fn_NMATCH("Apple", A1:A100, 3)    ' Find the 3rd "Apple"</pre>
         </section>
 
         <section class="fade-in">
             <h2>The VBA Code</h2>
-            <pre style="background: var(--code-bg); padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; border: 1px solid var(--border);">Function fn_NMATCH(ByVal lookup_value As Variant, _
+            <pre>Function fn_NMATCH(ByVal lookup_value As Variant, _
         ByVal lookup_vector As Range, ByVal instance_num As Variant) As Variant
     ' Returns the Nth occurrence position of lookup_value in lookup_vector
     Dim Arr_Src As Variant: Arr_Src = lookup_vector.Value2
