@@ -7,7 +7,7 @@
    CSS Variables & Theme System
    ======================================== */
 :root {
-    --bg-primary: #0c0c12;
+    --bg-primary: #000000;
     --bg-card: #13131a;
     --bg-card-alt: #1a1a24;
     --text-primary: #e8e8ed;
@@ -22,10 +22,10 @@
     --tag-text: #f59e0b;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.3);
-    --nav-bg: rgba(12, 12, 18, 0.92);
+    --nav-bg: rgba(0, 0, 0, 0.92);
     --nav-text: #e8e8ed;
     --code-bg: #1a1a24;
-    --hero-bg: #0c0c12;
+    --hero-bg: #000000;
     --hero-text: #e8e8ed;
     --hero-muted: #6b7280;
     --timeline-line: #1f1f2e;
@@ -51,7 +51,7 @@
     --nav-bg: rgba(245, 245, 240, 0.92);
     --nav-text: #1a1a1f;
     --code-bg: #f0ede6;
-    --hero-bg: #0c0c12;
+    --hero-bg: #000000;
     --hero-text: #f5f5f0;
     --hero-muted: #6b7280;
     --timeline-line: #e8e6e1;
@@ -374,13 +374,14 @@ header p.location {
     height: 200px;
     border-radius: 12px;
     object-fit: cover;
-    border: 2px solid rgba(245, 158, 11, 0.3);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-    transition: transform 0.4s ease;
+    border: 2px solid rgba(245, 158, 11, 0.4);
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.15), 0 20px 60px rgba(0, 0, 0, 0.5);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .profile-pic:hover {
     transform: scale(1.02);
+    box-shadow: 0 0 40px rgba(245, 158, 11, 0.25), 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .profile-initials {
@@ -529,10 +530,10 @@ section h2::after {
    Scroll Animations
    ======================================== */
 .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 0.15;
+    transform: translateY(12px);
+    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .fade-in.visible {
@@ -541,10 +542,10 @@ section h2::after {
 }
 
 /* Staggered children */
-.fade-in:nth-child(2) { transition-delay: 0.08s; }
-.fade-in:nth-child(3) { transition-delay: 0.16s; }
-.fade-in:nth-child(4) { transition-delay: 0.24s; }
-.fade-in:nth-child(5) { transition-delay: 0.32s; }
+.fade-in:nth-child(2) { transition-delay: 0.06s; }
+.fade-in:nth-child(3) { transition-delay: 0.12s; }
+.fade-in:nth-child(4) { transition-delay: 0.18s; }
+.fade-in:nth-child(5) { transition-delay: 0.24s; }
 
 /* ========================================
    Experience Timeline
@@ -638,6 +639,51 @@ section h2::after {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+}
+
+.skills-bar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 32px;
+}
+
+.skill-bar-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.skill-bar-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.04em;
+}
+
+.skill-bar-track {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.skill-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+    border-radius: 3px;
+    transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    width: 0;
+    box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.fade-in.visible .skill-bar-fill {
+    /* width set inline */
+}
+
+@media (max-width: 600px) {
+    .skills-bar-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .skill-tag {
@@ -1023,11 +1069,29 @@ section h2::after {
    ======================================== */
 footer {
     text-align: center;
-    padding: 32px 24px;
+    padding: 48px 24px 32px;
     color: var(--text-muted);
     font-size: 0.8rem;
     border-top: 1px solid var(--border);
     margin-top: 0;
+}
+
+.footer-logo {
+    margin-bottom: 8px;
+}
+
+.footer-logo svg {
+    color: var(--accent);
+    opacity: 0.6;
+}
+
+.footer-tagline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+    opacity: 0.6;
 }
 
 footer a {
@@ -1051,6 +1115,43 @@ footer a:hover {
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+}
+
+/* ========================================
+   Back to Top Button
+   ======================================== */
+.back-to-top {
+    position: fixed !important;
+    bottom: 32px !important;
+    right: 32px !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--accent);
+    font-size: 1.1rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background 0.2s, border-color 0.2s;
+    z-index: 999;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
 }
 
 /* ========================================

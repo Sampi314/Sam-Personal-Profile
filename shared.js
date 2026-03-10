@@ -74,10 +74,14 @@ function initScrollAnimations() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+                // Animate skill bars when section becomes visible
+                entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-width');
+                });
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.01, rootMargin: '0px 0px 80px 0px' });
 
     elements.forEach(el => observer.observe(el));
 }
@@ -537,15 +541,44 @@ function initNavLogo() {
 }
 
 /* ========================================
+   Back to Top Button
+   ======================================== */
+function initBackToTop() {
+    var btn = document.querySelector('.back-to-top');
+    if (!btn) return;
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 400) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    });
+    btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+/* ========================================
+   Footer Logo
+   ======================================== */
+function initFooterLogo() {
+    var el = document.querySelector('.footer-logo');
+    if (!el) return;
+    el.innerHTML = getSNLogoSVG(24);
+}
+
+/* ========================================
    Init All
    ======================================== */
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initNavLogo();
+    initFooterLogo();
     initNavbar();
     initScrollAnimations();
     initContactForm();
     initHeroParticles();
+    initBackToTop();
     generateCardThumbnails();
     generateProjectPlaceholders();
     initIframeLoading();

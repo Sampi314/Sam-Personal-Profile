@@ -6,6 +6,9 @@
     <title>Sam Ngo - Senior Analyst at SumProduct</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
 </head>
 <body>
     <!-- Sticky Navbar -->
@@ -179,17 +182,47 @@
         <section class="fade-in">
             <h2>Skills</h2>
             <div class="subsection-title">Technical</div>
-            <div class="skills-grid">
-                <span class="skill-tag">Excel</span>
-                <span class="skill-tag">VBA</span>
-                <span class="skill-tag">VB.NET</span>
-                <span class="skill-tag">Power Query</span>
-                <span class="skill-tag">Power BI</span>
-                <span class="skill-tag">RStudio</span>
-                <span class="skill-tag">Power Automate</span>
-                <span class="skill-tag">Financial Modeling</span>
-                <span class="skill-tag">Data Analysis</span>
-                <span class="skill-tag">Data Visualization</span>
+            <div class="skills-bar-grid">
+                <div class="skill-bar-item">
+                    <span class="skill-bar-label">Excel</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="95%"></div></div>
+                </div>
+                <div class="skill-bar-item">
+                    <span class="skill-bar-label">VBA</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90%"></div></div>
+                </div>
+                <div class="skill-bar-item">
+                    <span class="skill-bar-label">Power Query</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90%"></div></div>
+                </div>
+                <div class="skill-bar-item">
+                    <span class="skill-bar-label">Power BI</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85%"></div></div>
+                </div>
+                <div class="skill-bar-item">
+                    <span class="skill-bar-label">VB.NET</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75%"></div></div>
+                </div>
+                <div class="skill-bar-item">
+                    <span class="skill-bar-label">Financial Modeling</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90%"></div></div>
+                </div>
+                <div class="skill-bar-item">
+                    <span class="skill-bar-label">Data Visualization</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88%"></div></div>
+                </div>
+                <div class="skill-bar-item">
+                    <span class="skill-bar-label">Power Automate</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="70%"></div></div>
+                </div>
+                <div class="skill-bar-item">
+                    <span class="skill-bar-label">RStudio</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="60%"></div></div>
+                </div>
+                <div class="skill-bar-item">
+                    <span class="skill-bar-label">Data Analysis</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88%"></div></div>
+                </div>
             </div>
         </section>
 
@@ -238,6 +271,8 @@
     </main>
 
     <footer>
+        <div class="footer-logo"></div>
+        <div class="footer-tagline">Finance &middot; Data &middot; Visualization</div>
         <div class="footer-links">
             <a href="mailto:nkhoihue@gmail.com">Email</a>
             <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
@@ -245,6 +280,8 @@
         </div>
         &copy; 2026 Sam Ngo
     </footer>
+
+    <button class="back-to-top" aria-label="Back to top">&uarr;</button>
 
     <script src="shared.js"></script>
     <script>
