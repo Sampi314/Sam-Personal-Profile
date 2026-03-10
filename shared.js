@@ -116,10 +116,7 @@ function initContactForm() {
 /* ========================================
    Hero Particle Animation
    ======================================== */
-function initHeroParticles() {
-    const canvas = document.getElementById('hero-particles');
-    if (!canvas) return;
-
+function initParticleCanvas(canvas) {
     const ctx = canvas.getContext('2d');
     let particles = [];
     let animId;
@@ -140,8 +137,8 @@ function initHeroParticles() {
                 y: Math.random() * canvas.height,
                 vx: (Math.random() - 0.5) * 0.3,
                 vy: (Math.random() - 0.5) * 0.3,
-                r: Math.random() * 1.5 + 0.5,
-                alpha: Math.random() * 0.4 + 0.2
+                r: Math.random() * 2 + 1,
+                alpha: Math.random() * 0.4 + 0.45
             });
         }
     }
@@ -159,9 +156,9 @@ function initHeroParticles() {
                 const dy = particles[i].y - particles[j].y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < lineDistance) {
-                    const opacity = (1 - dist / lineDistance) * 0.08;
+                    const opacity = (1 - dist / lineDistance) * 0.25;
                     ctx.strokeStyle = `rgba(245, 158, 11, ${opacity})`;
-                    ctx.lineWidth = 0.5;
+                    ctx.lineWidth = 0.8;
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
@@ -214,6 +211,10 @@ function initHeroParticles() {
     resize();
     createParticles();
     draw();
+}
+
+function initHeroParticles() {
+    document.querySelectorAll('.hero-canvas').forEach(initParticleCanvas);
 }
 
 /* ========================================
