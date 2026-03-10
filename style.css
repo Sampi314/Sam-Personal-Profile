@@ -359,25 +359,6 @@ header h1 {
 header h1 em {
     font-style: italic;
     color: var(--accent);
-    position: relative;
-    display: inline-block;
-}
-
-header h1 em::after {
-    content: '\5433';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
-    font-style: normal;
-    font-size: 2.8em;
-    font-weight: 400;
-    color: var(--accent);
-    opacity: 0.07;
-    pointer-events: none;
-    z-index: -1;
-    line-height: 1;
 }
 
 header p.headline {
