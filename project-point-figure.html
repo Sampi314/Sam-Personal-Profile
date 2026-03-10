@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Point and Figure Chart with Bollinger Bands - Sam Ngo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="page-header-inner">
+            <h1>Point &amp; Figure Chart with Bollinger Bands</h1>
+            <p>Classic technical analysis chart built entirely in Excel formulas</p>
+        </div>
+    </div>
+
+    <main class="wide">
+        <section class="fade-in">
+            <div class="project-detail-header">
+                <div><h2>Overview</h2></div>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">Charting</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">Finance</span>
+                </div>
+            </div>
+            <p class="summary-text">A <strong>Point and Figure (P&amp;F) chart</strong> is a technical analysis tool that filters out time and focuses purely on price movement. Columns of X's represent rising prices; columns of O's represent falling prices. This workbook builds the entire P&amp;F chart from MSFT (Microsoft) stock data using Excel formulas, then overlays <strong>Bollinger Bands</strong> to identify overbought/oversold conditions. The chart rendering uses conditional formatting and VBA.</p>
+            <p class="summary-text" style="margin-top: 14px;"><a href="Samples/SP%20Point%20and%20Figure%20Chart%20with%20Bollinger%20Band-%20Complete.xlsm" download>Download the Excel file (.xlsm)</a></p>
+        </section>
+
+        <section class="fade-in">
+            <h2>How It Works</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 8px;"><strong>Data Sheet:</strong> Contains adjusted close prices from MSFT stock (sourced from Yahoo Finance).</li>
+                <li style="margin-bottom: 8px;"><strong>P&amp;F Logic:</strong> Formulas calculate bin width, switch locations, up/down indices, and upper/lower bin boundaries. Each column switches from X to O (or vice versa) only when the price reverses by at least the bin width.</li>
+                <li style="margin-bottom: 8px;"><strong>Symbols:</strong> Rising columns display <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">X</code>, falling columns display <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">O</code>, and Bollinger Band boundaries use <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">$</code> and <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">+++</code>.</li>
+                <li style="margin-bottom: 8px;"><strong>Bollinger Bands:</strong> Standard deviation calculations are overlaid on the P&amp;F grid to show upper and lower bands, helping identify when prices are extended beyond normal volatility.</li>
+                <li style="margin-bottom: 8px;"><strong>Summary Data:</strong> Tracks max/min stock prices, max/min of upper and lower bands for scaling.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>When to Use This</h2>
+            <p class="summary-text">Point and Figure charts are used by technical analysts to identify support/resistance levels and trend reversals without the noise of time-based charts. Adding Bollinger Bands provides a statistical framework for identifying when P&amp;F columns are reaching extreme levels. This workbook is a learning tool for understanding both techniques and how to implement them with pure Excel formulas.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <script src="shared.js"></script>
+</body>
+</html>

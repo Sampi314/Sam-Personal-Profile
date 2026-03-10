@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Pies Chart - Sam Ngo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="page-header-inner">
+            <h1>Bubble Pies Chart</h1>
+            <p>Combining bubble charts with pie chart segments for multi-dimensional data visualisation</p>
+        </div>
+    </div>
+
+    <main class="wide">
+        <section class="fade-in">
+            <div class="project-detail-header">
+                <div><h2>Overview</h2></div>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">Charting</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">Python</span>
+                </div>
+            </div>
+            <p class="summary-text">A <strong>Bubble Pie chart</strong> overlays mini pie charts on top of a bubble chart, showing both the <em>size</em> of each market and its <em>composition</em> across sectors (Agriculture, Industrial, Services) in a single visual. This technique, originally developed by Andy Pope, is implemented here with VBA macros and Excel's Python integration for chart rendering.</p>
+            <p class="summary-text" style="margin-top: 14px;"><a href="Samples/SP%20Bubble%20Pies.xlsm" download>Download the Excel file (.xlsm)</a></p>
+        </section>
+
+        <section class="fade-in">
+            <h2>How It Works</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 8px;"><strong>Data Structure:</strong> 7 markets (A&ndash;G) with X/Y coordinates, market size, and three sector breakdowns (Agriculture, Industrial, Services).</li>
+                <li style="margin-bottom: 8px;"><strong>Bubble Positioning:</strong> X and Y values position each market on the chart; the Market Size value controls bubble diameter.</li>
+                <li style="margin-bottom: 8px;"><strong>Pie Segments:</strong> Each bubble is replaced with a proportional pie chart showing the sector mix. Sector percentages are calculated as a share of each market's total.</li>
+                <li style="margin-bottom: 8px;"><strong>9 Embedded Charts:</strong> The workbook contains 9 chart objects that compose the final Bubble Pies visualisation.</li>
+                <li style="margin-bottom: 8px;"><strong>Python Integration:</strong> Uses Excel's <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">PY()</code> function for library loading and image generation.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>Sample Data</h2>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 10px;">
+                    <thead>
+                        <tr style="background: var(--card-bg); border-bottom: 2px solid var(--accent);">
+                            <th style="padding: 8px 12px; text-align: left;">Market</th>
+                            <th style="padding: 8px 12px; text-align: right;">X</th>
+                            <th style="padding: 8px 12px; text-align: right;">Y</th>
+                            <th style="padding: 8px 12px; text-align: right;">Size</th>
+                            <th style="padding: 8px 12px; text-align: right;">Agriculture</th>
+                            <th style="padding: 8px 12px; text-align: right;">Industrial</th>
+                            <th style="padding: 8px 12px; text-align: right;">Services</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: var(--text-secondary);">
+                        <tr><td style="padding: 6px 12px;">A</td><td style="padding: 6px 12px; text-align: right;">1</td><td style="padding: 6px 12px; text-align: right;">5</td><td style="padding: 6px 12px; text-align: right;">5</td><td style="padding: 6px 12px; text-align: right;">484</td><td style="padding: 6px 12px; text-align: right;">448</td><td style="padding: 6px 12px; text-align: right;">286</td></tr>
+                        <tr><td style="padding: 6px 12px;">B</td><td style="padding: 6px 12px; text-align: right;">3</td><td style="padding: 6px 12px; text-align: right;">10</td><td style="padding: 6px 12px; text-align: right;">3</td><td style="padding: 6px 12px; text-align: right;">437</td><td style="padding: 6px 12px; text-align: right;">177</td><td style="padding: 6px 12px; text-align: right;">107</td></tr>
+                        <tr><td style="padding: 6px 12px;">C</td><td style="padding: 6px 12px; text-align: right;">8</td><td style="padding: 6px 12px; text-align: right;">5</td><td style="padding: 6px 12px; text-align: right;">5</td><td style="padding: 6px 12px; text-align: right;">231</td><td style="padding: 6px 12px; text-align: right;">363</td><td style="padding: 6px 12px; text-align: right;">111</td></tr>
+                        <tr><td style="padding: 6px 12px;">D</td><td style="padding: 6px 12px; text-align: right;">6</td><td style="padding: 6px 12px; text-align: right;">6</td><td style="padding: 6px 12px; text-align: right;">3</td><td style="padding: 6px 12px; text-align: right;">108</td><td style="padding: 6px 12px; text-align: right;">293</td><td style="padding: 6px 12px; text-align: right;">308</td></tr>
+                        <tr><td style="padding: 6px 12px;">E</td><td style="padding: 6px 12px; text-align: right;">2</td><td style="padding: 6px 12px; text-align: right;">3</td><td style="padding: 6px 12px; text-align: right;">1</td><td style="padding: 6px 12px; text-align: right;">449</td><td style="padding: 6px 12px; text-align: right;">409</td><td style="padding: 6px 12px; text-align: right;">491</td></tr>
+                        <tr><td style="padding: 6px 12px;">F</td><td style="padding: 6px 12px; text-align: right;">3</td><td style="padding: 6px 12px; text-align: right;">2</td><td style="padding: 6px 12px; text-align: right;">1</td><td style="padding: 6px 12px; text-align: right;">382</td><td style="padding: 6px 12px; text-align: right;">458</td><td style="padding: 6px 12px; text-align: right;">480</td></tr>
+                        <tr><td style="padding: 6px 12px;">G</td><td style="padding: 6px 12px; text-align: right;">4</td><td style="padding: 6px 12px; text-align: right;">4</td><td style="padding: 6px 12px; text-align: right;">5</td><td style="padding: 6px 12px; text-align: right;">425</td><td style="padding: 6px 12px; text-align: right;">150</td><td style="padding: 6px 12px; text-align: right;">379</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>When to Use This</h2>
+            <p class="summary-text">Bubble Pies are ideal for executive presentations where you need to show market positioning (X/Y), relative scale (bubble size), and composition (pie segments) simultaneously. Common use cases include market analysis, portfolio comparison, and competitive landscape visualisation.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <script src="shared.js"></script>
+</body>
+</html>
