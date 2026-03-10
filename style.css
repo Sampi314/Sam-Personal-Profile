@@ -2085,6 +2085,39 @@ section.overview-prominent .project-detail-header h2 {
    Print Styles (CV / Homepage)
    ======================================== */
 @media print {
+    /* Force all CSS variables to print-friendly values */
+    :root,
+    [data-theme="light"] {
+        --bg-primary: #fff;
+        --bg-card: #fff;
+        --bg-card-alt: #fff;
+        --text-primary: #000;
+        --text-secondary: #333;
+        --text-muted: #555;
+        --accent: #b45309;
+        --accent-glow: transparent;
+        --accent-hover: #b45309;
+        --border: #ccc;
+        --border-strong: #999;
+        --tag-bg: #f5f5f5;
+        --tag-text: #333;
+        --shadow: none;
+        --shadow-hover: none;
+        --nav-bg: #fff;
+        --nav-text: #000;
+        --code-bg: #f5f5f5;
+        --hero-bg: #fff;
+        --hero-text: #000;
+        --hero-muted: #555;
+        --hero-orbit: transparent;
+        --hero-orbit-lg: transparent;
+        --hero-btn-border: #ccc;
+        --hero-pic-shadow: none;
+        --hero-pic-shadow-hover: none;
+        --timeline-line: #ccc;
+        --grain-opacity: 0;
+    }
+
     /* Hide non-essential elements */
     .navbar,
     .hero-canvas,
