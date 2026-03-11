@@ -123,8 +123,8 @@ function initParticleCanvas(canvas) {
     let paused = false;
 
     function resize() {
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     }
 
     function createParticles() {
