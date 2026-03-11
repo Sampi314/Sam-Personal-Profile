@@ -269,6 +269,7 @@ header {
     color: var(--hero-text);
     padding: 140px 32px 80px;
     position: relative;
+    overflow: hidden;
     transition: background 0.4s ease, color 0.4s ease;
 }
 
