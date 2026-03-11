@@ -733,6 +733,16 @@ function initTOC() {
 
     document.body.appendChild(sidebar);
 
+    // Show TOC only after scrolling past the page header
+    var pageHeader = document.querySelector('.page-header');
+    function updateTOCVisibility() {
+        if (!pageHeader) { sidebar.classList.add('visible'); return; }
+        var headerBottom = pageHeader.getBoundingClientRect().bottom;
+        sidebar.classList.toggle('visible', headerBottom < 0);
+    }
+    updateTOCVisibility();
+    window.addEventListener('scroll', updateTOCVisibility, { passive: true });
+
     // Highlight current section
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {

@@ -1391,6 +1391,14 @@ pre:hover .code-copy-btn {
     overflow-y: auto;
     z-index: 100;
     padding: 12px 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.toc-sidebar.visible {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .toc-title {
