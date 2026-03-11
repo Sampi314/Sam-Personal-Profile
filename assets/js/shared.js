@@ -1051,6 +1051,116 @@ function initGallery() {
 }
 
 /* ========================================
+   Section Jump Bar Active State (Home Page)
+   ======================================== */
+function initJumpBar() {
+    const jumpBar = document.querySelector('.jump-bar');
+    if (!jumpBar) return;
+
+    const pills = jumpBar.querySelectorAll('.jump-pill');
+    const sections = [];
+
+    pills.forEach(pill => {
+        const id = pill.getAttribute('href').replace('#', '');
+        const section = document.getElementById(id);
+        if (section) sections.push({ pill, section });
+    });
+
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                pills.forEach(p => p.classList.remove('active'));
+                const match = sections.find(s => s.section === entry.target);
+                if (match) match.pill.classList.add('active');
+            }
+        });
+    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(s => observer.observe(s.section));
+}
+
+/* ========================================
+   Blog Next/Previous Navigation
+   ======================================== */
+function initBlogNav() {
+    var path = window.location.pathname;
+    var page = path.split('/').pop() || '';
+    if (!page.startsWith('blog-') && !page.startsWith('project-')) return;
+
+    var currentIndex = -1;
+    for (var i = 0; i < BLOG_POSTS.length; i++) {
+        if (BLOG_POSTS[i].url === page) {
+            currentIndex = i;
+            break;
+        }
+    }
+    if (currentIndex === -1) return;
+
+    var prev = currentIndex > 0 ? BLOG_POSTS[currentIndex - 1] : null;
+    var next = currentIndex < BLOG_POSTS.length - 1 ? BLOG_POSTS[currentIndex + 1] : null;
+
+    if (!prev && !next) return;
+
+    var nav = document.createElement('nav');
+    nav.className = 'blog-nav';
+    nav.setAttribute('aria-label', 'Post navigation');
+
+    if (prev) {
+        nav.innerHTML += '<a href="' + prev.url + '" class="blog-nav-link prev">' +
+            '<span class="blog-nav-label">&larr; Previous</span>' +
+            '<span class="blog-nav-title">' + prev.title + '</span></a>';
+    }
+
+    if (next) {
+        nav.innerHTML += '<a href="' + next.url + '" class="blog-nav-link next">' +
+            '<span class="blog-nav-label">Next &rarr;</span>' +
+            '<span class="blog-nav-title">' + next.title + '</span></a>';
+    }
+
+    var related = document.querySelector('.related-posts');
+    if (related) {
+        related.parentNode.insertBefore(nav, related);
+    } else {
+        var main = document.querySelector('main');
+        if (main) main.appendChild(nav);
+    }
+}
+
+/* ========================================
+   Breadcrumbs
+   ======================================== */
+function initBreadcrumbs() {
+    var path = window.location.pathname;
+    var page = path.split('/').pop() || '';
+    var dir = path.split('/').slice(-2, -1)[0] || '';
+
+    if (dir !== 'blog' && dir !== 'projects') return;
+
+    var pageTitle = document.querySelector('.page-header-inner h1');
+    if (!pageTitle) return;
+
+    var section = dir === 'blog' ? 'Blog' : 'Tools';
+    var sectionUrl = dir === 'blog' ? '../blog.html' : '../tools.html';
+
+    var nav = document.createElement('nav');
+    nav.className = 'breadcrumb';
+    nav.setAttribute('aria-label', 'Breadcrumb');
+    nav.innerHTML =
+        '<a href="../index.html">Home</a>' +
+        '<span class="breadcrumb-separator">&rsaquo;</span>' +
+        '<a href="' + sectionUrl + '">' + section + '</a>' +
+        '<span class="breadcrumb-separator">&rsaquo;</span>' +
+        '<span class="breadcrumb-current">' + pageTitle.textContent + '</span>';
+
+    var header = document.querySelector('.page-header');
+    if (header && header.nextSibling) {
+        header.parentNode.insertBefore(nav, header.nextSibling);
+    }
+}
+
+/* ========================================
    Print Preparation
    ======================================== */
 window.addEventListener('beforeprint', () => {
@@ -1086,4 +1196,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTOC();
     initRelatedPosts();
     initGallery();
+    initJumpBar();
+    initBlogNav();
+    initBreadcrumbs();
 });
