@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mass Naming & Hyperlink Tools for Excel VBA - Sam Ngo</title>
+    <link rel="stylesheet" href="../assets/css/style.css?v=3">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+    <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="alternate" type="application/rss+xml" title="Sam Ngo RSS Feed" href="../feed.xml">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../tools.html">Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <canvas class="hero-canvas"></canvas>
+        <div class="page-header-inner">
+            <h1>Mass Naming & Hyperlink Tools for Excel VBA</h1>
+            <p>March 2026</p>
+        </div>
+    </div>
+
+    <main>
+        <section class="fade-in overview-prominent">
+            <div class="project-detail-header">
+                <div>
+                    <h2>Overview</h2>
+                </div>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">Named Ranges</span>
+                </div>
+            </div>
+            <p class="summary-text">Named ranges improve formula readability, but creating them one by one is slow. These three macros streamline named range workflows: Mass_Naming creates numbered named ranges in bulk, Cell_Reference_to_Name converts cell references in formulas to their named range equivalents, and Add_Hyperlinks turns formula references into clickable hyperlinks.</p>
+        </section>
+
+        <section class="fade-in">
+            <h2>How They Work</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 12px;"><strong>Mass Naming:</strong> Select a range, enter a prefix and starting index, and each cell gets a named range like Prefix001, Prefix002, etc. Perfect for setting up input cells in financial models</li>
+                <li style="margin-bottom: 12px;"><strong>Cell Reference to Name:</strong> Scans formula cells in the selection and replaces raw cell references (e.g., =Sheet1!B5) with their named range equivalents (e.g., =Revenue), making formulas self-documenting</li>
+                <li style="margin-bottom: 12px;"><strong>Add Hyperlinks:</strong> Converts formula cell references into clickable hyperlinks while preserving the original cell styling and font color, adding a custom screentip for documentation</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>The VBA Code</h2>
+            <pre>Sub Mass_Naming()
+    Dim PrefixInput As String
+    Dim StartIndex As Long
+    Dim cell As Range, i As Integer
+    
+    PrefixInput = InputBox(&quot;Please Enter the Name Prefix:&quot;)
+    StartIndex = InputBox(&quot;Please Enter the Starting Index:&quot;)
+    
+    On Error GoTo Skip
+    If StartIndex &lt; 0 Then GoTo Skip
+    
+    i = StartIndex
+    For Each cell In Selection
+        cell.Name = PrefixInput &amp; Format(i, &quot;000&quot;)
+        i = i + 1
+    Next cell
+    Exit Sub
+Skip:
+    MsgBox &quot;Invalid Inputs!!!&quot;, vbCritical
+End Sub
+
+Sub Cell_Reference_to_Name()
+    Dim Cel As Range, Sct_Rng As Range, Rng As Range
+    
+    If Selection.Count = 1 Then
+        Set Sct_Rng = Selection
+    Else
+        Set Sct_Rng = Selection.SpecialCells(xlCellTypeFormulas)
+    End If
+    
+    For Each Cel In Sct_Rng
+        Dim Str As String: Str = Mid(Cel.Formula, 2, Len(Cel.Formula))
+        Set Rng = Range(Str)
+        On Error Resume Next
+        If Rng.Name Is Nothing Then
+            Cel.ClearContents
+        Else
+            Cel.Formula = &quot;=&quot; &amp; Rng.Name.Name
+        End If
+        On Error GoTo 0
+    Next Cel
+End Sub
+
+Sub Add_Hyperlinks()
+    Dim Cel As Range, Rng As Range
+    Dim Scr_Tip As String
+    Scr_Tip = InputBox(&quot;Please enter the Screentip for all hyperlinks&quot;)
+    
+    If Selection.Count = 1 Then
+        Set Rng = Selection
+    Else
+        Set Rng = Selection.SpecialCells(xlCellTypeFormulas)
+    End If
+
+    For Each Cel In Rng
+        ' Add hyperlink while preserving cell style
+        Dim Cur_Sty As String: Cur_Sty = Cel.Style
+        Dim Cur_Clr As Long: Cur_Clr = Cel.Font.Color
+        ActiveSheet.Hyperlinks.Add Cel, &quot;&quot;, Cel.Formula, Scr_Tip
+        Cel.Style = Cur_Sty
+        Cel.Font.Color = Cur_Clr
+    Next Cel
+End Sub</pre>
+        </section>
+
+        <section class="fade-in">
+            <h2>Final Thoughts</h2>
+            <p class="summary-text">Named ranges are a cornerstone of well-structured Excel models. These tools make it practical to adopt named ranges even in large workbooks where manual creation would be prohibitively time-consuming.</p>
+        </section>
+        <section class="related-posts fade-in"></section>
+    </main>
+
+    <footer>
+        <div class="footer-logo"></div>
+        <div class="footer-tagline">Finance &middot; Data &middot; Visualization</div>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+    <script src="../assets/js/shared.js"></script>
+</body>
+</html>

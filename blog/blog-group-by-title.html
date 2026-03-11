@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-Grouping Rows by Title Hierarchy in VBA - Sam Ngo</title>
+    <link rel="stylesheet" href="../assets/css/style.css?v=3">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+    <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="alternate" type="application/rss+xml" title="Sam Ngo RSS Feed" href="../feed.xml">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../tools.html">Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <canvas class="hero-canvas"></canvas>
+        <div class="page-header-inner">
+            <h1>Auto-Grouping Rows by Title Hierarchy in VBA</h1>
+            <p>March 2026</p>
+        </div>
+    </div>
+
+    <main>
+        <section class="fade-in overview-prominent">
+            <div class="project-detail-header">
+                <div>
+                    <h2>Overview</h2>
+                </div>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">Outlining</span>
+                </div>
+            </div>
+            <p class="summary-text">Manually grouping and ungrouping rows in Excel is tedious, especially in large financial models with multiple heading levels. These VBA macros automate outline grouping based on which column contains each row's title text, supporting 2 to 8 hierarchy levels.</p>
+            <p class="summary-text" style="margin-top: 14px;">The approach is elegant: select a range where column position indicates hierarchy depth (column A = Level 1, column B = Level 2, etc.), and the macro automatically creates the correct outline grouping. Collapse_All and Expand_All provide quick toggle control across all sheets.</p>
+        </section>
+
+        <section class="fade-in">
+            <h2>How It Works</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 12px;"><strong>Title Detection:</strong> The macro checks which column contains text for each row. Column A content marks a top-level heading, column B marks a sub-heading, and so on</li>
+                <li style="margin-bottom: 12px;"><strong>Group Then Ungroup:</strong> First groups all selected rows to maximum depth, then selectively ungroups title rows to their correct level based on column position</li>
+                <li style="margin-bottom: 12px;"><strong>Parent Row Fix:</strong> A second pass corrects parent rows that should not be grouped under their children, ensuring the outline hierarchy is logically consistent</li>
+                <li style="margin-bottom: 12px;"><strong>Collapse/Expand All:</strong> Companion macros that set all sheets to outline level 1 (collapsed) or level 8 (fully expanded) in one click</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>The VBA Code</h2>
+            <pre>Sub Collapse_All()
+    Dim ws As Worksheet
+    For Each ws In ActiveWorkbook.Worksheets
+        On Error Resume Next
+        ws.Outline.ShowLevels RowLevels:=1, ColumnLevels:=1
+    Next ws
+    Range(&quot;A1&quot;).Select
+End Sub
+
+Sub Expand_All()
+    Dim ws As Worksheet
+    For Each ws In ActiveWorkbook.Worksheets
+        On Error Resume Next
+        ws.Outline.ShowLevels RowLevels:=8, ColumnLevels:=8
+    Next ws
+    Range(&quot;A1&quot;).Select
+End Sub
+
+Sub Group_Title_3Level()
+    Dim i As Integer, j As Integer, k As Integer
+    Dim Rng As Range, cell As Range
+
+    ' Group all rows in selection to max depth
+    For i = 1 To Selection.Columns.Count
+        Selection.Rows.Group
+    Next i
+    Set Rng = Selection.Resize(Selection.Rows.Count, 1)
+
+    ' Ungroup rows based on title hierarchy
+    For Each cell In Rng
+        If Not IsEmpty(cell.Value) Then
+            ' Level 1: content in first column
+            j = Selection.Columns.Count
+            cell.Rows.Ungroup
+        ElseIf Not IsEmpty(cell.Offset(0, 1).Value) Then
+            ' Level 2: content in second column
+            j = Selection.Columns.Count - 1
+            cell.Rows.Ungroup
+        End If
+        For k = 1 To j - 1
+            cell.Rows.Ungroup
+        Next k
+    Next cell
+    
+    ' Fix parent rows that shouldn't be grouped
+    For Each cell In Rng
+        If cell.EntireRow.OutlineLevel = 3 Then
+            If Not IsEmpty(cell.Offset(1, 0).Value) Or _
+               Not IsEmpty(cell.Offset(2, 0).Value) Then
+                cell.Rows.Ungroup
+            End If
+        End If
+    Next cell
+End Sub</pre>
+        </section>
+
+        <section class="fade-in">
+            <h2>Final Thoughts</h2>
+            <p class="summary-text">This tool is invaluable for financial models and reports where section headings follow a column-based indentation pattern. Instead of manually grouping hundreds of rows, select the range and let the macro build the entire outline hierarchy in seconds.</p>
+        </section>
+        <section class="related-posts fade-in"></section>
+    </main>
+
+    <footer>
+        <div class="footer-logo"></div>
+        <div class="footer-tagline">Finance &middot; Data &middot; Visualization</div>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+    <script src="../assets/js/shared.js"></script>
+</body>
+</html>

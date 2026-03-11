@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automating Sheet Setup in Excel with VBA - Sam Ngo</title>
+    <link rel="stylesheet" href="../assets/css/style.css?v=3">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+    <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="alternate" type="application/rss+xml" title="Sam Ngo RSS Feed" href="../feed.xml">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../tools.html">Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <canvas class="hero-canvas"></canvas>
+        <div class="page-header-inner">
+            <h1>Automating Sheet Setup in Excel with VBA</h1>
+            <p>September 25, 2024</p>
+        </div>
+    </div>
+
+    <main>
+        <section class="fade-in overview-prominent">
+            <div class="project-detail-header">
+                <div>
+                    <h2>Overview</h2>
+                </div>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">Automation</span>
+                </div>
+            </div>
+            <p class="summary-text">In professional services, attention to detail is key, and something as simple as setting each sheet to start at cell A1 with the correct scroll and zoom levels can make a big difference in the clarity and user-friendliness of your workbooks. Whether you're working on a financial model, a report, or any complex dataset, making sure every sheet is ready to go can save time and ensure consistency.</p>
+            <p class="summary-text" style="margin-top: 14px;">That's why I've developed a VBA macro to automatically reset all visible, hidden, and very hidden sheets in an Excel workbook, ensuring they all start at cell A1 and are properly zoomed for easy access.</p>
+        </section>
+
+        <section class="fade-in">
+            <h2>Key Benefits</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 12px;"><strong>Professional Presentation:</strong> Ensures all worksheets start at the top (A1), so there's no unnecessary scrolling, which can make a big difference in how clients and colleagues perceive your work.</li>
+                <li style="margin-bottom: 12px;"><strong>Efficiency:</strong> Automates the tedious task of resetting each sheet manually, saving you time.</li>
+                <li style="margin-bottom: 12px;"><strong>Consistency:</strong> Guarantees that all sheets &mdash; visible, hidden, or very hidden &mdash; are treated the same, creating a consistent user experience.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>How It Works</h2>
+            <p class="summary-text" style="margin-bottom: 14px;">This macro loops through every worksheet in the active workbook and ensures the following actions are performed for both visible and hidden sheets:</p>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 12px;"><strong>Top-left Reset:</strong> Each worksheet is reset to cell A1, ensuring the scroll is positioned at the top of the page.</li>
+                <li style="margin-bottom: 12px;"><strong>Zoom Set to 100%:</strong> Zoom is reset to 100% for all sheets.</li>
+                <li style="margin-bottom: 12px;"><strong>Hidden Sheets Handled:</strong> Hidden or very hidden sheets are temporarily made visible to apply these changes, then reverted to their original state.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>The VBA Code</h2>
+            <pre>Sub Auto_Set_Sheet()
+    Dim ws As Worksheet
+
+    For Each ws In ActiveWorkbook.Worksheets
+
+        If ws.Visible = xlSheetVisible Then
+            ActiveWindow.ScrollRow = 1
+            ActiveWindow.ScrollColumn = 1
+            ws.Parent.Windows(1).Zoom = 100
+            Application.GoTo ws.Range("A1"), True
+
+        ElseIf ws.Visible = xlSheetHidden Then
+            ws.Visible = xlSheetVisible
+            ActiveWindow.ScrollRow = 1
+            ActiveWindow.ScrollColumn = 1
+            ws.Parent.Windows(1).Zoom = 100
+            Application.GoTo ws.Range("A1"), True
+            ws.Visible = xlSheetHidden
+
+        ElseIf ws.Visible = xlSheetVeryHidden Then
+            ws.Visible = xlSheetVisible
+            ActiveWindow.ScrollRow = 1
+            ActiveWindow.ScrollColumn = 1
+            ws.Parent.Windows(1).Zoom = 100
+            Application.GoTo ws.Range("A1"), True
+            ws.Visible = xlSheetVeryHidden
+        End If
+    Next ws
+
+    Sheets(1).Activate
+    Range("A1").Select
+End Sub</pre>
+        </section>
+
+        <section class="fade-in">
+            <h2>Why Is This Important for Professional Service?</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 12px;"><strong>First Impressions:</strong> Starting each sheet at the top (A1) provides a clean, professional experience for anyone opening the workbook.</li>
+                <li style="margin-bottom: 12px;"><strong>Consistency:</strong> Ensures that no matter how large or complex your workbook, every sheet will be consistent in scroll position and zoom level.</li>
+                <li style="margin-bottom: 12px;"><strong>Automation:</strong> Saves you the hassle of manually resetting each sheet, freeing up time to focus on higher-value tasks.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>Final Thoughts</h2>
+            <p class="summary-text">With this simple yet powerful VBA tool, you can enhance the professionalism of your Excel workbooks and improve the user experience. Whether you're delivering financial reports, complex analyses, or multi-sheet models, this macro will streamline your workflow.</p>
+        </section>
+        <section class="related-posts fade-in"></section>
+    </main>
+
+    <footer>
+        <div class="footer-logo"></div>
+        <div class="footer-tagline">Finance &middot; Data &middot; Visualization</div>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+    <script src="../assets/js/shared.js"></script>
+</body>
+</html>

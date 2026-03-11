@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum to Target - Sam Ngo</title>
+    <link rel="stylesheet" href="../assets/css/style.css?v=3">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+    <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="alternate" type="application/rss+xml" title="Sam Ngo RSS Feed" href="../feed.xml">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../tools.html">Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <canvas class="hero-canvas"></canvas>
+        <div class="page-header-inner">
+            <h1>Sum to Target</h1>
+            <p>Finding all subsets that sum to a target value using pure Excel formulas</p>
+        </div>
+    </div>
+
+    <main class="wide">
+        <section class="fade-in overview-prominent">
+            <div class="project-detail-header">
+                <div><h2>Overview</h2></div>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">Formulas</span>
+                    <span class="card-tag">Algorithms</span>
+                    <span class="card-tag">Dynamic Arrays</span>
+                </div>
+            </div>
+            <p class="summary-text">The <strong>Subset Sum Problem</strong> is a classic computer science challenge: given a list of numbers and a target, find all subsets that sum exactly to the target. This workbook solves it entirely with Excel formulas &mdash; no VBA required. It demonstrates three approaches of increasing sophistication, from a step-by-step breakdown to a single-cell formula.</p>
+            <p class="summary-text" style="margin-top: 14px;"><a href="../samples/Sum%20to%20Target.xlsx" download>Download the Excel file (.xlsx)</a></p>
+            <div class="demo-container">
+                <iframe src="https://1drv.ms/x/c/5c2215c24dbec709/IQSpcBwBmNNmSa1BznLyVjzzAZ7es-UMqLk5SeKlHoSPm44" width="100%" height="346" frameborder="0" scrolling="no" title="Sum to Target Excel Online"></iframe>
+            </div>
+        </section>
+
+        <section class="fade-in section-alt">
+            <h2>Three Approaches</h2>
+            <div class="experience-item">
+                <h3>Sheet 1: Step-by-Step Breakdown</h3>
+                <p class="meta">Uses <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">DEC2BIN</code> + <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">SEQUENCE</code> to generate all 2<sup>n</sup>-1 binary combinations</p>
+                <p style="color: var(--text-secondary); margin-top: 6px;">Each binary string represents a subset (1 = include, 0 = exclude). The formula extracts individual digits with <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">MID</code>, multiplies by the number list using <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">MMULT</code>, and filters for subsets matching the target.</p>
+            </div>
+            <div class="experience-item">
+                <h3>Sheet 2: Single Formula (275 characters)</h3>
+                <p class="meta">The entire algorithm condensed into one cell using <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">FILTER</code>, <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">BASE</code>, and <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">SEQUENCE</code></p>
+                <p style="color: var(--text-secondary); margin-top: 6px;">Replaces <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">DEC2BIN</code> with <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">BASE</code> to handle larger number lists, and combines all steps into a single dynamic array formula that spills the results.</p>
+            </div>
+            <div class="experience-item">
+                <h3>Sheet 3: LET Formula (444 characters)</h3>
+                <p class="meta">Readable version using <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">LET</code> for named intermediate variables</p>
+                <p style="color: var(--text-secondary); margin-top: 6px;">The same algorithm wrapped in <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">LET</code> with descriptive variable names, making the logic auditable and maintainable. Outputs all matching subsets showing which numbers are included.</p>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>Key Formula Techniques</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 8px;"><strong>Binary Enumeration:</strong> <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">SEQUENCE(2^n-1)</code> generates all possible subset indices; <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">BASE()</code> or <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">DEC2BIN()</code> converts to binary inclusion masks.</li>
+                <li style="margin-bottom: 8px;"><strong>MMULT for Dot Product:</strong> Multiplies the binary mask by the number list to compute each subset's sum in one operation.</li>
+                <li style="margin-bottom: 8px;"><strong>FILTER for Results:</strong> Filters the binary masks to only those whose dot product equals the target.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>When to Use This</h2>
+            <p class="summary-text">This pattern solves real business problems: reconciling invoices that should sum to a specific payment, finding combinations of line items that match a budget allocation, or identifying which transactions compose a bank statement total. It's also an excellent demonstration of Excel's dynamic array capabilities for algorithm implementation.</p>
+        </section>
+        <section class="related-posts fade-in"></section>
+    </main>
+
+    <footer>
+        <div class="footer-logo"></div>
+        <div class="footer-tagline">Finance &middot; Data &middot; Visualization</div>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+    <script src="../assets/js/shared.js"></script>
+</body>
+</html>

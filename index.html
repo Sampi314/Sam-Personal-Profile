@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sam Ngo - Senior Analyst at SumProduct</title>
-    <link rel="stylesheet" href="style.css?v=3">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="assets/css/style.css?v=3">
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
     <link rel="alternate" type="application/rss+xml" title="Sam Ngo RSS Feed" href="feed.xml">
@@ -36,7 +36,7 @@
                 <p class="headline hero-reveal">Finance professional specializing in financial modeling, data transformation, and visualization at SumProduct.</p>
                 <p class="location hero-reveal">Sydney, NSW &mdash; Australia</p>
                 <div class="header-actions hero-reveal">
-                    <a href="Sam_Ngo_CV.pdf" download class="btn btn-primary magnetic-btn">Download CV</a>
+                    <a href="assets/Sam_Ngo_CV.pdf" download class="btn btn-primary magnetic-btn">Download CV</a>
                     <button onclick="window.print()" class="btn btn-outline magnetic-btn print-cv-btn">Print CV</button>
                     <a href="https://github.com/Sampi314" target="_blank" class="btn btn-outline magnetic-btn">GitHub</a>
                     <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank" class="btn btn-outline magnetic-btn">LinkedIn</a>
@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="hero-photo hero-reveal">
-                <img src="profile.jpg" alt="Sam Ngo" class="profile-pic float-gentle">
+                <img src="assets/img/profile.jpg" alt="Sam Ngo" class="profile-pic float-gentle">
             </div>
         </div>
     </header>
@@ -63,7 +63,7 @@
         <section class="fade-in section-alt">
             <h2>Featured Work</h2>
             <div class="featured-work-grid">
-                <a href="project-excel.html" class="featured-card" data-card-theme="excel">
+                <a href="projects/project-excel.html" class="featured-card" data-card-theme="excel">
                     <div class="featured-card-thumb" data-featured-theme="excel"></div>
                     <div class="featured-card-body">
                         <h3>Matrix Manipulation: 8 Formula Approaches</h3>
@@ -76,7 +76,7 @@
                     </div>
                 </a>
 
-                <a href="project-sum-to-target.html" class="featured-card" data-card-theme="algorithms">
+                <a href="projects/project-sum-to-target.html" class="featured-card" data-card-theme="algorithms">
                     <div class="featured-card-thumb" data-featured-theme="algorithms"></div>
                     <div class="featured-card-body">
                         <h3>Solving the Subset Sum Problem with Excel</h3>
@@ -102,13 +102,15 @@
                 <p class="meta">SumProduct &middot; Sydney, New South Wales, Australia</p>
                 <p class="meta">Oct 2023 &ndash; Present</p>
                 <ul>
-                    <li>Provide consulting solutions to financial and accounting challenges, including developing financial models and data analysis tools in Excel.</li>
-                    <li>Create dynamic Power BI dashboards and reports.</li>
-                    <li>Build automation models using Excel VBA, VB.NET, Power Query and Power BI.</li>
-                    <li>Assist in model audits.</li>
-                    <li>Manage projects and train staff in data analysis and automation tools.</li>
-                    <li>Evaluate and integrate AI platforms (ChatGPT, Claude, Gemini, Grok) into team workflows, and guide colleagues in setting up Claude Code CLI for local development.</li>
-                    <li>Write blogs for SumProduct on Power BI, Power Pivot, and Excel Challenge series.</li>
+                    <li>Develop financial models and data analysis solutions in Excel for clients across infrastructure, energy, real estate, and government sectors.</li>
+                    <li>Design and deliver dynamic Power BI dashboards and reports, including complex matrix visuals with dynamic Actual/Budget/Variance analysis.</li>
+                    <li>Build automation solutions using Excel VBA, Python (openpyxl, pywin32), VB.NET, Power Query, and Power BI.</li>
+                    <li>Develop a multi-agent Excel model audit framework &mdash; covering formula logic, error detection, formatting consistency, text quality, efficiency, hyperlinks, VBA, Power Query, and dependency mapping &mdash; significantly reducing manual review time.</li>
+                    <li>Productise AI tooling for the firm using Claude Code CLI and custom skill architecture, building reusable internal tools that automate core consulting deliverables.</li>
+                    <li>Tools built include a 7-phase financial modelling suite, a multi-agent Excel audit suite, an editorial writing auditor, a DAX blog generator, and a book authoring assistant.</li>
+                    <li>Evaluate and integrate AI platforms (Claude, ChatGPT, Gemini) into team workflows, guiding colleagues in adopting AI tools for day-to-day consulting tasks.</li>
+                    <li>Author published articles for SumProduct on DAX functions, Power BI, and Excel challenge series.</li>
+                    <li>Manage project delivery and train staff in data analysis, automation, and AI tools.</li>
                 </ul>
             </div>
 
@@ -275,7 +277,7 @@
 
     <button class="back-to-top" aria-label="Back to top">&uarr;</button>
 
-    <script src="shared.js"></script>
+    <script src="assets/js/shared.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('[data-featured-theme]').forEach(el => {
