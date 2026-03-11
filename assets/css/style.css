@@ -2210,7 +2210,13 @@ section.overview-prominent .project-detail-header h2 {
         margin-bottom: 8px !important;
     }
 
-    /* Allow page breaks inside sections but avoid breaking individual items */
+    /* Experience section starts on page 2 */
+    #experience {
+        break-before: page;
+        page-break-before: always;
+    }
+
+    /* Avoid breaking individual items across pages */
     .experience-item,
     .education-item {
         break-inside: avoid;
