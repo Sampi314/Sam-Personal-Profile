@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Removing Same-Sheet References with VBA - Sam Ngo</title>
+    <link rel="stylesheet" href="../assets/css/style.css?v=3">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+    <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="alternate" type="application/rss+xml" title="Sam Ngo RSS Feed" href="../feed.xml">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../tools.html">Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <canvas class="hero-canvas"></canvas>
+        <div class="page-header-inner">
+            <h1>Streamlining Excel Formulas: Removing Same-Sheet References with VBA</h1>
+            <p>September 18, 2024</p>
+        </div>
+    </div>
+
+    <main>
+        <section class="fade-in overview-prominent">
+            <div class="project-detail-header">
+                <div>
+                    <h2>Overview</h2>
+                </div>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">Automation</span>
+                </div>
+            </div>
+            <p class="summary-text">As an Excel power user or developer, you've likely encountered situations where formulas unnecessarily reference the active sheet itself. These internal references &mdash; where the formula refers to the current sheet using the sheet name followed by an exclamation mark (e.g., <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">Sheet1!A1</code>) &mdash; are redundant and can clutter your workbook.</p>
+            <p class="summary-text" style="margin-top: 14px;">Removing them can make your formulas cleaner and easier to manage. But how can you do this efficiently, especially when there are hundreds or thousands of such formulas? The answer lies in a simple but effective VBA macro.</p>
+        </section>
+
+        <section class="fade-in">
+            <h2>Why Remove Same-Sheet References?</h2>
+            <p class="summary-text" style="margin-bottom: 14px;">When Excel creates formulas across different sheets, it uses the sheet name followed by an exclamation mark to indicate where the referenced cells are located. However, when the formula refers to the same sheet it's on, these references are unnecessary. For example, these two formulas are identical:</p>
+            <pre data-lang="plaintext">=Sheet1!A1 + Sheet1!B1
+=A1 + B1</pre>
+            <p class="summary-text" style="margin-top: 14px;">Removing the <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">Sheet1!</code> reference simplifies the formula without changing its functionality.</p>
+        </section>
+
+        <section class="fade-in">
+            <h2>Handling Sheet Names with and without Spaces</h2>
+            <p class="summary-text">Before diving into the VBA solution, there's a key detail to be aware of:</p>
+            <ul style="padding-left: 20px; color: var(--text-secondary); margin-top: 12px;">
+                <li style="margin-bottom: 12px;">If a sheet name <strong>has spaces</strong>, Excel wraps the name in single quotes: <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">'Sheet 1'!A1</code></li>
+                <li style="margin-bottom: 12px;">If a sheet name <strong>doesn't have spaces</strong>, only the exclamation mark is used: <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">Sheet1!A1</code></li>
+            </ul>
+            <p class="summary-text" style="margin-top: 12px;">This nuance needs to be accounted for when building the VBA solution.</p>
+        </section>
+
+        <section class="fade-in">
+            <h2>The VBA Solution</h2>
+            <p class="summary-text" style="margin-bottom: 16px;">The following VBA macro scans through all the formulas in the active worksheet and removes references to the current sheet, regardless of whether the sheet name has spaces or not:</p>
+            <pre>Sub RemoveSameSheetReferences()
+    Dim sht     As Worksheet
+    Dim ShtName As String
+
+    Set sht = ActiveSheet
+
+    ShtName = "'" &amp; sht.Name &amp; "'!"
+    sht.Cells.Replace What:=ShtName, Replacement:="", _
+                      LookAt:=xlPart, SearchOrder:=xlByRows, _
+                      matchCase:=False, SearchFormat:=False, _
+                      ReplaceFormat:=False, _
+                      FormulaVersion:=xlReplaceFormula2
+
+    ShtName = sht.Name &amp; "!"
+    sht.Cells.Replace What:=ShtName, Replacement:="", _
+                      LookAt:=xlPart, SearchOrder:=xlByRows, _
+                      matchCase:=False, SearchFormat:=False, _
+                      ReplaceFormat:=False, _
+                      FormulaVersion:=xlReplaceFormula2
+End Sub</pre>
+        </section>
+
+        <section class="fade-in">
+            <h2>How It Works</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 12px;">The macro first identifies the active sheet using the <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">ActiveSheet</code> property.</li>
+                <li style="margin-bottom: 12px;">It then checks the name of the sheet and formats the name accordingly (with or without single quotes).</li>
+                <li style="margin-bottom: 12px;">The <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">Replace</code> function is used twice &mdash; once for the case with single quotes and once without &mdash; to ensure that both types of references are removed.</li>
+                <li style="margin-bottom: 12px;">After this, all redundant same-sheet references in formulas are cleaned up.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>When to Use This Macro</h2>
+            <p class="summary-text" style="margin-bottom: 14px;">This macro is useful when working with large, complex workbooks where you need to streamline formulas &mdash; financial models, multi-sheet reports, or data analysis.</p>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 12px;"><strong>Efficiency:</strong> Automatically cleans up your formulas, saving time from manual adjustments.</li>
+                <li style="margin-bottom: 12px;"><strong>Readability:</strong> Makes your formulas shorter and easier to understand.</li>
+                <li style="margin-bottom: 12px;"><strong>Maintainability:</strong> Reduces clutter, making future edits and troubleshooting easier.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>Final Thoughts</h2>
+            <p class="summary-text">With a little VBA knowledge, you can save a lot of time by automating the cleanup of same-sheet references in your Excel formulas. This simple macro ensures that your formulas are as clean and efficient as possible, reducing redundancy and improving the overall clarity of your workbooks.</p>
+            <p class="summary-text" style="margin-top: 14px;">Try it out in your own workbooks, and feel free to adapt the code to suit your specific needs. If you have any questions or want to learn more about VBA for Excel automation, feel free to reach out!</p>
+        </section>
+        <section class="related-posts fade-in"></section>
+    </main>
+
+    <footer>
+        <div class="footer-logo"></div>
+        <div class="footer-tagline">Finance &middot; Data &middot; Visualization</div>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+    <script src="../assets/js/shared.js"></script>
+</body>
+</html>

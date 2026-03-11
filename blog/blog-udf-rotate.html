@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fn_ROTATE: Rotate a 2D Range 90 Degrees - Sam Ngo</title>
+    <link rel="stylesheet" href="../assets/css/style.css?v=3">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+    <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="alternate" type="application/rss+xml" title="Sam Ngo RSS Feed" href="../feed.xml">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../tools.html">Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <canvas class="hero-canvas"></canvas>
+        <div class="page-header-inner">
+            <h1>fn_ROTATE: Rotate a 2D Range 90 Degrees</h1>
+            <p>March 2026</p>
+        </div>
+    </div>
+
+    <main>
+        <section class="fade-in overview-prominent">
+            <div class="project-detail-header">
+                <div><h2>Overview</h2></div>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">UDF</span>
+                </div>
+            </div>
+            <p class="summary-text">Rotates a 2D range 90 degrees clockwise, with an optional count parameter for 180 or 270 degree rotations. Unlike TRANSPOSE, this performs a true geometric rotation of the data matrix.</p>
+        </section>
+
+        <section class="fade-in">
+            <h2>How It Works</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 8px;"><strong>Arr:</strong> The 2D range to rotate.</li>
+                <li style="margin-bottom: 8px;"><strong>times (optional):</strong> Number of 90-degree clockwise rotations (default 1). Uses <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">Mod 4</code> so values &gt; 4 wrap around.</li>
+                <li style="margin-bottom: 8px;">Remaps <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">Rtt(Row, Col)</code> &rarr; <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">Tmp(Col, Row_Cnt - Row + 1)</code> for each rotation.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>Usage</h2>
+            <pre data-lang="plaintext">=fn_ROTATE(A1:D3)       ' Rotate 90° clockwise
+=fn_ROTATE(A1:D3, 2)    ' Rotate 180°
+=fn_ROTATE(A1:D3, 3)    ' Rotate 270° (90° counter-clockwise)</pre>
+        </section>
+
+        <section class="fade-in">
+            <h2>The VBA Code</h2>
+            <pre>Function fn_ROTATE(Arr As Range, Optional times As Integer = 1) As Variant
+    ' Rotates a 2D range 90 degrees clockwise, repeated 'times' times
+    Dim Rtt As Variant, Tmp As Variant
+    Dim Row_Cnt As Long, Col_Cnt As Long, Row As Long, Col As Long, Idx As Long
+    Rtt = Arr.Value
+    times = times Mod 4
+    For Idx = 1 To times
+        Row_Cnt = UBound(Rtt, 1): Col_Cnt = UBound(Rtt, 2)
+        ReDim Tmp(1 To Col_Cnt, 1 To Row_Cnt)
+        For Row = 1 To Row_Cnt
+            For Col = 1 To Col_Cnt
+                Tmp(Col, Row_Cnt - Row + 1) = Rtt(Row, Col)
+            Next Col
+        Next Row
+        Rtt = Tmp
+    Next Idx
+    fn_ROTATE = Rtt
+End Function</pre>
+        </section>
+        <section class="related-posts fade-in"></section>
+    </main>
+
+    <footer>
+        <div class="footer-logo"></div>
+        <div class="footer-tagline">Finance &middot; Data &middot; Visualization</div>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">&uarr;</button>
+    <script src="../assets/js/shared.js"></script>
+</body>
+</html>

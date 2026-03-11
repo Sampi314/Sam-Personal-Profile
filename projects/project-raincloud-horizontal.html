@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizontal RainCloud Chart - Sam Ngo</title>
+    <link rel="stylesheet" href="../assets/css/style.css?v=3">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+    <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="alternate" type="application/rss+xml" title="Sam Ngo RSS Feed" href="../feed.xml">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../tools.html">Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <canvas class="hero-canvas"></canvas>
+        <div class="page-header-inner">
+            <h1>Horizontal RainCloud Chart</h1>
+            <p>Distribution visualisation combining density plots, box plots, and scatter plots in Excel</p>
+        </div>
+    </div>
+
+    <main class="wide">
+        <section class="fade-in overview-prominent">
+            <div class="project-detail-header">
+                <div><h2>Overview</h2></div>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">Charting</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">Statistics</span>
+                </div>
+            </div>
+            <p class="summary-text">RainCloud charts are a modern alternative to box plots that show the <em>full distribution</em> of data without hiding the underlying shape. This workbook builds horizontal RainCloud charts entirely in Excel using <strong>34 embedded chart objects</strong>, VBA macros, and formula-driven data scaffolding. It includes both single-cloud and three-cloud comparison layouts.</p>
+            <p class="summary-text" style="margin-top: 14px;"><a href="../samples/SN%20Horizontal%20RainCloud%20Chart.xlsm" download>Download the Excel file (.xlsm)</a></p>
+            <div class="demo-container">
+                <iframe src="https://1drv.ms/x/c/5c2215c24dbec709/IQT4_LstLEKGRrNi09WGXKWhAUF6lEU612K2SQb_sIW5zE8" width="100%" height="346" frameborder="0" scrolling="no" title="Horizontal RainCloud Chart Excel Online"></iframe>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>Chart Components</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 8px;"><strong>Cloud (Density Curve):</strong> The "rain cloud" at the top shows the probability density &mdash; built from frequency bins, upper/lower bounds, and a scale-down factor to control the curve height.</li>
+                <li style="margin-bottom: 8px;"><strong>Box Plot (Stacked Bar):</strong> A stacked bar chart shows the interquartile range (25th, 25&ndash;50th, 50&ndash;75th percentiles) with error bars for whiskers.</li>
+                <li style="margin-bottom: 8px;"><strong>Rain Drops (Scatter):</strong> Individual data points plotted as a jittered scatter below the box, so every observation is visible.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>Sheets Included</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 8px;"><strong>Horizontal Raincloud Bar Cloud:</strong> Single-cloud layout showing one distribution with bar-based cloud rendering.</li>
+                <li style="margin-bottom: 8px;"><strong>Horz Raincloud True Cloud:</strong> Single-cloud layout using a true density curve (area chart) instead of bars.</li>
+                <li style="margin-bottom: 8px;"><strong>Horizontal Raincloud - 3 Clouds:</strong> Side-by-side comparison of three distributions with sorted data, percentile calculations, and stacked bar configurations for each cloud.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>When to Use This</h2>
+            <p class="summary-text">RainCloud charts excel at comparing distributions across groups &mdash; salary ranges by department, test scores by cohort, or financial returns by strategy. They show everything a box plot does, plus the actual distribution shape and individual data points. This is especially valuable in presentations where stakeholders want to see the "why" behind summary statistics.</p>
+        </section>
+        <section class="related-posts fade-in"></section>
+    </main>
+
+    <footer>
+        <div class="footer-logo"></div>
+        <div class="footer-tagline">Finance &middot; Data &middot; Visualization</div>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+    <script src="../assets/js/shared.js"></script>
+</body>
+</html>

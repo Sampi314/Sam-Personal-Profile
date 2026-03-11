@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fn_Is_Hyperlink: Detect Hyperlinks in Cells - Sam Ngo</title>
+    <link rel="stylesheet" href="../assets/css/style.css?v=3">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+    <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="alternate" type="application/rss+xml" title="Sam Ngo RSS Feed" href="../feed.xml">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../tools.html">Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <canvas class="hero-canvas"></canvas>
+        <div class="page-header-inner">
+            <h1>fn_Is_Hyperlink: Detect Hyperlinks in Cells</h1>
+            <p>March 2026</p>
+        </div>
+    </div>
+
+    <main>
+        <section class="fade-in overview-prominent">
+            <div class="project-detail-header">
+                <div><h2>Overview</h2></div>
+                <div class="card-tags">
+                    <span class="card-tag">Excel</span>
+                    <span class="card-tag">VBA</span>
+                    <span class="card-tag">UDF</span>
+                </div>
+            </div>
+            <p class="summary-text">A custom worksheet function that returns TRUE/FALSE indicating whether each cell in a range contains a hyperlink. Useful for auditing workbooks and finding cells with embedded links.</p>
+        </section>
+
+        <section class="fade-in">
+            <h2>How It Works</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 8px;"><strong>Hyperlink_Range:</strong> The range of cells to check.</li>
+                <li style="margin-bottom: 8px;">Tests <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">.Hyperlinks.Count &gt; 0</code> for each cell.</li>
+                <li style="margin-bottom: 8px;">Returns a spilled array matching the shape of the input range.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>Usage</h2>
+            <pre data-lang="plaintext">=fn_Is_Hyperlink(A1:A100)</pre>
+            <p class="summary-text" style="margin-top: 14px;">Use with SUMPRODUCT to count hyperlinks: <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">=SUMPRODUCT(--fn_Is_Hyperlink(A1:A100))</code></p>
+        </section>
+
+        <section class="fade-in">
+            <h2>The VBA Code</h2>
+            <pre>Function fn_Is_Hyperlink(Hyperlink_Range As Range) As Variant
+    Dim Arr() As Variant
+    ReDim Arr(1 To Hyperlink_Range.Rows.Count, 1 To Hyperlink_Range.Columns.Count)
+    Dim r As Long, c As Long
+    For r = 1 To Hyperlink_Range.Rows.Count
+        For c = 1 To Hyperlink_Range.Columns.Count
+            Arr(r, c) = (Hyperlink_Range(r, c).Hyperlinks.Count > 0)
+        Next c
+    Next r
+    fn_Is_Hyperlink = Arr
+End Function</pre>
+        </section>
+        <section class="related-posts fade-in"></section>
+    </main>
+
+    <footer>
+        <div class="footer-logo"></div>
+        <div class="footer-tagline">Finance &middot; Data &middot; Visualization</div>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">&uarr;</button>
+    <script src="../assets/js/shared.js"></script>
+</body>
+</html>

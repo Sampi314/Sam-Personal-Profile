@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Query ETL Pipeline - Sam Ngo</title>
+    <link rel="stylesheet" href="../assets/css/style.css?v=3">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+    <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="alternate" type="application/rss+xml" title="Sam Ngo RSS Feed" href="../feed.xml">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">Sam Ngo</a>
+            <button class="nav-hamburger" aria-label="Toggle menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../tools.html">Tools</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">&#9790;</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <canvas class="hero-canvas"></canvas>
+        <div class="page-header-inner">
+            <h1>Power Query ETL Pipeline</h1>
+            <p>Step-by-step data transformation demonstration</p>
+        </div>
+    </div>
+
+    <main class="wide">
+        <section class="fade-in overview-prominent">
+            <div class="project-detail-header">
+                <div>
+                    <h2>Overview</h2>
+                </div>
+                <div class="card-tags">
+                    <span class="card-tag">Power Query</span>
+                    <span class="card-tag">M Code</span>
+                    <span class="card-tag">ETL</span>
+                </div>
+            </div>
+            <p class="summary-text">This demo walks through a complete ETL (Extract, Transform, Load) pipeline built in Power Query. Starting from raw CSV data with missing values and inconsistent formatting, each step progressively cleans, reshapes, and enriches the data until it's ready for analysis. The M code is shown alongside the data preview at every stage.</p>
+        </section>
+
+        <section class="fade-in">
+            <h2>Pipeline Steps</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 8px;"><strong>1. Source:</strong> Load raw CSV data and inspect for quality issues (nulls, wrong types).</li>
+                <li style="margin-bottom: 8px;"><strong>2. Remove Nulls:</strong> Filter out incomplete records using <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">Table.SelectRows</code>.</li>
+                <li style="margin-bottom: 8px;"><strong>3. Split Column:</strong> Break "Name" into "First Name" and "Last Name" with <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; color: var(--accent);">Splitter.SplitTextByDelimiter</code>.</li>
+                <li style="margin-bottom: 8px;"><strong>4. Change Type:</strong> Convert text to proper types (numbers, dates) and replace nulls with defaults.</li>
+                <li style="margin-bottom: 8px;"><strong>5. Add Column:</strong> Create a calculated "Revenue Band" column using conditional M code logic.</li>
+            </ul>
+        </section>
+
+        <section class="fade-in">
+            <h2>Interactive Demo</h2>
+            <p class="summary-text" style="margin-bottom: 16px;">Click each step in the pipeline to see the data and M code at that stage. Changed cells are highlighted in yellow, removed values in red.</p>
+            <div class="demo-container">
+                <iframe src="demo-powerquery.html" title="Power Query ETL Demo"></iframe>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <h2>When to Use This</h2>
+            <p class="summary-text">Power Query is the go-to tool for repeatable data transformations in Excel and Power BI. Unlike manual data cleaning, every step is recorded as M code and re-runs automatically when the source data refreshes. I use Power Query extensively at SumProduct to standardize data from multiple sources, clean client-provided datasets, and build robust data pipelines that feed into financial models and reports.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-logo"></div>
+        <div class="footer-tagline">Finance &middot; Data &middot; Visualization</div>
+        <div class="footer-links">
+            <a href="mailto:nkhoihue@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/nkhoihue/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Sampi314" target="_blank">GitHub</a>
+        </div>
+        &copy; 2026 Sam Ngo
+    </footer>
+
+    <button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+    <script src="../assets/js/shared.js"></script>
+</body>
+</html>

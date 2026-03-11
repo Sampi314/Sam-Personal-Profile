@@ -10,255 +10,255 @@
 
     <item>
         <title>fn_Sum_by_Color: Sum Cells by Fill Color</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-sum-by-color.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-udf-sum-by-color.html</link>
         <description>Sum cells whose background color matches a reference cell. Ideal for color-coded financial models.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-sum-by-color.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-udf-sum-by-color.html</guid>
     </item>
     <item>
         <title>fn_Range_Has_Notes: Detect Cell Comments</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-range-has-notes.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-udf-range-has-notes.html</link>
         <description>Returns a TRUE/FALSE array indicating which cells have legacy comments attached.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-range-has-notes.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-udf-range-has-notes.html</guid>
     </item>
     <item>
         <title>fn_Extract_Comments_Thread: Export Threaded Comments</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-extract-comments.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-udf-extract-comments.html</link>
         <description>Extract all threaded comments and replies into a structured table with Cell, Author, Date, and Text columns.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-extract-comments.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-udf-extract-comments.html</guid>
     </item>
     <item>
         <title>fn_NMATCH: Find the Nth Occurrence</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-nmatch.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-udf-nmatch.html</link>
         <description>Like MATCH but finds the Nth occurrence of a value in a range.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-nmatch.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-udf-nmatch.html</guid>
     </item>
     <item>
         <title>fn_ROTATE: Rotate a 2D Range 90 Degrees</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-rotate.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-udf-rotate.html</link>
         <description>Rotate any 2D range clockwise with an optional count for 180 or 270 degree rotations.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-rotate.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-udf-rotate.html</guid>
     </item>
     <item>
         <title>fn_Does_File_Path_Exist: Check File Paths from Cells</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-file-path-exist.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-udf-file-path-exist.html</link>
         <description>Returns TRUE/FALSE for each cell, checking whether the file path actually exists on disk.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-file-path-exist.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-udf-file-path-exist.html</guid>
     </item>
     <item>
         <title>fn_Is_Hyperlink: Detect Hyperlinks in Cells</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-is-hyperlink.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-udf-is-hyperlink.html</link>
         <description>Returns TRUE/FALSE indicating whether each cell contains a hyperlink.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-udf-is-hyperlink.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-udf-is-hyperlink.html</guid>
     </item>
     <item>
         <title>Workbook Statistics Report Generator</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-workbook-stats.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-workbook-stats.html</link>
         <description>Generate comprehensive stats: formula density, dynamic arrays, unique formulae, and cross-sheet dependencies.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-workbook-stats.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-workbook-stats.html</guid>
     </item>
     <item>
         <title>Dynamic Array Spill Resolver</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-spill-resolver.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-spill-resolver.html</link>
         <description>Automatically detect and fix #SPILL! errors by inserting rows and columns where dynamic arrays need space.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-spill-resolver.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-spill-resolver.html</guid>
     </item>
     <item>
         <title>Audit &amp; Formula Tracing Tools</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-audit-tracing.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-audit-tracing.html</link>
         <description>Enhanced Trace Dependents/Precedents with safety checks and a Toggle R1C1 reference style switch.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-audit-tracing.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-audit-tracing.html</guid>
     </item>
     <item>
         <title>Clipboard Power Tools</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-clipboard-tools.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-clipboard-tools.html</link>
         <description>Copy cell addresses, formulas as text, and select ranges from clipboard text using the Windows API.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-clipboard-tools.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-clipboard-tools.html</guid>
     </item>
     <item>
         <title>Workbook Error Scanner</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-error-scanner.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-error-scanner.html</link>
         <description>Scan every sheet for #REF!, #VALUE!, #N/A and all other errors with a clickable hyperlinked report.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-error-scanner.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-error-scanner.html</guid>
     </item>
     <item>
         <title>Data Validation Inspector</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-validation-inspector.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-validation-inspector.html</link>
         <description>List all data validation rules and find cells that violate their own validation constraints.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-validation-inspector.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-validation-inspector.html</guid>
     </item>
     <item>
         <title>Workbook Documentation Suite</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-workbook-documentation.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-workbook-documentation.html</link>
         <description>Document named ranges, embedded objects, unique formulas, and chart series across workbooks.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-workbook-documentation.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-workbook-documentation.html</guid>
     </item>
     <item>
         <title>Power Query Manager</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-power-query-manager.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-power-query-manager.html</link>
         <description>Extract, export, import, and remove Power Query definitions with VBA.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-power-query-manager.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-power-query-manager.html</guid>
     </item>
     <item>
         <title>Text Case Transformations</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-text-case.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-text-case.html</link>
         <description>Six in-place text case macros: UPPER, lower, Proper, Title Case, tOGGLE, and Sentence case.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-text-case.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-text-case.html</guid>
     </item>
     <item>
         <title>Auto-Grouping Rows by Title Hierarchy</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-group-by-title.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-group-by-title.html</link>
         <description>Automatically create outline groups from 2 to 8 levels based on column title positions.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-group-by-title.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-group-by-title.html</guid>
     </item>
     <item>
         <title>Auto Save &amp; Version Control</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-auto-save-versioning.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-auto-save-versioning.html</link>
         <description>Timed auto-save and automatic version numbering with initials prefix.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-auto-save-versioning.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-auto-save-versioning.html</guid>
     </item>
     <item>
         <title>VBA Code Inspector</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-vba-inspector.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-vba-inspector.html</link>
         <description>List every Sub, Function, and Property across all open workbooks.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-vba-inspector.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-vba-inspector.html</guid>
     </item>
     <item>
         <title>Mass Naming &amp; Hyperlink Tools</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-naming-hyperlinks.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-naming-hyperlinks.html</link>
         <description>Bulk-create numbered named ranges, convert cell references to names, and add hyperlinks.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-naming-hyperlinks.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-naming-hyperlinks.html</guid>
     </item>
     <item>
         <title>Smart Fill in All Four Directions</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-smart-fill.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-smart-fill.html</link>
         <description>Fill blank cells from the nearest value in any direction: down, up, right, or left.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-smart-fill.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-smart-fill.html</guid>
     </item>
     <item>
         <title>Formula Calculation Timer</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-calculation-timer.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-calculation-timer.html</link>
         <description>Measure single-cell recalculation time or full workbook rebuild time for performance tuning.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-calculation-timer.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-calculation-timer.html</guid>
     </item>
     <item>
         <title>Fill Blank Cells to the Left</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-fill-left.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-fill-left.html</link>
         <description>A VBA macro to fill blank cells with the value from the nearest non-blank cell to the right.</description>
         <pubDate>Thu, 01 Nov 2024 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-fill-left.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-fill-left.html</guid>
     </item>
     <item>
         <title>Automating Sheet Setup</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-auto-set-sheet.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-auto-set-sheet.html</link>
         <description>Reset all sheets to A1 with 100% zoom for a clean workbook presentation.</description>
         <pubDate>Sun, 01 Sep 2024 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-auto-set-sheet.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-auto-set-sheet.html</guid>
     </item>
     <item>
         <title>Removing Same-Sheet References</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/blog-remove-sheet-refs.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-remove-sheet-refs.html</link>
         <description>Clean up redundant same-sheet references in formulas automatically.</description>
         <pubDate>Sun, 01 Sep 2024 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog-remove-sheet-refs.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/blog/blog-remove-sheet-refs.html</guid>
     </item>
     <item>
         <title>Bubble Pies Chart</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/project-bubble-pies.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/projects/project-bubble-pies.html</link>
         <description>Overlay mini pie charts on a bubble chart to show market positioning, scale, and sector composition.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/project-bubble-pies.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/projects/project-bubble-pies.html</guid>
     </item>
     <item>
         <title>Marimekko Chart</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/project-marimekko.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/projects/project-marimekko.html</link>
         <description>Variable-width stacked bar chart for market share and product mix analysis.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/project-marimekko.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/projects/project-marimekko.html</guid>
     </item>
     <item>
         <title>Percentage Change Column Chart</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/project-percentage-change.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/projects/project-percentage-change.html</link>
         <description>Column chart with year-over-year variance arrows and percentage labels.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/project-percentage-change.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/projects/project-percentage-change.html</guid>
     </item>
     <item>
         <title>Waffle Charts in Excel</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/project-waffle-chart.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/projects/project-waffle-chart.html</link>
         <description>10x10 grid percentage visualisation using SEQUENCE and conditional formatting.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/project-waffle-chart.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/projects/project-waffle-chart.html</guid>
     </item>
     <item>
         <title>Horizontal RainCloud Charts</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/project-raincloud-horizontal.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/projects/project-raincloud-horizontal.html</link>
         <description>Distribution visualisation combining density curves, box plots, and scatter plots in Excel.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/project-raincloud-horizontal.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/projects/project-raincloud-horizontal.html</guid>
     </item>
     <item>
         <title>Vertical RainCloud Charts</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/project-raincloud-vertical.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/projects/project-raincloud-vertical.html</link>
         <description>Vertical RainCloud chart with 1-cloud and 3-cloud layouts in Excel.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/project-raincloud-vertical.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/projects/project-raincloud-vertical.html</guid>
     </item>
     <item>
         <title>Point &amp; Figure Chart with Bollinger Bands</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/project-point-figure.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/projects/project-point-figure.html</link>
         <description>Classic technical analysis chart built from MSFT stock data with Bollinger Band overlays.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/project-point-figure.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/projects/project-point-figure.html</guid>
     </item>
     <item>
         <title>Christmas Tree Light Generator</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/project-christmas-tree.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/projects/project-christmas-tree.html</link>
         <description>A festive Excel creation with randomised Unicode ornaments and conditional formatting lights.</description>
         <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/project-christmas-tree.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/projects/project-christmas-tree.html</guid>
     </item>
     <item>
         <title>Matrix Manipulation Formula Engine</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/project-excel.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/projects/project-excel.html</link>
         <description>Compare 8 formula approaches to 2D aggregation: MMULT, SUMIFS, GROUPBY, and LAMBDA variants.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/project-excel.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/projects/project-excel.html</guid>
     </item>
     <item>
         <title>Subset Sum Problem with Excel Formulas</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/project-sum-to-target.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/projects/project-sum-to-target.html</link>
         <description>Find all number combinations that sum to a target using SEQUENCE, BASE, MMULT, and FILTER.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/project-sum-to-target.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/projects/project-sum-to-target.html</guid>
     </item>
     <item>
         <title>Dynamic Hyperlinks That Never Break</title>
-        <link>https://sampi314.github.io/Sam-Personal-Profile/project-dynamic-hyperlink.html</link>
+        <link>https://sampi314.github.io/Sam-Personal-Profile/projects/project-dynamic-hyperlink.html</link>
         <description>Formula-driven hyperlinks using HYPERLINK(), INDIRECT(), and CELL() that auto-update.</description>
         <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
-        <guid>https://sampi314.github.io/Sam-Personal-Profile/project-dynamic-hyperlink.html</guid>
+        <guid>https://sampi314.github.io/Sam-Personal-Profile/projects/project-dynamic-hyperlink.html</guid>
     </item>
 </channel>
 </rss>
