@@ -11,7 +11,14 @@ permissions:
 jobs:
   auto-merge:
     runs-on: ubuntu-latest
-    if: contains(github.head_ref, 'claude/')
+    if: >-
+      contains(github.head_ref, 'claude/')
+      && github.event.pull_request.head.repo.full_name == github.repository
+      && (
+        github.actor == 'Sampi314'
+        || github.actor == 'claude[bot]'
+        || github.actor == 'app/claude'
+      )
     steps:
       - name: Enable auto-merge
         uses: peter-evans/enable-pull-request-automerge@v3
