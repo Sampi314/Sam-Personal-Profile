@@ -1190,7 +1190,7 @@ footer a:hover {
     background: linear-gradient(90deg, var(--accent), var(--accent-hover));
     transform-origin: left;
     transform: scaleX(0);
-    transition: transform 0.1s linear;
+    will-change: transform;
     box-shadow: 0 0 8px var(--accent-glow);
 }
 
