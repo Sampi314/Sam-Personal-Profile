@@ -1051,6 +1051,18 @@ function initGallery() {
 }
 
 /* ========================================
+   Print Preparation
+   ======================================== */
+window.addEventListener('beforeprint', () => {
+    // Make all fade-in sections visible for print
+    document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+    // Set skill bar widths so they render filled
+    document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+        bar.style.width = bar.getAttribute('data-width');
+    });
+});
+
+/* ========================================
    Init All
    ======================================== */
 document.addEventListener('DOMContentLoaded', () => {
