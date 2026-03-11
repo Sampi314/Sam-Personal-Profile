@@ -118,9 +118,16 @@ function initContactForm() {
    ======================================== */
 function initParticleCanvas(canvas) {
     const ctx = canvas.getContext('2d');
-    let particles = [];
     let animId;
     let paused = false;
+    let scrollY = 0;
+
+    // Three depth layers: back, mid, front
+    const layers = [
+        { particles: [], speed: 0.12, size: [0.5, 1.2], alpha: [0.15, 0.3],  lineAlpha: 0.08, lineDist: 100, parallax: 0.02, color: '245, 158, 11' },
+        { particles: [], speed: 0.25, size: [1.0, 2.2], alpha: [0.35, 0.6],  lineAlpha: 0.18, lineDist: 130, parallax: 0.05, color: '245, 158, 11' },
+        { particles: [], speed: 0.45, size: [1.8, 3.5], alpha: [0.55, 0.85], lineAlpha: 0.30, lineDist: 160, parallax: 0.10, color: '245, 158, 11' },
+    ];
 
     function resize() {
         canvas.width = window.innerWidth;
@@ -128,66 +135,92 @@ function initParticleCanvas(canvas) {
     }
 
     function createParticles() {
-        particles = [];
         const area = canvas.width * canvas.height;
-        const count = Math.min(Math.floor(area / 12000), 60);
-        for (let i = 0; i < count; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 0.3,
-                vy: (Math.random() - 0.5) * 0.3,
-                r: Math.random() * 2 + 1,
-                alpha: Math.random() * 0.4 + 0.45
-            });
-        }
+        // Back layer: many small particles. Mid: moderate. Front: fewer large ones.
+        const counts = [
+            Math.min(Math.floor(area / 18000), 50),
+            Math.min(Math.floor(area / 22000), 35),
+            Math.min(Math.floor(area / 35000), 20),
+        ];
+        layers.forEach((layer, i) => {
+            layer.particles = [];
+            for (let n = 0; n < counts[i]; n++) {
+                layer.particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * layer.speed,
+                    vy: (Math.random() - 0.5) * layer.speed,
+                    r: Math.random() * (layer.size[1] - layer.size[0]) + layer.size[0],
+                    alpha: Math.random() * (layer.alpha[1] - layer.alpha[0]) + layer.alpha[0],
+                });
+            }
+        });
     }
 
     function draw() {
         if (paused) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        const lineDistance = 120;
+        for (const layer of layers) {
+            const offsetY = scrollY * layer.parallax;
 
-        // Draw connecting lines
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < lineDistance) {
-                    const opacity = (1 - dist / lineDistance) * 0.25;
-                    ctx.strokeStyle = `rgba(245, 158, 11, ${opacity})`;
-                    ctx.lineWidth = 0.8;
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
+            // Draw connecting lines for this layer
+            for (let i = 0; i < layer.particles.length; i++) {
+                for (let j = i + 1; j < layer.particles.length; j++) {
+                    const a = layer.particles[i];
+                    const b = layer.particles[j];
+                    const ay = a.y - offsetY;
+                    const by = b.y - offsetY;
+                    const dx = a.x - b.x;
+                    const dy = ay - by;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < layer.lineDist) {
+                        const opacity = (1 - dist / layer.lineDist) * layer.lineAlpha;
+                        ctx.strokeStyle = `rgba(${layer.color}, ${opacity})`;
+                        ctx.lineWidth = layer === layers[2] ? 1.0 : layer === layers[1] ? 0.7 : 0.4;
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, ay);
+                        ctx.lineTo(b.x, by);
+                        ctx.stroke();
+                    }
                 }
             }
-        }
 
-        // Draw particles
-        for (const p of particles) {
-            p.x += p.vx;
-            p.y += p.vy;
+            // Draw particles for this layer
+            for (const p of layer.particles) {
+                p.x += p.vx;
+                p.y += p.vy;
 
-            // Wrap around edges
-            if (p.x < -10) p.x = canvas.width + 10;
-            if (p.x > canvas.width + 10) p.x = -10;
-            if (p.y < -10) p.y = canvas.height + 10;
-            if (p.y > canvas.height + 10) p.y = -10;
+                if (p.x < -10) p.x = canvas.width + 10;
+                if (p.x > canvas.width + 10) p.x = -10;
+                if (p.y < -10) p.y = canvas.height + 10;
+                if (p.y > canvas.height + 10) p.y = -10;
 
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(245, 158, 11, ${p.alpha})`;
-            ctx.fill();
+                const drawY = p.y - offsetY;
+                ctx.beginPath();
+                ctx.arc(p.x, drawY, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${layer.color}, ${p.alpha})`;
+                ctx.fill();
+
+                // Glow on front layer particles
+                if (layer === layers[2] && p.r > 2.5) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, drawY, p.r * 2.5, 0, Math.PI * 2);
+                    const glow = ctx.createRadialGradient(p.x, drawY, p.r * 0.5, p.x, drawY, p.r * 2.5);
+                    glow.addColorStop(0, `rgba(${layer.color}, ${p.alpha * 0.3})`);
+                    glow.addColorStop(1, `rgba(${layer.color}, 0)`);
+                    ctx.fillStyle = glow;
+                    ctx.fill();
+                }
+            }
         }
 
         animId = requestAnimationFrame(draw);
     }
 
-    // Pause when tab not visible
+    // Track scroll for parallax
+    window.addEventListener('scroll', () => { scrollY = window.pageYOffset; }, { passive: true });
+
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
             paused = true;
@@ -198,7 +231,6 @@ function initParticleCanvas(canvas) {
         }
     });
 
-    // Resize handler
     let resizeTimer;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
