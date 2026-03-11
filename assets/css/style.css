@@ -305,8 +305,8 @@ header::after {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     pointer-events: none;
     z-index: 0;
 }
@@ -2212,13 +2212,8 @@ section.overview-prominent .project-detail-header h2 {
 
     /* Experience section starts on page 2 */
     #experience {
-        break-before: page !important;
-        page-break-before: always !important;
-    }
-
-    /* Skill bars: show filled state in print */
-    .skill-bar-fill {
-        transition: none !important;
+        break-before: page;
+        page-break-before: always;
     }
 
     /* Avoid breaking individual items across pages */
