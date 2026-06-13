@@ -174,11 +174,226 @@ Minimal CSS skeletons. Compose, don't fork.
 }
 ```
 
-### Hero — text only, no marketing illustration
+### Hero — see §6, this pattern is load-bearing across every site
 
-The home hero uses **typography + a single profile photo + ambient orbit dots**, not a stock illustration. Decorative elements (`--hero-orbit`, `--hero-orbit-lg`) are rgba glows positioned around the photo.
+## 6. Hero Section — required on every site
 
-## 6. Favicon / Icon Family
+The hero is the **signature surface** of the visual identity. Every site in this system has one with the same anatomy. Don't omit it, don't replace it with a stock illustration, and don't flatten the layered composition into a single image-on-background.
+
+### Anatomy (four stacked z-layers)
+
+```
+z: 0   <header> background — solid theme color
+z: 0   ::before / ::after — two animated orbit rings (decorative)
+z: 0   <canvas> — particle layer (JS-driven, optional but characteristic)
+z: 1   .hero-inner — content grid (text + photo)
+```
+
+Skipping the orbits or the particle layer flattens the look and the hero stops feeling like *this* identity. Keep all four.
+
+### HTML scaffold
+
+```html
+<header>
+    <canvas id="hero-particles" class="hero-canvas"></canvas>
+    <div class="hero-inner">
+        <div class="hero-text">
+            <div class="hero-label">Senior Analyst</div>     <!-- eyebrow w/ dash rule -->
+            <h1>Sam <em>Ngo</em></h1>                         <!-- accent on surname -->
+            <p class="headline">One-sentence value statement.</p>
+            <p class="location">Sydney, NSW — Australia</p>
+            <div class="header-actions">
+                <a class="btn btn-primary">Primary CTA</a>
+                <a class="btn btn-outline">Secondary</a>
+                <a class="btn btn-outline">Tertiary</a>
+            </div>
+            <div class="contact-bar">
+                <a href="mailto:...">email@domain.com</a>
+            </div>
+        </div>
+        <div class="hero-photo">
+            <img src="profile.jpg" alt="..." class="profile-pic" loading="eager">
+        </div>
+    </div>
+</header>
+```
+
+### CSS recipe
+
+```css
+/* Layer 1: the header itself */
+header {
+    background: var(--hero-bg);
+    color: var(--hero-text);
+    padding: 140px 32px 80px;     /* 140px top accounts for fixed nav */
+    position: relative;
+    overflow: hidden;              /* clip orbit rings */
+}
+
+/* Layer 2: animated orbit rings — defining decoration */
+header::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -80px;
+    width: 400px; height: 400px;
+    border: 1px solid var(--hero-orbit);
+    border-radius: 50%;
+    animation: orbit-slow 25s linear infinite;
+    pointer-events: none;
+}
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -200px; left: -100px;
+    width: 500px; height: 500px;
+    border: 1px solid var(--hero-orbit-lg);
+    border-radius: 50%;
+    animation: orbit-slow 35s linear infinite reverse;
+    pointer-events: none;
+}
+@keyframes orbit-slow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* Layer 3: canvas particle field (see assets/js/shared.js for behavior) */
+.hero-canvas {
+    position: fixed; top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Layer 4: content grid */
+.hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;    /* text takes remaining, photo fits */
+    gap: 48px;
+    align-items: center;
+    position: relative; z-index: 1;     /* sit above orbits + canvas */
+}
+
+/* Eyebrow label with horizontal dash rule */
+.hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+}
+.hero-label::before {                   /* the signature 24px dash before label */
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--accent);
+}
+
+/* H1 — Space Mono, massive, accent-italic on the last token */
+header h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(2.8rem, 6vw, 4.2rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 16px;
+}
+header h1 em {                          /* the split-emphasis trick */
+    font-style: italic;
+    color: var(--accent);
+}
+
+/* Headline — short value statement, no bigger than 1.1rem */
+header p.headline {
+    font-size: 1.1rem;
+    color: var(--hero-muted);
+    max-width: 440px;
+    line-height: 1.6;
+}
+
+/* Location — small monospace, low-key */
+header p.location {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--hero-muted);
+    margin-top: 8px;
+    letter-spacing: 0.02em;
+}
+
+/* Profile photo — rounded square, accent border, soft orange halo */
+.profile-pic {
+    width: 200px; height: 200px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 2px solid rgba(255, 107, 0, 0.4);
+    box-shadow: var(--hero-pic-shadow);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.profile-pic:hover {
+    transform: scale(1.02);
+    box-shadow: var(--hero-pic-shadow-hover);
+}
+
+/* Mobile: stack vertically, photo on TOP */
+@media (max-width: 768px) {
+    header { padding: 110px 20px 60px; }
+    .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .hero-photo { order: -1; }          /* photo above text on mobile */
+    .profile-pic { width: 120px; height: 120px; }
+}
+```
+
+### Required variables (in addition to §2)
+
+```css
+:root {
+    --hero-bg:              #000000;
+    --hero-text:            #e8e8ed;
+    --hero-muted:           #6b7280;
+    --hero-orbit:           rgba(255, 107, 0, 0.12);
+    --hero-orbit-lg:        rgba(255, 107, 0, 0.06);
+    --hero-btn-border:      rgba(255, 255, 255, 0.2);
+    --hero-pic-shadow:      0 0 30px rgba(255, 107, 0, 0.15), 0 20px 60px rgba(0, 0, 0, 0.5);
+    --hero-pic-shadow-hover:0 0 40px rgba(255, 107, 0, 0.25), 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+[data-theme="light"] {
+    --hero-bg:              #f5f5f0;
+    --hero-text:            #1a1a1f;
+    --hero-muted:           #6b7280;
+    --hero-orbit:           rgba(217, 90, 0, 0.10);
+    --hero-orbit-lg:        rgba(217, 90, 0, 0.05);
+    --hero-btn-border:      rgba(26, 26, 31, 0.18);
+    --hero-pic-shadow:      0 0 30px rgba(217, 90, 0, 0.12), 0 12px 40px rgba(0, 0, 0, 0.1);
+    --hero-pic-shadow-hover:0 0 40px rgba(217, 90, 0, 0.2), 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+```
+
+### Five rules the hero must follow
+
+1. **The H1 uses split emphasis** — wrap the most personal/identifying token (surname, product name, key noun) in `<em>` so it renders accent-italic. This is the system's signature heading pattern.
+2. **The eyebrow has a 24px dash rule before it.** Don't replace with an icon. The dash is a wordmark element.
+3. **The orbit rings are non-negotiable.** They define the layered depth. If a project doesn't have a hero photo, the orbits still appear.
+4. **Photo on top on mobile, not below.** `order: -1` on `.hero-photo` ensures the face is the first thing a phone visitor sees.
+5. **The headline is one sentence, max ~25 words.** If you can't fit the value statement in one sentence, the value statement isn't sharp enough yet.
+
+### Variations for non-portfolio sites
+
+If the new repo isn't a personal portfolio (e.g. a tool, a docs site, a product), adapt as follows but keep the four-layer composition:
+
+| Site type | Eyebrow | H1 split | Photo slot | CTA |
+|---|---|---|---|---|
+| Personal portfolio | Job title | Name (surname italic) | Profile photo | Download CV |
+| Product / tool | Tagline ("Excel, sharpened") | Product name (key noun italic) | Product screenshot or icon | Try it / GitHub |
+| Documentation | "Documentation" | Project name | Logo (or omit) | Get started |
+| Blog | "Writing" | Author or blog name | Author photo (or omit) | Latest post |
+
+## 7. Favicon / Icon Family
 
 The icon family lives at `assets/img/`:
 
@@ -202,7 +417,7 @@ rm tmp.svg
 
 For new repos, copy this pattern but swap the character/label to that repo's identity.
 
-## 7. Cache-Busting CSS
+## 8. Cache-Busting CSS
 
 The site uses query-string versioning on stylesheet links:
 
@@ -212,7 +427,7 @@ The site uses query-string versioning on stylesheet links:
 
 Bump `?v=N` on every visual release so returning visitors don't see stale styles. Without this, browsers happily serve the old amber CSS for hours/days.
 
-## 8. How to Apply This in Another Repo
+## 9. How to Apply This in Another Repo
 
 When starting a new repo that should match this identity:
 
