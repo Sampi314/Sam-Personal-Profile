@@ -28,7 +28,7 @@
 
   <!-- 吳 — Traditional Chinese surname (Wu) -->
   <text x="16" y="19" text-anchor="middle"
-        font-family="'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Heiti TC', 'Hiragino Sans GB', sans-serif"
+        font-family="'Songti TC', 'Songti SC', 'Noto Serif TC', 'Noto Serif CJK TC', 'PingFang TC', 'Microsoft JhengHei', serif"
         font-size="18" font-weight="700"
         fill="url(#accent-grad)" filter="url(#glow)">吳</text>
 
