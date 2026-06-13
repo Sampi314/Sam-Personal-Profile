@@ -557,20 +557,22 @@ function initIframeLoading() {
 }
 
 /* ========================================
-   SN Monogram Logo
+   吳 Brand Logo (simplified mark of the favicon)
    ======================================== */
-function getSNLogoSVG(size) {
+function getBrandLogoSVG(size) {
     size = size || 28;
     return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">' +
         '<rect x="0.5" y="0.5" width="31" height="31" rx="6" fill="none" stroke="currentColor" stroke-width="1" opacity="0.4"/>' +
-        '<text x="16" y="22" text-anchor="middle" font-family="\'Space Mono\', monospace" font-size="14" font-weight="700" fill="currentColor">SN</text>' +
+        '<text x="16" y="24" text-anchor="middle" ' +
+            'font-family="\'Noto Sans TC\', \'PingFang TC\', \'Microsoft JhengHei\', \'Heiti TC\', sans-serif" ' +
+            'font-size="22" font-weight="700" fill="currentColor">吳</text>' +
     '</svg>';
 }
 
 function initNavLogo() {
     var brand = document.querySelector('.nav-brand');
     if (!brand) return;
-    brand.innerHTML = getSNLogoSVG(28);
+    brand.innerHTML = getBrandLogoSVG(28);
 }
 
 /* ========================================
@@ -597,7 +599,7 @@ function initBackToTop() {
 function initFooterLogo() {
     var el = document.querySelector('.footer-logo');
     if (!el) return;
-    el.innerHTML = getSNLogoSVG(24);
+    el.innerHTML = getBrandLogoSVG(24);
 }
 
 /* ========================================
