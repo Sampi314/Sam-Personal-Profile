@@ -564,7 +564,7 @@ function getBrandLogoSVG(size) {
     return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">' +
         '<rect x="0.5" y="0.5" width="31" height="31" rx="6" fill="none" stroke="currentColor" stroke-width="1" opacity="0.4"/>' +
         '<text x="16" y="24" text-anchor="middle" ' +
-            'font-family="\'Noto Sans TC\', \'PingFang TC\', \'Microsoft JhengHei\', \'Heiti TC\', sans-serif" ' +
+            'font-family="\'Songti TC\', \'Songti SC\', \'Noto Serif TC\', \'Noto Serif CJK TC\', \'PingFang TC\', \'Microsoft JhengHei\', serif" ' +
             'font-size="22" font-weight="700" fill="currentColor">吳</text>' +
     '</svg>';
 }
