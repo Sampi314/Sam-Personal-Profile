@@ -1,16 +1,12 @@
 <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#000000"/>
-      <stop offset="100%" stop-color="#000000"/>
-    </linearGradient>
     <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f59e0b"/>
-      <stop offset="60%" stop-color="#fbbf24"/>
-      <stop offset="100%" stop-color="#f59e0b"/>
+      <stop offset="0%" stop-color="#FF6B00"/>
+      <stop offset="60%" stop-color="#FF8C42"/>
+      <stop offset="100%" stop-color="#FF6B00"/>
     </linearGradient>
     <filter id="glow">
-      <feGaussianBlur stdDeviation="0.5" result="blur"/>
+      <feGaussianBlur stdDeviation="0.3" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
@@ -19,21 +15,29 @@
   </defs>
 
   <!-- Background -->
-  <rect width="32" height="32" rx="4" fill="url(#bg-grad)"/>
+  <rect width="32" height="32" rx="4" fill="#000000"/>
 
   <!-- Subtle border -->
-  <rect x="0.5" y="0.5" width="31" height="31" rx="3.5" fill="none" stroke="#f59e0b" stroke-width="0.5" opacity="0.3"/>
+  <rect x="0.5" y="0.5" width="31" height="31" rx="3.5" fill="none" stroke="#FF6B00" stroke-width="0.5" opacity="0.3"/>
 
   <!-- Corner accent dots -->
-  <circle cx="3.2" cy="3.2" r="0.5" fill="#f59e0b" opacity="0.4"/>
-  <circle cx="28.8" cy="3.2" r="0.5" fill="#f59e0b" opacity="0.4"/>
-  <circle cx="3.2" cy="28.8" r="0.5" fill="#f59e0b" opacity="0.4"/>
-  <circle cx="28.8" cy="28.8" r="0.5" fill="#f59e0b" opacity="0.4"/>
+  <circle cx="3.2" cy="3.2" r="0.5" fill="#FF6B00" opacity="0.4"/>
+  <circle cx="28.8" cy="3.2" r="0.5" fill="#FF6B00" opacity="0.4"/>
+  <circle cx="3.2" cy="28.8" r="0.5" fill="#FF6B00" opacity="0.4"/>
+  <circle cx="28.8" cy="28.8" r="0.5" fill="#FF6B00" opacity="0.4"/>
 
-  <!-- Decorative grid lines -->
-  <line x1="3.2" y1="4.5" x2="28.8" y2="4.5" stroke="#f59e0b" stroke-width="0.3" opacity="0.12"/>
-  <line x1="3.2" y1="27.5" x2="28.8" y2="27.5" stroke="#f59e0b" stroke-width="0.3" opacity="0.12"/>
+  <!-- 吳 — Traditional Chinese surname (Wu) -->
+  <text x="16" y="19" text-anchor="middle"
+        font-family="'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Heiti TC', 'Hiragino Sans GB', sans-serif"
+        font-size="18" font-weight="700"
+        fill="url(#accent-grad)" filter="url(#glow)">吳</text>
 
-  <!-- SN monogram text -->
-  <text x="16" y="21" text-anchor="middle" font-family="'Space Mono', 'SF Mono', 'Consolas', monospace" font-size="13" font-weight="700" fill="url(#accent-grad)" filter="url(#glow)" letter-spacing="-0.5">SN</text>
+  <!-- Divider between character and label -->
+  <line x1="12" y1="22.5" x2="20" y2="22.5" stroke="#FF6B00" stroke-width="0.3" opacity="0.5"/>
+
+  <!-- "CV" label -->
+  <text x="16" y="28.5" text-anchor="middle"
+        font-family="'Space Mono', 'SF Mono', 'Consolas', monospace"
+        font-size="5" font-weight="700" letter-spacing="1"
+        fill="#FF6B00" opacity="0.85">CV</text>
 </svg>
