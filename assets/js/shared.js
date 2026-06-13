@@ -124,9 +124,9 @@ function initParticleCanvas(canvas) {
 
     // Three depth layers: back, mid, front
     const layers = [
-        { particles: [], speed: 0.12, size: [0.5, 1.2], alpha: [0.15, 0.3],  lineAlpha: 0.08, lineDist: 100, parallax: 0.02, color: '245, 158, 11' },
-        { particles: [], speed: 0.25, size: [1.0, 2.2], alpha: [0.35, 0.6],  lineAlpha: 0.18, lineDist: 130, parallax: 0.05, color: '245, 158, 11' },
-        { particles: [], speed: 0.45, size: [1.8, 3.5], alpha: [0.55, 0.85], lineAlpha: 0.30, lineDist: 160, parallax: 0.10, color: '245, 158, 11' },
+        { particles: [], speed: 0.12, size: [0.5, 1.2], alpha: [0.15, 0.3],  lineAlpha: 0.08, lineDist: 100, parallax: 0.02, color: '255, 107, 0' },
+        { particles: [], speed: 0.25, size: [1.0, 2.2], alpha: [0.35, 0.6],  lineAlpha: 0.18, lineDist: 130, parallax: 0.05, color: '255, 107, 0' },
+        { particles: [], speed: 0.45, size: [1.8, 3.5], alpha: [0.55, 0.85], lineAlpha: 0.30, lineDist: 160, parallax: 0.10, color: '255, 107, 0' },
     ];
 
     function resize() {
