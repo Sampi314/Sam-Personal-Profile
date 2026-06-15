@@ -11,9 +11,9 @@
 <div align="center">
 
 ```
-+--[ Sam-Personal-Profile ]----------------------------------------------+
-|  personal site v1 - narrative, projects, contact
-+------------------------------------------------------------+
+┌─[ Sam-Personal-Profile ]─────────────────────────────────────────────┐
+│  personal site v1 - narrative, projects, contact                     │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
 </div>
@@ -113,9 +113,9 @@ Tracked in the [**Sampi314 Portfolio Roadmap**](https://github.com/users/Sampi31
 <div align="center">
 
 ```
-+--[ end of transmission ]------------------------------------+
-|  github.com/Sampi314/Sam-Personal-Profile
-+------------------------------------------------------------+
+┌─[ end of transmission ]──────────────────────────────────────────────┐
+│  github.com/Sampi314/Sam-Personal-Profile                            │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
 </div>
